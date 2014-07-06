@@ -33,10 +33,20 @@ module.exports = function(grunt) {
                 dest: 'build/spektraltools.js'
             }
         },
+        uglify: {
+            build: {
+                options: {
+                    mangle: true
+                },
+                files: {
+                    "build/spektraltools.min.js": ["build/spektraltools.js"]
+                }
+            }
+        },
         watch: {
             build: {
                 files: ["src/**"],
-                tasks: ["concat"]
+                tasks: ["concat", "uglify"]
             }
         }
     });
@@ -50,4 +60,5 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);
+    grunt.registerTask('build', ['concat', 'uglify']);
 };
