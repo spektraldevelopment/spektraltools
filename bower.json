@@ -1,0 +1,22 @@
+{
+  "name": "spektraltools",
+  "version": "0.0.1",
+  "homepage": "https://github.com/spektraldevelopment/spektraltools",
+  "authors": [
+    "SpektralDevelopment <spektraldevelopment@gmail.com>"
+  ],
+  "description": "A JavaScript library for DOM manipulation and other uses. This is the spiritual successor of spektraljs.",
+  "main": "build/*",
+  "keywords": [
+    "Javascript",
+    "spektral"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
