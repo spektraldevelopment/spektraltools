@@ -45,8 +45,18 @@ module.exports = function(grunt) {
         },
         watch: {
             build: {
-                files: ["src/**"],
-                tasks: ["concat", "uglify"]
+                files: ["src/**", "spec/**"],
+                tasks: ["concat", "uglify", "jasmine"]
+            }
+        },
+        jasmine: {
+            pivotal: {
+                src: "build/spektraltools.js",
+                    options: {
+                    specs: "spec/SpektraltoolsSpec.js",
+                    outfile: "SpecRunner.html",
+                    keepRunner: true
+                }
             }
         }
     });
@@ -60,5 +70,5 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);
-    grunt.registerTask('build', ['concat', 'uglify']);
+    grunt.registerTask('build', ['concat', 'uglify', 'jasmine']);
 };
