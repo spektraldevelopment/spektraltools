@@ -6,7 +6,8 @@ A JavaScript library for DOM manipulation and other uses. This is the spiritual 
 
 ## DOM
 
-#### 1. Spektral.addElement(parent, type, attrs);
+1. Spektral.addElement(parent, type, attrs);
+------
 
 ##### Description
 Adds a new element to a parent container.
@@ -32,7 +33,8 @@ var newDiv = Spektral.addElement(parentDiv, 'div',
 	});
 ```
 
-#### 2. Spektral.removeElement(element);
+2. Spektral.removeElement(element);
+------
 
 #### Description
 Removes an element from the DOM.
@@ -51,7 +53,8 @@ var divToRemove = document.querySelector('#fooBar');
 Spektral.removeElement(divToRemove);
 ```
 
-#### 3. Spektral.setAttributes(element, attrs);
+3. Spektral.setAttributes(element, attrs);
+------
 
 #### Description
 Adds attributes to an element.
