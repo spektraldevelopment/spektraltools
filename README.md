@@ -57,7 +57,9 @@ Adds attributes to an element.
 element: `HTMLElement` - The element you want to remove.
 attrs: `Object` - Contains all the attributes you want to add.
 >Note: Some attributes require a modified name to avoid compatibility problems.
+
 >class -> className
+
 >data-type -> dataType
 
 ##### Returns
