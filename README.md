@@ -12,11 +12,11 @@ A JavaScript library for DOM manipulation and other uses. This is the spiritual 
 Adds a new element to a parent container.
 
 ##### Arguments
-container:`HTMLElement` - The parent you want to add the new element to.
+container: `HTMLElement` - The parent you want to add the new element to.
 
-type:`String` - The type of element you want.
+type: `String` - The type of element you want.
 
-attrs:`Object` - Any attributes you want to add. 
+attrs: `Object` - Any attributes you want to add. 
 >Note: To set class, use className to avoid IE compatibility issues.
 
 ##### Returns
@@ -26,8 +26,8 @@ attrs:`Object` - Any attributes you want to add.
 
 ```javascript
 var newDiv = Spektral.addElement(parentDiv, 'div', { 
-id: 'newDiv', 
-className: 'div-style'});
+	id: 'newDiv', 
+	className: 'div-style'});
 ```
 
 #### 2. Spektral.removeElement(element);
@@ -36,7 +36,7 @@ className: 'div-style'});
 Removes an element from the DOM.
 
 #### Arguments
-element:`HTMLElement` - The element you want to remove.
+element: `HTMLElement` - The element you want to remove.
 
 ##### Returns
 `Nothing`
@@ -54,8 +54,8 @@ Spektral.removeElement(divToRemove);
 Adds attributes to an element.
 
 #### Arguments
-element:`HTMLElement` - The element you want to remove.
-attrs:`Object` - Contains all the attributes you want to add.
+element: `HTMLElement` - The element you want to remove.
+attrs: `Object` - Contains all the attributes you want to add.
 >Note: Some attributes require a modified name to avoid compatibility problems.
 >class -> className
 >data-type -> dataType
@@ -67,10 +67,10 @@ attrs:`Object` - Contains all the attributes you want to add.
 
 ```javascript
 var test = document.createElement('div');
-Spektral.setAttributes(test, { 
-id: 'testDiv', 
-className: 'test-class', 
-dataTest: 'test-data' });
+	Spektral.setAttributes(test, { 
+	id: 'testDiv', 
+	className: 'test-class', 
+	dataTest: 'test-data' });
 ```
 ---
 
