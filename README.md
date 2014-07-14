@@ -25,9 +25,11 @@ attrs: `Object` - Any attributes you want to add.
 ##### Example
 
 ```javascript
-var newDiv = Spektral.addElement(parentDiv, 'div', { 
-	id: 'newDiv', 
-	className: 'div-style'});
+var newDiv = Spektral.addElement(parentDiv, 'div', 
+	{ 
+		id: 'newDiv', 
+		className: 'div-style'
+	});
 ```
 
 #### 2. Spektral.removeElement(element);
@@ -45,6 +47,7 @@ element: `HTMLElement` - The element you want to remove.
 
 ```javascript
 var divToRemove = document.querySelector('#fooBar');
+
 Spektral.removeElement(divToRemove);
 ```
 
@@ -59,7 +62,6 @@ attrs: `Object` - Contains all the attributes you want to add.
 >Note: Some attributes require a modified name to avoid compatibility problems.
 
 >class -> className
-
 >data-type -> dataType
 
 ##### Returns
@@ -69,10 +71,13 @@ attrs: `Object` - Contains all the attributes you want to add.
 
 ```javascript
 var test = document.createElement('div');
-	Spektral.setAttributes(test, { 
+	
+Spektral.setAttributes(test, 
+{ 
 	id: 'testDiv', 
 	className: 'test-class', 
-	dataTest: 'test-data' });
+	dataTest: 'test-data' 
+});
 ```
 ---
 
