@@ -22,13 +22,6 @@ function createTestContainer(parent, attrs) {
 }
 
 ////////////////////
-////CLEAR TEST CONTAINER
-////////////////////
-function clearTestContainer(parent) {
-    parent.innerHTML = '';
-}
-
-////////////////////
 ////CREATE TEST ELEMENT
 ////////////////////
 function createTestElement(parent, type, attrs) {
@@ -47,12 +40,12 @@ function createTestElement(parent, type, attrs) {
     return newElement;
 }
 
-function findElementById(id) {
-    var el = document.querySelector(id), exists;
-    if (el === null) {
-        exists = false;
+function destroyTestContainer(element) {
+    try {
+        element.remove();
+    } catch (err) {
+        element.parentNode.removeChild(element);
     }
-    return exists;
 }
 
 ////////////////////
@@ -117,6 +110,9 @@ function logObject(obj, id) {
     }
 }
 
+////////////////////
+////LOG ARRAY
+////////////////////
 function logArray(arr, id) {
     var i;
     if (id !== undefined) {

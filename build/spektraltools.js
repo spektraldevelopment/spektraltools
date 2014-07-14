@@ -47,6 +47,22 @@
         }
     };
 
+    //DOM - SET ATTRIBUTES
+    Spektral.setAttributes = function(element, attrs) {
+        var k, dataCheck, dataAttr;
+        for (k in attrs) {
+            dataCheck = Spektral.hasPattern(k, 'data');
+            if (k === 'className') {
+                element.setAttribute('class', attrs[k]);
+            } else if (dataCheck.match === true) {
+                dataAttr = Spektral.stripString(k, 'data').toLowerCase();
+                element.setAttribute('data-' + dataAttr, attrs[k]);
+            } else {
+                element.setAttribute(k, attrs[k]);
+            }
+        }
+    };
+
     //EVENT - ATTACH EVENT LISTENER
     Spektral.attachEventListener = function (eventTarget, eventType, eventHandler) {
         if (eventTarget.addEventListener) {
@@ -86,6 +102,51 @@
             evt = new Event(eventName);
         }
         return evt;
+    };
+
+    //String - hasPattern
+    Spektral.hasPattern = function (request, pattern) {
+        var
+            regEx = new RegExp(pattern, "g"),
+            matches = request.match(regEx),
+            hasMatch = false, matchAmount = 0,
+            matchObj = {};
+        if (matches !== null) {
+
+            hasMatch = true;
+            matchAmount = matches.length;
+        }
+        matchObj['match'] = hasMatch;
+        matchObj['amount'] = matchAmount;
+        matchObj['array'] = matches;
+        return matchObj;
+    };
+
+    //String - stripString
+    Spektral.stripString = function (request, character, mode) {
+        mode = mode || "all";
+        var
+            first = new RegExp(character, ""),
+            all = new RegExp(character, "g"),
+            newString = "", characterFound = 0, letter, i;
+        if(mode === "all") {
+            newString = request.replace(all, "");
+        } else if (mode === "first") {
+            newString = request.replace(first, "");
+        } else {
+            //Target index
+            for(i = 0; i < request.length; i += 1) {
+                letter = request[i];
+                if(letter === character) {
+                    if(characterFound === mode) {
+                        letter = letter.replace(character, "");
+                    }
+                    characterFound ++;
+                }
+                newString += letter;
+            }
+        }
+        return newString;
     };
 
     //UTILS - GET TYPE

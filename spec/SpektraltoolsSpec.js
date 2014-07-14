@@ -1,15 +1,13 @@
 describe('SpektralTools: ', function() {
 
     initHelper(document);
-    var testContainer = createTestContainer();
 
     it('Spektraltools is defined.', function() {
        expect(Spektral).toBeDefined();
     });
 
-    describe('addElement', function() {
-
-        var createdDiv;
+    describe('DOM - addElement', function() {
+        var testContainer = createTestContainer(), createdDiv;
 
         it('creates an element.', function() {
             createdDiv = Spektral.addElement(testContainer, 'div', { id: 'newDiv', className: 'new-style', style: 'border: 1px solid #cecece' });
@@ -17,7 +15,7 @@ describe('SpektralTools: ', function() {
         });
 
         it('created element has id of newDiv.', function() {
-           expect(createdDiv.id).toMatch('newDiv');
+            expect(createdDiv.id).toMatch('newDiv');
         });
 
         it('created element has className of new-style.', function(){
@@ -33,15 +31,39 @@ describe('SpektralTools: ', function() {
             expect(testContainer.children[0].id).toMatch('newDiv');
         });
 
-        clearTestContainer(testContainer);
+        destroyTestContainer(testContainer);
     });
 
-    describe('removeElement', function(){
-        var divToRemove = createTestElement(testContainer, 'div', { id: 'divToRemove'});
+    describe('DOM - removeElement', function(){
+        var
+            testContainer = createTestContainer(),
+            divToRemove = createTestElement(testContainer, 'div', { id: 'divToRemove'});
+
         Spektral.removeElement(divToRemove);
 
         it('removed test div.', function(){
            expect(document.querySelector('#divToRemove')).toBeNull();
+        });
+
+        destroyTestContainer(testContainer);
+    });
+
+    describe('DOM - setAttributes', function(){
+        var
+            testContainer = createTestContainer(),
+            test = createTestElement(testContainer, 'div');
+        Spektral.setAttributes(test, { id: 'testDiv', className: 'test-class', dataTest: 'test-data' });
+
+        it('added id attribute named testDiv.', function(){
+            expect(test.id).toMatch('testDiv');
+        });
+
+        it('added class attribute named test-class.', function(){
+            expect(test.className).toMatch('test-class');
+        });
+
+        it('added data attribute named data-test.', function(){
+            expect(test.dataset.test).toMatch('test-data');
         });
     });
 
