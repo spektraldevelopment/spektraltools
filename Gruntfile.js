@@ -54,6 +54,7 @@ module.exports = function(grunt) {
                 src: "build/spektraltools.js",
                     options: {
                     specs: "spec/SpektraltoolsSpec.js",
+                    helpers: 'spec/helper/helper.js',
                     outfile: "SpecRunner.html",
                     keepRunner: true
                 }
@@ -71,4 +72,5 @@ module.exports = function(grunt) {
     // Default task(s).
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('build', ['concat', 'uglify', 'jasmine']);
+    grunt.registerTask('test', ['jasmine']);
 };

@@ -1,0 +1,128 @@
+//JASMINE HELPER FILE
+
+var document, body;
+
+////////////////////
+////INIT HELPER
+////////////////////
+function initHelper (doc) {
+    document = doc;
+    body = doc.body;
+}
+
+////////////////////
+////CREATE TEST CONTAINER
+////////////////////
+function createTestContainer(parent, attrs) {
+    parent = parent || body;
+    var tc = document.createElement('div');
+    tc.id = getParameter(attrs, 'id', 'testContainer');
+    parent.appendChild(tc);
+    return tc;
+}
+
+////////////////////
+////CLEAR TEST CONTAINER
+////////////////////
+function clearTestContainer(parent) {
+    parent.innerHTML = '';
+}
+
+////////////////////
+////CREATE TEST ELEMENT
+////////////////////
+function createTestElement(parent, type, attrs) {
+    type = type || 'div';
+    var newElement = document.createElement(type), key;
+    for (key in attrs) {
+        if (key === 'className') {
+            newElement.class = attrs[key];
+        } else if (key === 'innerHTML') {
+            newElement.innerHTML = attrs[key];
+        } else {
+            newElement.setAttribute(key, attrs[key]);
+        }
+    }
+    parent.appendChild(newElement);
+    return newElement;
+}
+
+function findElementById(id) {
+    var el = document.querySelector(id), exists;
+    if (el === null) {
+        exists = false;
+    }
+    return exists;
+}
+
+////////////////////
+////GET PARAMETER
+////////////////////
+function getParameter(obj, val, defaultParam) {
+    var retrievedParam;
+    if (obj !== undefined) {
+        if (obj[val] === undefined) {
+            retrievedParam = defaultParam;
+            //console.log("getParameter: val was not found, setting to default.")
+        } else {
+            retrievedParam = obj[val];
+            //console.log("getParameter: val found.")
+        }
+    } else {
+        retrievedParam = defaultParam;
+        //console.log("getParameter: object was not defined, setting val to default.")
+    }
+    return retrievedParam;
+}
+
+//////////////////
+////GET CHILD NODES
+/////////////////
+function getChildNodes(parent) {
+    var
+        children = parent.childNodes,
+        childArr = [], i, isElement;
+    console.log(parent.id + ' children: ');
+    for (i = 0; i < children.length; i += 1) {
+        isElement = isAnElement(children[i]);
+        if(isElement === true) {
+            childArr.push(children[i]);
+            console.log('child: ' + children[i]);
+        }
+    }
+    return childArr;
+}
+
+//////////////////
+////IS ELEMENT
+/////////////////
+function isAnElement(possibleElement) {
+    var isEl = false, type = possibleElement.nodeType;
+    if(type === 1) {
+        isEl = true;
+    }
+    return isEl;
+}
+
+////////////////////
+////LOG OBJECT
+////////////////////
+function logObject(obj, id) {
+    var k;
+    if (id !== undefined) {
+        console.log('Object: ' + id);
+    }
+    for (k in obj) {
+        console.log('key: ' + k + ' value: ' + obj[k]);
+    }
+}
+
+function logArray(arr, id) {
+    var i;
+    if (id !== undefined) {
+        console.log('Array: ' + id);
+    }
+    for (i = 0; i < arr.length; i += 1) {
+        console.log(arr[i]);
+    }
+}

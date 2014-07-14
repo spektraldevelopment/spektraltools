@@ -13,4 +13,13 @@
         }
         parent.appendChild(newElement);
         return newElement;
-    }
+    };
+
+    //DOM - REMOVE ELEMENT
+    Spektral.removeElement = function (element) {
+        try {
+            element.remove();
+        } catch (err) {
+            element.parentNode.removeChild(element);
+        }
+    };

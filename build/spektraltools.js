@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-07-07
+* Build Created: 2014-07-13
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -36,7 +36,16 @@
         }
         parent.appendChild(newElement);
         return newElement;
-    }
+    };
+
+    //DOM - REMOVE ELEMENT
+    Spektral.removeElement = function (element) {
+        try {
+            element.remove();
+        } catch (err) {
+            element.parentNode.removeChild(element);
+        }
+    };
 
     //EVENT - ATTACH EVENT LISTENER
     Spektral.attachEventListener = function (eventTarget, eventType, eventHandler) {
