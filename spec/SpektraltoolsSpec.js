@@ -65,6 +65,8 @@ describe('SpektralTools: ', function() {
         it('added data attribute named data-test.', function(){
             expect(test.dataset.test).toMatch('test-data');
         });
+
+        destroyTestContainer(testContainer);
     });
 
 });
