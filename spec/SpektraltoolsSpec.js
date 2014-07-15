@@ -134,5 +134,20 @@ describe('SpektralTools: ', function() {
         it('moves #testElementTwo to before #testElementOne.', function(){
             expect(testContainer.children[0].id).toMatch('testElementTwo');
         });
+        destroyTestContainer(testContainer);
+    });
+
+    describe('DOM - clearAllChildren', function(){
+        var
+            testContainer = createTestContainer(),
+            testElementOne = createTestElement(testContainer, 'div', { id: 'testElementOne' }),
+            testElementTwo = createTestElement(testContainer, 'div', { id: 'testElementTwo' });
+
+        Spektral.clearChildren(testContainer);
+
+        it('clears the parent of all its children.', function(){
+            expect(testContainer.children.length).toEqual(0);
+        });
+        destroyTestContainer(testContainer);
     });
 });

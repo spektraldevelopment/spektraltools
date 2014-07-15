@@ -105,7 +105,7 @@
     };
 
     //DOM - CLEAR CHILDREN
-    Spektral.clearAllChildren = function (parent) {
+    Spektral.clearChildren = function (parent) {
         parent.innerHTML = '';
     };
 
