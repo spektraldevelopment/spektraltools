@@ -80,3 +80,8 @@
     Spektral.moveToBefore = function (element, targetElement) {
         element.parentNode.insertBefore(element, targetElement);
     };
+
+    //DOM - CLEAR CHILDREN
+    Spektral.clearAllChildren = function (parent) {
+        parent.innerHTML = '';
+    };

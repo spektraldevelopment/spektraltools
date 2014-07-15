@@ -104,6 +104,11 @@
         element.parentNode.insertBefore(element, targetElement);
     };
 
+    //DOM - CLEAR CHILDREN
+    Spektral.clearAllChildren = function (parent) {
+        parent.innerHTML = '';
+    };
+
     //EVENT - ATTACH EVENT LISTENER
     Spektral.attachEventListener = function (eventTarget, eventType, eventHandler) {
         if (eventTarget.addEventListener) {

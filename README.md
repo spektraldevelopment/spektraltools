@@ -101,6 +101,46 @@ attribute: `String` - The attribute you want to remove.
 ```javascript
 Spektral.destroyAttribute(testDiv, 'class');
 ```
+
+5. Spektral.moveToAfter(element, targetElement)
+------
+
+#### Description
+Moves an element to after a target element.
+
+#### Arguments
+element: `HTMLElement` - The element you want to move.
+targetElement: `HTMLElement` - The element you want to place the chosen element after.
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+Spektral.moveToAfter(testElementOne, testElementTwo);
+//Results in testElementOne being placed after testElementTwo
+```
+
+6. Spektral.moveToBefore(element, targetElement)
+------
+
+#### Description
+Moves an element to before a target element.
+
+#### Arguments
+element: `HTMLElement` - The element you want to move.
+targetElement: `HTMLElement` - The element you want to place the chosen element before.
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+Spektral.moveToBefore(testElementTwo, testElementOne);
+//Results in testElementTwo being placed before testElementOne
+```
 ---
 
 
