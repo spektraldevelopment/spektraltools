@@ -61,3 +61,12 @@
         }
         return attrObj;
     };
+
+    //DOM - DESTROY ATTRIBUTE
+    Spektral.destroyAttribute = function (element, attribute) {
+        if (element.hasAttribute(attribute)) {
+            element.removeAttribute(attribute);
+        } else {
+            Spektral.log('destroyAttribute: element does not have attribute ' + attribute + ' set.', 'warn');
+        }
+    };

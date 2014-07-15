@@ -82,6 +82,25 @@ Spektral.setAttributes(test,
 	dataTest: 'test-data' 
 });
 ```
+
+4. Spektral.destroyAttribute(element, attribute);
+------
+
+#### Description
+Removes an attribute from an element.
+
+#### Arguments
+element: `HTMLElement` - The element you want to target.
+attribute: `String` - The attribute you want to remove.
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+Spektral.destroyAttribute(testDiv, 'class');
+```
 ---
 
 

@@ -1,16 +1,18 @@
 
     //DEBUG - LOG
     Spektral.log = function(msg, type, obj) {
-        if (type === 'warn') {
-            console.warn(msg)
-        } else if (type === 'error') {
-            console.error(msg);
-        } else if (type === 'dir') {
-            console.group(msg);
-            console.dir(obj);
-            console.groupEnd();
-        } else {
-            console.log(msg)
+        if (debug === true) {
+            if (type === 'warn') {
+                console.warn(msg)
+            } else if (type === 'error') {
+                console.error(msg);
+            } else if (type === 'dir') {
+                console.group(msg);
+                console.dir(obj);
+                console.groupEnd();
+            } else {
+                console.log(msg)
+            }
         }
     }
 
@@ -18,11 +20,11 @@
     Spektral.logGroup = function(groupName, obj, type) {
         type = type || 'nodes';
         var k;
-        console.group(groupName);
-        for (k in obj) {
-            if (type === 'nodes') {
-               console.log('type: ' + Spektral.getType(obj[k]));
+        if (debug === true) {
+            console.group(groupName);
+            for (k in obj) {
+                console.log(k + ' : ' + obj[k]);
             }
+            console.groupEnd();
         }
-        console.groupEnd();
     }

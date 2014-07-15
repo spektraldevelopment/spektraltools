@@ -1,6 +1,7 @@
 describe('SpektralTools: ', function() {
 
     initHelper(document);
+    Spektral.debug();
 
     it('Spektraltools is defined.', function() {
        expect(Spektral).toBeDefined();
@@ -20,7 +21,6 @@ describe('SpektralTools: ', function() {
 
         it('created element has className of new-style.', function(){
             expect(createdDiv.className).toMatch('new-class');
-
         });
 
         it('created element has a style of border: 1px solid #cecece.', function(){
@@ -59,15 +59,15 @@ describe('SpektralTools: ', function() {
             test = createTestElement(testContainer, 'div');
         Spektral.setAttributes(test, { id: 'testDiv', className: 'test-class', dataTest: 'test-data' });
 
-        it('added id attribute named testDiv.', function(){
+        it('set id attribute named testDiv.', function(){
             expect(test.id).toMatch('testDiv');
         });
 
-        it('added class attribute named test-class.', function(){
+        it('set class attribute named test-class.', function(){
             expect(test.className).toMatch('test-class');
         });
 
-        it('added data attribute named data-test.', function(){
+        it('set data attribute named data-test.', function(){
             expect(test.dataset.test).toMatch('test-data');
         });
 
@@ -90,6 +90,20 @@ describe('SpektralTools: ', function() {
 
         it('returned object has key with a value of color:#fff.', function(){
             expect(attrs.style).toMatch('color:#fff');
+        });
+
+        destroyTestContainer(testContainer);
+    });
+
+    describe('DOM - destroyAttribute', function(){
+        var
+           testContainer = createTestContainer(),
+           testDiv = createTestElement(testContainer, 'div', { id: 'testDiv', className: 'test-class'});
+
+        Spektral.destroyAttribute(testDiv, 'class');
+
+        it('removes an attribute of class.', function() {
+            expect(testDiv.hasAttribute('class')).toBeFalsy();
         });
     });
 
