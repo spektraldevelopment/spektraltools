@@ -75,3 +75,8 @@
     Spektral.moveToAfter = function (element, targetElement) {
         element.parentNode.insertBefore(element, targetElement.nextSibling);
     };
+
+    //DOM - MOVE TO BEFORE
+    Spektral.moveToBefore = function (element, targetElement) {
+        element.parentNode.insertBefore(element, targetElement);
+    };

@@ -120,5 +120,19 @@ describe('SpektralTools: ', function() {
         it('moves #testElementOne to after #testElementTwo.', function(){
             expect(testContainer.children[1].id).toMatch('testElementOne');
         });
+        destroyTestContainer(testContainer);
+    });
+
+    describe('DOM - moveToBefore', function(){
+        var
+            testContainer = createTestContainer(),
+            testElementOne = createTestElement(testContainer, 'div', { id: 'testElementOne' }),
+            testElementTwo = createTestElement(testContainer, 'div', { id: 'testElementTwo' });
+
+        Spektral.moveToBefore(testElementTwo, testElementOne);
+
+        it('moves #testElementTwo to before #testElementOne.', function(){
+            expect(testContainer.children[0].id).toMatch('testElementTwo');
+        });
     });
 });

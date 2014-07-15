@@ -99,6 +99,11 @@
         element.parentNode.insertBefore(element, targetElement.nextSibling);
     };
 
+    //DOM - MOVE TO BEFORE
+    Spektral.moveToBefore = function (element, targetElement) {
+        element.parentNode.insertBefore(element, targetElement);
+    };
+
     //EVENT - ATTACH EVENT LISTENER
     Spektral.attachEventListener = function (eventTarget, eventType, eventHandler) {
         if (eventTarget.addEventListener) {
