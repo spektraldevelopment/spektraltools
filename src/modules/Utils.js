@@ -12,3 +12,14 @@
         type = type.toLowerCase();
         return type;
     };
+
+    //UTILS - GET INFO
+    Spektral.getInfo = function (obj) {
+        var info;
+        try {
+            info = JSON.stringify(obj);
+        } catch (err) {
+            Spektral.log("getInfo: could not stringify.", obj, "dir");
+        }
+        return info;
+    };

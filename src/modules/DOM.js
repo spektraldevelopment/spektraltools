@@ -1,13 +1,20 @@
 
     //DOM - ADD ELEMENT
     Spektral.addElement = function(parent, type, attrs) {
-        var newElement = document.createElement(type), key;
+        var
+            newElement = document.createElement(type),
+            key, dataCheck, dataAttr;
         for (key in attrs) {
+            dataCheck = Spektral.hasPattern(key, 'data');
             if (key === 'className') {
-                newElement.class = attrs[key];
+                newElement.className = attrs[key];
             } else if (key === 'innerHTML') {
                 newElement.innerHTML = attrs[key];
-            } else {
+            } else if (dataCheck.match === true) {
+                dataAttr = Spektral.stripString(key, 'data').toLowerCase();
+                newElement.setAttribute('data-' + dataAttr, attrs[key]);
+            }
+            else {
                 newElement.setAttribute(key, attrs[key]);
             }
         }
@@ -38,4 +45,19 @@
                 element.setAttribute(k, attrs[k]);
             }
         }
+    };
+
+    //DOM - GET ATTRIBUTES
+    Spektral.getAttributes = function (element) {
+        var attributes = element.attributes, attrObj = {}, i;
+        if (attributes.length >= 1) {
+            for (i = 0; i < attributes.length; i += 1) {
+                if (attributes.item(i).nodeName === 'class') {
+                    attrObj['className'] = attributes.item(i).value;
+                } else {
+                    attrObj[attributes.item(i).nodeName] = attributes.item(i).value;
+                }
+            }
+        }
+        return attrObj;
     };

@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-07-13
+* Build Created: 2014-07-14
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -24,13 +24,20 @@
 
     //DOM - ADD ELEMENT
     Spektral.addElement = function(parent, type, attrs) {
-        var newElement = document.createElement(type), key;
+        var
+            newElement = document.createElement(type),
+            key, dataCheck, dataAttr;
         for (key in attrs) {
+            dataCheck = Spektral.hasPattern(key, 'data');
             if (key === 'className') {
-                newElement.class = attrs[key];
+                newElement.className = attrs[key];
             } else if (key === 'innerHTML') {
                 newElement.innerHTML = attrs[key];
-            } else {
+            } else if (dataCheck.match === true) {
+                dataAttr = Spektral.stripString(key, 'data').toLowerCase();
+                newElement.setAttribute('data-' + dataAttr, attrs[key]);
+            }
+            else {
                 newElement.setAttribute(key, attrs[key]);
             }
         }
@@ -61,6 +68,21 @@
                 element.setAttribute(k, attrs[k]);
             }
         }
+    };
+
+    //DOM - GET ATTRIBUTES
+    Spektral.getAttributes = function (element) {
+        var attributes = element.attributes, attrObj = {}, i;
+        if (attributes.length >= 1) {
+            for (i = 0; i < attributes.length; i += 1) {
+                if (attributes.item(i).nodeName === 'class') {
+                    attrObj['className'] = attributes.item(i).value;
+                } else {
+                    attrObj[attributes.item(i).nodeName] = attributes.item(i).value;
+                }
+            }
+        }
+        return attrObj;
     };
 
     //EVENT - ATTACH EVENT LISTENER
@@ -163,22 +185,43 @@
         return type;
     };
 
+    //UTILS - GET INFO
+    Spektral.getInfo = function (obj) {
+        var info;
+        try {
+            info = JSON.stringify(obj);
+        } catch (err) {
+            Spektral.log("getInfo: could not stringify.", obj, "dir");
+        }
+        return info;
+    };
+
     //DEBUG - LOG
-    Spektral.log = function(msg, type) {
+    Spektral.log = function(msg, type, obj) {
         if (type === 'warn') {
             console.warn(msg)
         } else if (type === 'error') {
             console.error(msg);
         } else if (type === 'dir') {
-            console.dir(msg);
+            console.group(msg);
+            console.dir(obj);
+            console.groupEnd();
         } else {
             console.log(msg)
         }
     }
 
     //DEBUG - LOG GROUP
-    Spektral.logGroup = function(groupName, obj) {
-        //Will log a custom group
+    Spektral.logGroup = function(groupName, obj, type) {
+        type = type || 'nodes';
+        var k;
+        console.group(groupName);
+        for (k in obj) {
+            if (type === 'nodes') {
+               console.log('type: ' + Spektral.getType(obj[k]));
+            }
+        }
+        console.groupEnd();
     }
 
 	window.Spektral = Spektral;

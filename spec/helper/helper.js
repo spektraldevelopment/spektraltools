@@ -29,7 +29,7 @@ function createTestElement(parent, type, attrs) {
     var newElement = document.createElement(type), key;
     for (key in attrs) {
         if (key === 'className') {
-            newElement.class = attrs[key];
+            newElement.className = attrs[key];
         } else if (key === 'innerHTML') {
             newElement.innerHTML = attrs[key];
         } else {

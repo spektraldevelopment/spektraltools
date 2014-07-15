@@ -44,3 +44,4 @@ dwsync.xml
 .idea
 .sass-cache
 .grunt
+test/*

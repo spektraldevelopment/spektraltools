@@ -10,7 +10,7 @@ describe('SpektralTools: ', function() {
         var testContainer = createTestContainer(), createdDiv;
 
         it('creates an element.', function() {
-            createdDiv = Spektral.addElement(testContainer, 'div', { id: 'newDiv', className: 'new-style', style: 'border: 1px solid #cecece' });
+            createdDiv = Spektral.addElement(testContainer, 'div', { id: 'newDiv', className: 'new-class', style: 'border: 1px solid #cecece', dataTest: 'test' });
             expect(createdDiv).toBeDefined();
         });
 
@@ -19,11 +19,16 @@ describe('SpektralTools: ', function() {
         });
 
         it('created element has className of new-style.', function(){
-            expect(createdDiv.class).toMatch('new-style');
+            expect(createdDiv.className).toMatch('new-class');
+
         });
 
         it('created element has a style of border: 1px solid #cecece.', function(){
             expect(createdDiv.getAttribute('style')).toMatch('border: 1px solid #cecece');
+        });
+
+        it('created element has a data-test attribute with a value of test.', function(){
+            expect(createdDiv.dataset.test).toMatch('test');
         });
 
         it('created element was added to parent.', function() {
@@ -67,6 +72,25 @@ describe('SpektralTools: ', function() {
         });
 
         destroyTestContainer(testContainer);
+    });
+
+    describe('DOM - getAttributes', function(){
+        var
+            testContainer = createTestContainer(),
+            testDiv = createTestElement(testContainer, 'div', { id: 'testDiv', className: 'test-class', style: 'color:#fff'}),
+            attrs = Spektral.getAttributes(testDiv);
+
+        it('returned object has key id with a value of testDiv.', function(){
+            expect(attrs.id).toMatch('testDiv');
+        });
+
+        it('returned object has key className with a value of test-class.', function(){
+            expect(attrs.className).toMatch('test-class');
+        });
+
+        it('returned object has key with a value of color:#fff.', function(){
+            expect(attrs.style).toMatch('color:#fff');
+        });
     });
 
 });
