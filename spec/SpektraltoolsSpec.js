@@ -105,6 +105,26 @@ describe('SpektralTools: ', function() {
         it('removes an attribute of class.', function() {
             expect(testDiv.hasAttribute('class')).toBeFalsy();
         });
+
+        destroyTestContainer(testContainer);
+    });
+
+    describe('DOM - getParent', function(){
+        var
+            testContainer = createTestContainer(),
+            testDiv = createTestElement(testContainer, 'div', { id: 'testDiv'}), parent;
+
+        parent = Spektral.getParent(testDiv);
+
+        it('returns an element.', function() {
+            expect(getType(parent)).toMatch('div');
+        });
+
+        it('returns an element with the id of #testContainer.', function(){
+           expect(parent.id).toMatch('testContainer');
+        });
+
+        destroyTestContainer(testContainer);
     });
 
 });

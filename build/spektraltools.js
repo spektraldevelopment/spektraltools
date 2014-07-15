@@ -94,6 +94,11 @@
         }
     };
 
+    //DOM - GET PARENT
+    Spektral.getParent = function (element) {
+        return element.parentNode;
+    }
+
     //EVENT - ATTACH EVENT LISTENER
     Spektral.attachEventListener = function (eventTarget, eventType, eventHandler) {
         if (eventTarget.addEventListener) {

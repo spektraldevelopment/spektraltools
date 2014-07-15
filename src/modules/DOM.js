@@ -70,3 +70,8 @@
             Spektral.log('destroyAttribute: element does not have attribute ' + attribute + ' set.', 'warn');
         }
     };
+
+    //DOM - GET PARENT
+    Spektral.getParent = function (element) {
+        return element.parentNode;
+    }
