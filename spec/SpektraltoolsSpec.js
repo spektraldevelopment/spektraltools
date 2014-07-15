@@ -109,22 +109,16 @@ describe('SpektralTools: ', function() {
         destroyTestContainer(testContainer);
     });
 
-    describe('DOM - getParent', function(){
+    describe('DOM - moveToAfter', function(){
         var
             testContainer = createTestContainer(),
-            testDiv = createTestElement(testContainer, 'div', { id: 'testDiv'}), parent;
+            testElementOne = createTestElement(testContainer, 'div', { id: 'testElementOne' }),
+            testElementTwo = createTestElement(testContainer, 'div', { id: 'testElementTwo' });
 
-        parent = Spektral.getParent(testDiv);
+        Spektral.moveToAfter(testElementOne, testElementTwo);
 
-        it('returns an element.', function() {
-            expect(getType(parent)).toMatch('div');
+        it('moves #testElementOne to after #testElementTwo.', function(){
+            expect(testContainer.children[1].id).toMatch('testElementOne');
         });
-
-        it('returns an element with the id of #testContainer.', function(){
-           expect(parent.id).toMatch('testContainer');
-        });
-
-        destroyTestContainer(testContainer);
     });
-
 });

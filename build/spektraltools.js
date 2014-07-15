@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-07-14
+* Build Created: 2014-07-15
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -94,10 +94,10 @@
         }
     };
 
-    //DOM - GET PARENT
-    Spektral.getParent = function (element) {
-        return element.parentNode;
-    }
+    //DOM - MOVE TO AFTER
+    Spektral.moveToAfter = function (element, targetElement) {
+        element.parentNode.insertBefore(element, targetElement.nextSibling);
+    };
 
     //EVENT - ATTACH EVENT LISTENER
     Spektral.attachEventListener = function (eventTarget, eventType, eventHandler) {

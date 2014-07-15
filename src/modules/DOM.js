@@ -71,7 +71,7 @@
         }
     };
 
-    //DOM - GET PARENT
-    Spektral.getParent = function (element) {
-        return element.parentNode;
-    }
+    //DOM - MOVE TO AFTER
+    Spektral.moveToAfter = function (element, targetElement) {
+        element.parentNode.insertBefore(element, targetElement.nextSibling);
+    };
