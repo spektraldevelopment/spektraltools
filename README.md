@@ -224,4 +224,29 @@ Spektral.isElement(testObject);
 ```
 ---
 
+## UTILS
+
+1. Spektral.getType(obj);
+------
+
+#### Description
+Gets the type of various objects, and returns the type in a lower case string. ex. string, number, object, div, etc.
+
+#### Arguments
+obj: `Various` - The object you want to check
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+Spektral.getType(23);
+//Returns 'number'
+Spektral.getType(testDiv);
+//Returns 'div'
+```
+
+---
+
 

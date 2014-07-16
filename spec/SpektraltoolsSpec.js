@@ -195,4 +195,30 @@ describe('SpektralTools: ', function() {
 
         destroyTestContainer(testContainer);
     });
+
+    describe('UTILS - getType', function(){
+        var
+            testContainer = createTestContainer(),
+            testNum = 23,
+            testString = 'Test',
+            testObj = { test: 'Foobar' };
+
+        it('returns a type of div.', function(){
+            expect(Spektral.getType(testContainer)).toMatch('div');
+        });
+
+        it('returns a type of number.', function(){
+            expect(Spektral.getType(testNum)).toMatch('number');
+        });
+
+        it('returns a type of string.', function(){
+            expect(Spektral.getType(testString)).toMatch('string');
+        });
+
+        it('returns a type of object.', function(){
+            expect(Spektral.getType(testObj)).toMatch('object');
+        });
+
+        destroyTestContainer(testContainer);
+    });
 });

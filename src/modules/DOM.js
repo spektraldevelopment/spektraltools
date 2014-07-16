@@ -109,7 +109,7 @@
         }
     };
 
-    //DOM - isElement
+    //DOM - IS ELEMENT
     Spektral.isElement = function (possibleElement) {
         var isAnElement = false, type = possibleElement.nodeType;
         if(type === 1) {
