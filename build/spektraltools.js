@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-07-15
+* Build Created: 2014-07-16
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -130,6 +130,15 @@
         } else {
             element.innerHTML = textContent;
         }
+    };
+
+    //DOM - isElement
+    Spektral.isElement = function (possibleElement) {
+        var isAnElement = false, type = possibleElement.nodeType;
+        if(type === 1) {
+            isAnElement = true;
+        }
+        return isAnElement;
     };
 
     //EVENT - ATTACH EVENT LISTENER

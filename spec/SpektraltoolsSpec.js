@@ -179,4 +179,20 @@ describe('SpektralTools: ', function() {
 
         destroyTestContainer(testContainer);
     });
+
+    describe('DOM - isElement', function(){
+        var
+            testContainer = createTestContainer(),
+            notAnElement = { test: 'foobar' };
+
+        it('returns an element as true.', function(){
+            expect(Spektral.isElement(testContainer)).toBeTruthy();
+        });
+
+        it('returns a non element as false.', function(){
+            expect(Spektral.isElement(notAnElement)).toBeFalsy();
+        });
+
+        destroyTestContainer(testContainer);
+    });
 });

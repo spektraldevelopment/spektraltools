@@ -108,3 +108,12 @@
             element.innerHTML = textContent;
         }
     };
+
+    //DOM - isElement
+    Spektral.isElement = function (possibleElement) {
+        var isAnElement = false, type = possibleElement.nodeType;
+        if(type === 1) {
+            isAnElement = true;
+        }
+        return isAnElement;
+    };

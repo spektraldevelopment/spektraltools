@@ -201,6 +201,27 @@ append: `Boolean default:false` - If set to true, will append text to the existi
 Spektral.setInnerText(testContainer, 'Here is some text.');
 Spektral.setInnerText(testContainer, 'Here is even more text.', true);
 ```
+
+10. Spektral.isElement(possibleElement);
+------
+
+#### Description
+Checks if something is an element.
+
+#### Arguments
+possibleElement: `Various` - The possible element you want to check.
+
+##### Returns
+`Boolean`
+
+##### Example
+
+```javascript
+Spektral.isElement(testDiv);
+//Retrurns true
+Spektral.isElement(testObject);
+//Returns false
+```
 ---
 
 
