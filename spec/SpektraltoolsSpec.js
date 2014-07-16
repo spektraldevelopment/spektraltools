@@ -137,7 +137,7 @@ describe('SpektralTools: ', function() {
         destroyTestContainer(testContainer);
     });
 
-    describe('DOM - clearAllChildren', function(){
+    describe('DOM - clearChildren', function(){
         var
             testContainer = createTestContainer(),
             testElementOne = createTestElement(testContainer, 'div', { id: 'testElementOne' }),
@@ -148,6 +148,35 @@ describe('SpektralTools: ', function() {
         it('clears the parent of all its children.', function(){
             expect(testContainer.children.length).toEqual(0);
         });
+        destroyTestContainer(testContainer);
+    });
+
+    describe('DOM - getInnerText', function(){
+        var testContainer = createTestContainer();
+
+        testContainer.innerHTML = 'Testing';
+
+        it('gets the inner text testContainer.', function(){
+           expect(Spektral.getInnerText(testContainer)).toMatch('Testing');
+       });
+       destroyTestContainer(testContainer);
+    });
+
+    describe('DOM - setInnerText', function(){
+        var testContainer = createTestContainer();
+
+        Spektral.setInnerText(testContainer, 'Here is some text.');
+
+        it('sets the inner text of testContainer.', function(){
+            expect(testContainer.innerHTML).toMatch('Here is some text.');
+        });
+
+        Spektral.setInnerText(testContainer, ' And here is even more text.', true);
+
+        it('appends text to the existing inner text of testContainer.', function(){
+            expect(testContainer.innerHTML).toMatch('Here is some text. And here is even more text.');
+        });
+
         destroyTestContainer(testContainer);
     });
 });

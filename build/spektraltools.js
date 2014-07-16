@@ -109,6 +109,29 @@
         parent.innerHTML = '';
     };
 
+    //DOM - GET INNER TEXT
+    Spektral.getInnerText = function(element) {
+        var content = element.textContent;
+        if (content === undefined) {
+            content = element.innerText;
+        }
+        return content;
+    };
+
+    //DOM - SET INNER TEXT
+    Spektral.setInnerText = function (element, textContent, append) {
+        append = append || false;
+        var
+            currentContent = Spektral.getInnerText(element),
+            newContent;
+        if(append === true) {
+            newContent = currentContent + textContent;
+            element.innerHTML = newContent;
+        } else {
+            element.innerHTML = textContent;
+        }
+    };
+
     //EVENT - ATTACH EVENT LISTENER
     Spektral.attachEventListener = function (eventTarget, eventType, eventHandler) {
         if (eventTarget.addEventListener) {

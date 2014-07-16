@@ -141,6 +141,66 @@ targetElement: `HTMLElement` - The element you want to place the chosen element 
 Spektral.moveToBefore(testElementTwo, testElementOne);
 //Results in testElementTwo being placed before testElementOne
 ```
+
+7. Spektral.clearChildren(parent)
+------
+
+#### Description
+Clears a parent of its children.
+
+#### Arguments
+parent: `HTMLElement` - The parent you want to clear.
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+Spektral.clearChildren(divWithChildren);
+```
+
+8. Spektral.getInnerText(element);
+------
+
+#### Description
+Gets the inner text of an element.
+
+#### Arguments
+element: `HTMLElement` - The element you want to retrieve inner text from.
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+var testDiv = document.createElement('div');
+testDiv.innerHTML = 'Testing';
+Spektral.getInnerText(testDiv)
+//Returns 'Testing'
+```
+
+9. Spektral.setInnerText(element, textContent, append);
+------
+
+#### Description
+Sets the inner text of an element, as well as appends text to exisiting text.
+
+#### Arguments
+element: `HTMLElement` - The element you want set the innerHTML of.
+textContent: `String` - The text content.
+append: `Boolean default:false` - If set to true, will append text to the existing text.
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+Spektral.setInnerText(testContainer, 'Here is some text.');
+Spektral.setInnerText(testContainer, 'Here is even more text.', true);
+```
 ---
 
 
