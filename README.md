@@ -247,6 +247,24 @@ Spektral.getType(testDiv);
 //Returns 'div'
 ```
 
+2. Spektral.getInfo(obj);
+------
+
+#### Description
+Stringifies an object.
+
+#### Arguments
+obj: `Various` - The object you want to stringify.
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+Spektral.getInfo(testObj);
+```
+
 ---
 
 

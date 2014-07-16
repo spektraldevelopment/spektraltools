@@ -221,4 +221,13 @@ describe('SpektralTools: ', function() {
 
         destroyTestContainer(testContainer);
     });
+
+    describe('UTILS - getInfo', function(){
+        var
+            testObj = { testOne: 'Test one', testTwo: 'Test two'},
+            info = Spektral.getInfo(testObj);
+        it('returns a string.', function(){
+            expect(getType(info)).toMatch('string');
+        });
+    });
 });
