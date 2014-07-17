@@ -24,13 +24,21 @@
         return info;
     };
 
-    //UTILS - GET KEY
-    Spektral.getKey = function (code) {
-        var key;
-        if (code === 38) { key = "UP"; }
-        if (code === 40) { key = "DOWN"; }
-        if (code === 37) { key = "LEFT"; }
-        if (code === 39) { key = "RIGHT"; }
-        if (code === 13) { key = "ENTER"; }
-        return key;
+    //UTILS - IS MATCH
+    Spektral.isMatch = function (itemA, itemB, useType) {
+        useType = useType || false;
+        var
+            isMatch = false,
+            itemAType = Spektral.getType(itemA),
+            itemBType = Spektral.getType(itemB);
+        if(useType === true) {
+            if(itemAType === itemBType) {
+                isMatch = true;
+            }
+        } else {
+            if (itemA === itemB) {
+                isMatch = true;
+            }
+        }
+        return isMatch;
     };

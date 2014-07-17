@@ -230,4 +230,33 @@ describe('SpektralTools: ', function() {
             expect(getType(info)).toMatch('string');
         });
     });
+
+    describe('UTILS - isMatch', function(){
+        var
+            testStringOne = 'Test',
+            testStringTwo = 'Test',
+            testNumOne = 4,
+            testNumTwo = 6,
+            testBoolOne = true;
+
+        it('returns a boolean.', function(){
+            expect(getType(Spektral.isMatch(testStringOne, testStringTwo))).toMatch('boolean');
+        });
+
+        it('returns true when two items match.', function(){
+            expect(Spektral.isMatch(testStringOne, testStringTwo)).toBeTruthy();
+        });
+
+        it('returns false when two items do not match.', function(){
+            expect(Spektral.isMatch(testNumOne, testNumTwo)).toBeFalsy();
+        });
+
+        it('returns true when the type of two items match.', function(){
+            expect(Spektral.isMatch(testNumOne, testNumTwo, true)).toBeTruthy();
+        });
+
+        it('returns false when the type of two items does not match.', function(){
+            expect(Spektral.isMatch(testNumTwo, testBoolOne, true)).toBeFalsy();
+        });
+    });
 });

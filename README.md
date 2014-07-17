@@ -265,6 +265,30 @@ obj: `Various` - The object you want to stringify.
 Spektral.getInfo(testObj);
 ```
 
+3. Spektral.isMatch(itemA, itemB, useType);
+------
+
+#### Description
+Compares two values and returns a boolean, can also compare the type of two values as well.
+
+#### Arguments
+itemA: `Various` - The value or item you want to compare.
+itemB: `Various` - The value or item you want to compare against itemA.
+useType `Boolean default:false` - If set to true, will compare variables type, instead of value.
+
+##### Returns
+`Boolean`
+
+##### Example
+
+```javascript
+var testNumOne = 4, testNumTwo = 8;
+Spektral.isMatch(testNumOne, testNumTwo);
+//Will return false
+Spektral.isMatch(testNumOne, testNumTwo, true);
+//Will return true because both values are numbers
+```
+
 ---
 
 
