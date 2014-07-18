@@ -182,7 +182,21 @@
         return evt;
     };
 
-    //String - hasPattern
+    //NUMBER - roundNum
+    Spektral.roundNum = function (num, type) {
+        type = type || "regular";
+        var roundedNum = 0;
+        if (type === "regular") {
+            roundedNum = Math.round(num);
+        } else if (type === "up") {
+            roundedNum = Math.ceil(num)
+        } else if (type === "down") {
+            roundedNum = Math.floor(num);
+        }
+        return roundedNum;
+    };
+
+    //STRING - hasPattern
     Spektral.hasPattern = function (request, pattern) {
         var
             regEx = new RegExp(pattern, "g"),
@@ -200,7 +214,7 @@
         return matchObj;
     };
 
-    //String - stripString
+    //STRING - stripString
     Spektral.stripString = function (request, character, mode) {
         mode = mode || "all";
         var

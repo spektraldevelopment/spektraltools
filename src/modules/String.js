@@ -1,5 +1,5 @@
 
-    //String - hasPattern
+    //STRING - hasPattern
     Spektral.hasPattern = function (request, pattern) {
         var
             regEx = new RegExp(pattern, "g"),
@@ -17,7 +17,7 @@
         return matchObj;
     };
 
-    //String - stripString
+    //STRING - stripString
     Spektral.stripString = function (request, character, mode) {
         mode = mode || "all";
         var
