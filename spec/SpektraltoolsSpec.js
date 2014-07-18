@@ -196,6 +196,25 @@ describe('SpektralTools: ', function() {
         destroyTestContainer(testContainer);
     });
 
+    describe('NUMBER - roundNum', function(){
+        var
+            testNum = 6.456,
+            testNumCeil = 8.3,
+            testNumFloor = 3.7;
+
+        it('rounds a number.', function(){
+            expect(Spektral.roundNum(testNum)).toEqual(6);
+        });
+
+        it('rounds a number up.', function(){
+            expect(Spektral.roundNum(testNumCeil, 'up')).toEqual(9);
+        });
+
+        it('rounds a number down.', function(){
+            expect(Spektral.roundNum(testNumFloor, 'down')).toEqual(3);
+        });
+    });
+
     describe('UTILS - getType', function(){
         var
             testContainer = createTestContainer(),
