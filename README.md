@@ -359,9 +359,9 @@ character: `String` - The character you want to check for
 
 ```javascript
 Spektral.detectCharacter('$#@!', '#');
-Returns: true
+//Returns: true
 Spektral.detectCharacter('$#@!', '*');
-Returns: false
+//Returns: false
 ```
 6. Spektral.stripWhiteSpace(request, removeAll);
 ------
@@ -401,7 +401,7 @@ request: `String` - The string you want to strip
 
 ```javascript
 Spektral.stripBrackets('({[foobar]})');
-Returns: foobar
+//Returns: foobar
 ```
 
 8. Spektral.convertCase(request, newCase);
@@ -425,7 +425,28 @@ Spektral.convertCase('FOOBAR'));
 Spektral.convertCase('foobar', 'upper');
 //Returns: FOOBAR
 Spektral.convertCase('foobar', 'first');
-Returns: Foobar
+//Returns: Foobar
+```
+
+9. Spektral.trimString(request, start, end);
+------
+
+#### Description
+Trims a string based on the start and end index set
+
+#### Arguments
+request: `String` - The string you want to trim
+start: `Number` - The start index
+end: `Number` - The end index
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+Spektral.trimString('foobar', 1, 5);
+//Returns: ooba
 ```
 ---
 

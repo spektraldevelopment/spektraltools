@@ -139,3 +139,8 @@
         }
         return newString;
     };
+
+    //STRING - trimString
+    Spektral.trimString = function (request, start, end) {
+        return request.substring(start, end);
+    };

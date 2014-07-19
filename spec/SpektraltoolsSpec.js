@@ -355,6 +355,17 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('STRING - trimString', function(){
+        var testString = Spektral.trimString('foobar', 1, 5);
+        it('returns a string.', function(){
+            expect(getType(testString)).toMatch('string');
+        });
+
+        it('trims the string.', function(){
+            expect(testString).toMatch('ooba');
+        });
+    });
+
     describe('UTILS - getType', function(){
         var
             testContainer = createTestContainer(),
