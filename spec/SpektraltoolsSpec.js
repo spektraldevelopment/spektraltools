@@ -309,6 +309,22 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('STRING - stripWhiteSpace', function(){
+        var testString = ' foo bar  ';
+
+        it('returns a string.', function(){
+            expect(getType(Spektral.stripWhiteSpace(testString))).toMatch('string');
+        });
+
+        it('strips the white space on either side of string.', function(){
+            expect(Spektral.stripWhiteSpace(testString)).toMatch('foo bar');
+        });
+
+        it('strips all white space from the string.', function(){
+            expect(Spektral.stripWhiteSpace(testString, true)).toMatch('foobar');
+        });
+    });
+
     describe('UTILS - getType', function(){
         var
             testContainer = createTestContainer(),

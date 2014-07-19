@@ -340,7 +340,47 @@ character: `String default:-` - The character you want to target, you can use an
 ```javascript
 Spektral.convertToCamel('camel-case');
 Returns: camelCase
+```
 
+5. Spektral.detectCharacter(request, character);
+------
+
+#### Description
+Detects a character in a string, good for detecting hashtags
+
+#### Arguments
+request: `String` - The string you want to check
+character: `String` - The character you want to check for
+##### Returns
+`Boolean`
+
+##### Example
+
+```javascript
+Spektral.detectCharacter('$#@!', '#');
+Returns: true
+Spektral.detectCharacter('$#@!', '*');
+Returns: false
+```
+6. Spektral.stripWhiteSpace(request, removeAll);
+------
+
+#### Description
+Strips a string of extra white space at the beginning and end of the string, can also remove all white space if needed
+
+#### Arguments
+request: `String` - The string you want to strip
+removeAll: `Boolean default:false` - If set to true, removes all white space from string
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+Spektral.stripWhiteSpace(' foo bar ');
+//Returns: 'foo bar';
+Spektral.stripWhiteSpace(' foo bar ');
+//Returns: 'foobar'
 ```
 
 ---
