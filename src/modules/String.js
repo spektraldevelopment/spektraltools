@@ -125,3 +125,17 @@
         } catch(e){}
         return value;
     };
+
+    //STRING - convertCase
+    Spektral.convertCase = function (request, newCase) {
+        newCase = newCase || "lower";
+        var newString;
+        if (newCase === "lower") {
+            newString = request.toLowerCase();
+        } else if (newCase === "upper") {
+            newString =  request.toUpperCase();
+        } else if (newCase === "first") {
+            newString = request.charAt(0).toUpperCase() + request.slice(1);
+        }
+        return newString;
+    };

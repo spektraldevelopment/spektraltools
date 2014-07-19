@@ -337,6 +337,24 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('STRING - convertCase',function(){
+        it('returns a string.', function(){
+            expect(getType(Spektral.convertCase('FooBaR'))).toMatch('string');
+        });
+
+        it('converts string to lower case.', function(){
+            expect(Spektral.convertCase('FOOBAR')).toMatch('foobar');
+        });
+
+        it('converts string to upper case.', function(){
+            expect(Spektral.convertCase('foobar', 'upper')).toMatch('FOOBAR');
+        });
+
+        it('converts first letter only to upper case.', function(){
+            expect(Spektral.convertCase('foobar', 'first')).toMatch('Foobar');
+        });
+    });
+
     describe('UTILS - getType', function(){
         var
             testContainer = createTestContainer(),

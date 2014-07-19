@@ -403,6 +403,30 @@ request: `String` - The string you want to strip
 Spektral.stripBrackets('({[foobar]})');
 Returns: foobar
 ```
+
+8. Spektral.convertCase(request, newCase);
+------
+
+#### Description
+Converts a string to upper or lower case, also capitalizes the first letter in a string
+
+#### Arguments
+request: `String` - The string you want to change case
+newCase: `String default:lower` - The new case you want, you can also use 'upper' or 'first'
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+Spektral.convertCase('FOOBAR'));
+//Returns: foobar
+Spektral.convertCase('foobar', 'upper');
+//Returns: FOOBAR
+Spektral.convertCase('foobar', 'first');
+Returns: Foobar
+```
 ---
 
 ## UTILS
