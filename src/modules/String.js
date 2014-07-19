@@ -74,9 +74,9 @@
     };
 
     //STRING - covertToCamel
-    Spektral.convertToCamel = function (request, char) {
-        char = char || "-";
-        var splitRequest = Spektral.splitString(request, char), newString, stringToConvert, i;
+    Spektral.convertToCamel = function (request, character) {
+        character = character || "-";
+        var splitRequest = Spektral.splitString(request, character), newString, stringToConvert, i;
         newString = splitRequest[0];
         for (i = 0; i < splitRequest.length; i += 1) {
             if (i !== 0) {

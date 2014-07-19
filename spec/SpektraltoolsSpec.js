@@ -277,6 +277,22 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('STRING - convertToCamel', function(){
+        var testString = Spektral.convertToCamel('camel-case');
+
+        it('returns a string.', function(){
+            expect(getType(testString)).toMatch('string');
+        });
+
+        it('converts a string to camel case.', function(){
+            expect(testString).toMatch('camelCase');
+        });
+
+        it('converts to camel case using a non-hyphen character.', function(){
+            expect(Spektral.convertToCamel('test#test#test', '#')).toMatch('testTestTest');
+        });
+    });
+
     describe('UTILS - getType', function(){
         var
             testContainer = createTestContainer(),

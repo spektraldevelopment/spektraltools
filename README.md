@@ -322,6 +322,27 @@ Returns: ['Split', 'on', 'these', 'commas']
 Spektral.splitString('Split#on#these#hashtags');
 Returns: ['Split', 'on', 'these', 'hashtags']
 ```
+4. Spektral.convertCamel(request, character);
+------
+
+#### Description
+Converts a string separated by hyphens to camel case.
+
+#### Arguments
+request: `String` - The string you want to convert to camel case
+character: `String default:-` - The character you want to target, you can use another character optionally
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+Spektral.convertToCamel('camel-case');
+Returns: camelCase
+
+```
+
 ---
 
 ## UTILS
