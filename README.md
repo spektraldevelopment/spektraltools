@@ -556,6 +556,28 @@ Spektral.isObjectEmpty({test:'foobar'});
 Spektral.isObjectEmpty({});
 //Returns: true
 ```
+
+6. Spektral.arrayHasValue(array, value);
+------
+
+#### Description
+Checks an array for a stored value and returns the result as a boolean
+
+#### Arguments
+array: `Array` - The array you want to check
+value: `Various` - The value you want to find
+
+##### Returns
+`Boolean`
+
+##### Example
+
+```javascript
+Spektral.arrayHasValue(['one', 'two'], 'two');
+//Returns: true
+Spektral.arrayHasValue([1,2,3], 4);
+//Returns: false
+```
 ---
 
 

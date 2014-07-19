@@ -460,4 +460,19 @@ describe('SpektralTools: ', function() {
             expect(Spektral.isObjectEmpty(testObj)).toBeFalsy();
         });
     });
+
+    describe('UTILS - arrayHasValue', function(){
+
+        it('returns a boolean.', function(){
+            expect(getType(Spektral.arrayHasValue(['one', 'two', 'three'], 'two'))).toMatch('boolean');
+        });
+
+        it('returns true when value is in array.', function(){
+            expect(Spektral.arrayHasValue(['one', 'two', 'three'], 'two')).toBeTruthy();
+        });
+
+        it('returns false when value is not in array.', function(){
+            expect(Spektral.arrayHasValue([1, 2, 3], 4)).toBeFalsy();
+        });
+    });
 });

@@ -403,7 +403,7 @@
         return parseInt(request.replace(/[^0-9.]/g, ""), 10);
     };
 
-    //UTILS - isObjectEmpty
+    //UTILS - IS OBJECT EMPTY
     Spektral.isObjectEmpty = function (obj) {
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
@@ -412,6 +412,18 @@
         }
         return true;
     };
+
+    //UTILS - ARRAY HAS VALUE
+    Spektral.arrayHasValue = function (array, value) {
+        var i, found = false;
+        for(i = 0; i < array.length; i += 1) {
+            if(array[i] === value) {
+                found = true;
+            }
+        }
+        return found;
+    };
+
 
     //DEBUG - LOG
     Spektral.log = function(msg, type, obj) {
