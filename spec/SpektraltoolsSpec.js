@@ -293,6 +293,22 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('STRING - detectCharacter', function(){
+        var testString = '@#$G';
+
+        it('returns a boolean.', function(){
+            expect(getType(Spektral.detectCharacter(testString, '$'))).toMatch('boolean');
+        });
+
+        it('detects a character and returns true.', function(){
+            expect(Spektral.detectCharacter(testString, '#')).toBeTruthy();
+        });
+
+        it('returns false if character is not detected.', function(){
+            expect(Spektral.detectCharacter(testString, '*')).toBeFalsy();
+        });
+    });
+
     describe('UTILS - getType', function(){
         var
             testContainer = createTestContainer(),
