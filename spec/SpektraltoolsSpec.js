@@ -325,6 +325,18 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('STRING - stripBrackets', function(){
+        var testString = '({[foobar]})';
+
+        it('returns a string.', function(){
+            expect(getType(Spektral.stripBrackets(testString))).toMatch('string');
+        });
+
+        it('return string is stripped of all brackets.', function(){
+            expect(Spektral.stripBrackets(testString)).toMatch('foobar');
+        });
+    });
+
     describe('UTILS - getType', function(){
         var
             testContainer = createTestContainer(),

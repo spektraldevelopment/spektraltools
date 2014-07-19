@@ -107,3 +107,21 @@
         }
         return newString;
     };
+
+    //STRING - stripBrackets
+    Spektral.stripBrackets = function (request) {
+        var value;
+        //[]
+        try {
+            value = request.match(/\[(.*?)\]/)[1];
+        } catch(e){}
+        //()
+        try {
+            value = request.match(/\((.*?)\)/)[1];
+        } catch(e){}
+        //{}
+        try {
+            value = request.match(/\{(.*?)\}/)[1];
+        } catch(e){}
+        return value;
+    };
