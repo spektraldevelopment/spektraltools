@@ -241,6 +241,20 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('STRING - stripString', function(){
+        it('strips a string of a set character.', function(){
+           expect(Spektral.stripString('These #hashtags wi#ll be rem#oved.', '#')).toMatch('These hashtags will be removed.');
+        });
+
+        it('it strips only the first character, when mode is set to \'first\'.', function(){
+            expect(Spektral.stripString('@foobar@', '@', 'first')).toMatch('foobar@');
+        });
+
+        it('it strips only the third character from string.', function(){
+            expect(Spektral.stripString('#foo#ba#r#', '#', 2)).toMatch('#foo#bar#');
+        });
+    });
+
     describe('UTILS - getType', function(){
         var
             testContainer = createTestContainer(),

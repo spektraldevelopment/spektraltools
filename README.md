@@ -257,7 +257,7 @@ Spektral.roundNum(8.8, 'down');
 ------
 
 #### Description
-Checks a string for a pattern and returns an object containing the keys 'match', 'amount'
+Checks a string for a pattern and returns an object containing the keys 'match' and 'amount'
 
 #### Arguments
 request: `String` - The string you want to check
@@ -272,6 +272,33 @@ pattern: `String default:regular` - The pattern you want to check for
 var testPattern = Spektral.hasPattern('This foobar string has foobar in it twice.', 'foobar');
 //testPattern.match = true;
 //testPattern.amount = 2;
+```
+
+2. Spektral.stripString(request, character, mode)
+------
+
+#### Description
+Strips a requested character from a string
+
+#### Arguments
+request: `String` - The string you want to strip
+character: `String` - The character you want to remove
+mode: `String or Number default:all` - If set to 'all', will remove character from entire string, 
+if set to 'first', will on remove only the first instance of the character, if set to a number, will remove
+the character specifically at it's index (note: won't work with RegEx special characters such as * yet)
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+Spektral.stripString('These #hashtags wi#ll be rem#oved.', '#');
+//Returns: These hashtags will be removed.
+Spektral.stripString('@foobar@', '@', 'first');
+//Returns: foobar@
+Spektral.stripString('#foo#ba#r#', '#', 2);
+//Returns: #foo#bar#
 ```
 ---
 
