@@ -201,16 +201,13 @@
         var
             regEx = new RegExp(pattern, "g"),
             matches = request.match(regEx),
-            hasMatch = false, matchAmount = 0,
             matchObj = {};
         if (matches !== null) {
-
-            hasMatch = true;
-            matchAmount = matches.length;
+            matchObj['match'] = true;
+            matchObj['amount'] = matches.length;
+        } else {
+            matchObj['match'] = false;
         }
-        matchObj['match'] = hasMatch;
-        matchObj['amount'] = matchAmount;
-        matchObj['array'] = matches;
         return matchObj;
     };
 

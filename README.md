@@ -224,6 +224,57 @@ Spektral.isElement(testObject);
 ```
 ---
 
+## NUMBER
+
+1. Spektral.roundNum(num, type);
+------
+
+#### Description
+Rounds a number. Also has the option to round up and down.
+
+#### Arguments
+num: `Number` - The number you want to round
+type: `String default:regular` - Also accepts params: 'up', and 'down'
+
+##### Returns
+`Number`
+
+##### Example
+
+```javascript
+Spektral.roundNum(4.56);
+//Returns 5
+Spektral.roundNum(3.4, 'up');
+//Returns 4
+Spektral.roundNum(8.8, 'down');
+//Returns 8
+```
+---
+
+## STRING
+
+1. Spektral.hasPattern(request, pattern);
+------
+
+#### Description
+Checks a string for a pattern and returns an object containing the keys 'match', 'amount'
+
+#### Arguments
+request: `String` - The string you want to check
+pattern: `String default:regular` - The pattern you want to check for
+
+##### Returns
+`Object`
+
+##### Example
+
+```javascript
+var testPattern = Spektral.hasPattern('This foobar string has foobar in it twice.', 'foobar');
+//testPattern.match = true;
+//testPattern.amount = 2;
+```
+---
+
 ## UTILS
 
 1. Spektral.getType(obj);

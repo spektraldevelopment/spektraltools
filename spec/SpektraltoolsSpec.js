@@ -215,6 +215,32 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('STRING - hasPattern', function(){
+        var
+            testString = 'This foobar string has foobar in it two times.',
+            matchObject = Spektral.hasPattern(testString, 'foobar');
+
+        it('returns an object.', function(){
+            expect(getType(matchObject)).toMatch('object');
+        });
+
+        it('match value in object is true.', function(){
+            expect(matchObject.match).toBeTruthy();
+        });
+
+        it('amount value in object is 2.', function(){
+            expect(matchObject.amount).toEqual(2);
+        });
+
+        it('if pattern does not match, returns false.', function(){
+            expect(Spektral.hasPattern('No match', 'foobar').match).toBeFalsy();
+        });
+
+        it('if pattern does not match, do not set amount.', function(){
+            expect(Spektral.hasPattern('No match', 'foobar').amount).toBeUndefined();
+        });
+    });
+
     describe('UTILS - getType', function(){
         var
             testContainer = createTestContainer(),
