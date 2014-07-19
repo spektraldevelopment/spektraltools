@@ -403,6 +403,16 @@
         return parseInt(request.replace(/[^0-9.]/g, ""), 10);
     };
 
+    //UTILS - isObjectEmpty
+    Spektral.isObjectEmpty = function (obj) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                return false;
+            }
+        }
+        return true;
+    };
+
     //DEBUG - LOG
     Spektral.log = function(msg, type, obj) {
         if (debug === true) {

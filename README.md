@@ -515,7 +515,7 @@ Spektral.isMatch(testNumOne, testNumTwo, true);
 //Will return true because both values are numbers
 ```
 
-4. Spektral.stringToNum(request)
+4. Spektral.stringToNum(request);
 ------
 
 #### Description
@@ -534,6 +534,27 @@ Spektral.stringToNum('15');
 //Returns: 15
 Spektral.stringToNum('15foo45bar');
 /Returns: 1545
+```
+
+5. Spektral.isObjectEmpty(obj);
+------
+
+#### Description
+Checks when an object has keys and returns the result in a boolean
+
+#### Arguments
+obj: `Object` - The object you want to check
+
+##### Returns
+`Boolean`
+
+##### Example
+
+```javascript
+Spektral.isObjectEmpty({test:'foobar'});
+//Returns: false
+Spektral.isObjectEmpty({});
+//Returns: true
 ```
 ---
 

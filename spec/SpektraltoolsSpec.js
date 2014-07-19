@@ -444,4 +444,20 @@ describe('SpektralTools: ', function() {
             expect(Spektral.stringToNum('foo3bar5')).toEqual(35);
         });
     });
+
+    describe('UTILS - isObjectEmpty', function(){
+        var testObj = { test: 'foo', testTwo: 'bar'}, emptyObj = {};
+
+        it('returns a boolean.', function(){
+            expect(getType(Spektral.isObjectEmpty(testObj))).toMatch('boolean');
+        });
+
+        it('returns true when object is empty.', function(){
+            expect(Spektral.isObjectEmpty(emptyObj)).toBeTruthy();
+        });
+
+        it('returns false when object is populated.', function(){
+            expect(Spektral.isObjectEmpty(testObj)).toBeFalsy();
+        });
+    });
 });
