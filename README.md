@@ -300,6 +300,28 @@ Spektral.stripString('@foobar@', '@', 'first');
 Spektral.stripString('#foo#ba#r#', '#', 2);
 //Returns: #foo#bar#
 ```
+
+3. Spektral.splitString(request, character);
+------
+
+#### Description
+Splits a string that uses a common character for separation, and returns an array of each individual value. Ex. 'This, string, has, lots, of, commas'
+
+#### Arguments
+request: `String` - The string you want to split
+character: `String default:,` - The character you want to split the string with, default is comma.
+
+##### Returns
+`Array`
+
+##### Example
+
+```javascript
+Spektral.splitString('Split, on, these, commas');
+Returns: ['Split', 'on', 'these', 'commas']
+Spektral.splitString('Split#on#these#hashtags');
+Returns: ['Split', 'on', 'these', 'hashtags']
+```
 ---
 
 ## UTILS

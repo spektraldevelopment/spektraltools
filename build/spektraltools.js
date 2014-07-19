@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-07-18
+* Build Created: 2014-07-19
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -241,6 +241,70 @@
         }
         return newString;
     };
+
+    //STRING - splitString
+    Spektral.splitString = function (request, character) {
+        character = character || ",";
+        var
+            splitArray = [], split,
+            i, detectCharacter = Spektral.detectCharacter(request, character),
+            stripped;
+
+        if(detectCharacter === false && character !== " ") {
+
+            log("splitString: Could not split string because character [" + character + "] was not in string.", "warn");
+        } else {
+            if(character !== " ") {
+                split = request.split(character);
+            } else {
+                split = request.split(/[ ,]+/);
+            }
+        }
+
+        for (i = 0; i < split.length; i += 1) {
+            if(split[i] !== "") {
+                stripped = Spektral.stripWhiteSpace(split[i]);
+                splitArray.push(stripped);
+            }
+        }
+        return splitArray;
+    };
+
+    //STRING - covertToCamel
+    Spektral.convertToCamel = function (request, char) {
+        char = char || "-";
+        var splitRequest = Spektral.splitString(request, char), newString, stringToConvert, i;
+        newString = splitRequest[0];
+        for (i = 0; i < splitRequest.length; i += 1) {
+            if (i !== 0) {
+                stringToConvert = splitRequest[i].charAt(0).toUpperCase() + splitRequest[i].slice(1);
+                newString += stringToConvert;
+            }
+        }
+        return newString;
+    };
+
+    //STRING - detectCharacter
+    Spektral.detectCharacter = function (request, character) {
+        var detected = false, test = request.match(character);
+        if(test !== null) {
+            detected = true;
+        }
+        return detected;
+    };
+
+    //STRING - stripWhiteSpace
+    Spektral.stripWhiteSpace = function (request, removeAll) {
+        removeAll = removeAll || false;
+        var newString;
+        if(removeAll !== false) {
+            newString = request.replace(/\s+/g, '');
+        } else {
+            newString = request.replace(/(^\s+|\s+$)/g,'');
+        }
+        return newString;
+    };
+
 
     //UTILS - GET TYPE
     Spektral.getType = function (obj) {

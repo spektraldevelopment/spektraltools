@@ -255,6 +255,28 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('STRING - splitString', function(){
+        var
+            testArray = Spektral.splitString('test-one, test-two, test-three'),
+            testArrayColon = Spektral.splitString('testOne:testTwo:testThree', ':');
+
+        it('returns an array.', function(){
+            expect(getType(testArray)).toMatch('array');
+        });
+
+        it('array has values that were separated by character.', function(){
+            expect(testArray[0]).toMatch('test-one');
+            expect(testArray[1]).toMatch('test-two');
+            expect(testArray[2]).toMatch('test-three');
+        });
+
+        it('allows for other characters to be used.', function(){
+            expect(testArrayColon[0]).toMatch('testOne');
+            expect(testArrayColon[1]).toMatch('testTwo');
+            expect(testArrayColon[2]).toMatch('testThree');
+        });
+    });
+
     describe('UTILS - getType', function(){
         var
             testContainer = createTestContainer(),
