@@ -475,4 +475,27 @@ describe('SpektralTools: ', function() {
             expect(Spektral.arrayHasValue([1, 2, 3], 4)).toBeFalsy();
         });
     });
+
+    describe('UTILS - queryArray', function(){
+        var testArray = [0, 1, 2, 3, 3, 3, 3];
+
+        it('returns a single value when only one instance is found.', function(){
+            expect(getType(Spektral.queryArray(testArray, 1))).toMatch('number');
+        });
+
+        it('returns an array if more than one instance found.', function(){
+            expect(getType(Spektral.queryArray(testArray, 3))).toMatch('array');
+            expect(Spektral.queryArray(testArray, 3)[0]).toEqual(3);
+        });
+
+        it('returns the correct amount of instances.', function(){
+            expect(Spektral.queryArray(testArray, 3).length).toEqual(4);
+        });
+
+        it('returns zero length is no instance found.', function(){
+            expect(Spektral.queryArray(testArray, 4).length).toEqual(0);
+        });
+    });
+
+
 });

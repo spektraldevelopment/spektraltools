@@ -424,6 +424,23 @@
         return found;
     };
 
+    //UTILS - QUERY ARRAY
+    Spektral.queryArray = function(array, value) {
+        var i, resultArray = [];
+
+        for (i = 0; i < array.length; i += 1) {
+            if(array[i] === value) {
+                resultArray.push(array[i]);
+            }
+        }
+
+        if(resultArray.length === 1) {
+            return resultArray[0];
+        } else {
+            return resultArray;
+        }
+    };
+
 
     //DEBUG - LOG
     Spektral.log = function(msg, type, obj) {

@@ -578,6 +578,28 @@ Spektral.arrayHasValue(['one', 'two'], 'two');
 Spektral.arrayHasValue([1,2,3], 4);
 //Returns: false
 ```
+
+7. Spektral.queryArray(array, value);
+------
+
+#### Description
+Queries an array and returns the results either in a single value or array depending on how many times the value was found
+
+#### Arguments
+array: `Array` - The array you want to check
+value: `Various` - The value you want to find
+
+##### Returns
+`Various or Array`
+
+##### Example
+
+```javascript
+Spektral.queryArray([1,2,3,3,3,3], 1);
+//Returns: single value of the number 1
+Spektral.queryArray([1,2,3,3,3,3], 3);
+//Returns: array with 4 instances of 3
+```
 ---
 
 
