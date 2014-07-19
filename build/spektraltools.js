@@ -182,6 +182,17 @@
         return evt;
     };
 
+    //EVENT - TRIGGER EVENT
+    Spektral.triggerEvent = function (obj, evt) {
+        var newEvent, evtType = Spektral.getType(evt);
+        if(evtType === "event" || evtType === "customevent") {
+            obj.dispatchEvent(evt);
+        } else if (evtType === "string") {
+            newEvent = Spektral.createEvent(evt);
+            obj.dispatchEvent(newEvent);
+        }
+    };
+
     //NUMBER - roundNum
     Spektral.roundNum = function (num, type) {
         type = type || "regular";
@@ -196,7 +207,7 @@
         return roundedNum;
     };
 
-    //STRING - hasPattern
+    //STRING - HAS PATTERN
     Spektral.hasPattern = function (request, pattern) {
         var
             regEx = new RegExp(pattern, "g"),
@@ -211,7 +222,7 @@
         return matchObj;
     };
 
-    //STRING - stripString
+    //STRING - STRIP STRING
     Spektral.stripString = function (request, character, mode) {
         mode = mode || "all";
         var
@@ -242,7 +253,7 @@
         return newString;
     };
 
-    //STRING - splitString
+    //STRING - SPLIT STRING
     Spektral.splitString = function (request, character) {
         character = character || ",";
         var
@@ -270,7 +281,7 @@
         return splitArray;
     };
 
-    //STRING - covertToCamel
+    //STRING - CONVERT TO CAMEL
     Spektral.convertToCamel = function (request, character) {
         character = character || "-";
         var splitRequest = Spektral.splitString(request, character), newString, stringToConvert, i;
@@ -284,7 +295,7 @@
         return newString;
     };
 
-    //STRING - detectCharacter
+    //STRING - DETECT CHARACTER
     Spektral.detectCharacter = function (request, character) {
         var detected = false, test = request.match(character);
         if(test !== null) {
@@ -293,7 +304,7 @@
         return detected;
     };
 
-    //STRING - stripWhiteSpace
+    //STRING - STRIP WHITE SPACE
     Spektral.stripWhiteSpace = function (request, removeAll) {
         removeAll = removeAll || false;
         var newString;
@@ -305,7 +316,7 @@
         return newString;
     };
 
-    //STRING - stripBrackets
+    //STRING - STRIP BRACKETS
     Spektral.stripBrackets = function (request) {
         var value;
         //[]
@@ -323,7 +334,7 @@
         return value;
     };
 
-    //STRING - convertCase
+    //STRING - CONVERT CASE
     Spektral.convertCase = function (request, newCase) {
         newCase = newCase || "lower";
         var newString;
@@ -337,7 +348,7 @@
         return newString;
     };
 
-    //STRING - trimString
+    //STRING - TRIM STRING
     Spektral.trimString = function (request, start, end) {
         return request.substring(start, end);
     };
@@ -385,6 +396,11 @@
             }
         }
         return isMatch;
+    };
+
+    //UTILS - STRING TO NUM
+    Spektral.stringToNum = function(request) {
+        return parseInt(request.replace(/[^0-9.]/g, ""), 10);
     };
 
     //DEBUG - LOG

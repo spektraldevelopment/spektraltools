@@ -39,3 +39,14 @@
         }
         return evt;
     };
+
+    //EVENT - TRIGGER EVENT
+    Spektral.triggerEvent = function (obj, evt) {
+        var newEvent, evtType = Spektral.getType(evt);
+        if(evtType === "event" || evtType === "customevent") {
+            obj.dispatchEvent(evt);
+        } else if (evtType === "string") {
+            newEvent = Spektral.createEvent(evt);
+            obj.dispatchEvent(newEvent);
+        }
+    };

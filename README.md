@@ -515,6 +515,26 @@ Spektral.isMatch(testNumOne, testNumTwo, true);
 //Will return true because both values are numbers
 ```
 
+4. Spektral.stringToNum(request)
+------
+
+#### Description
+Converts a number in a string into a `Number`
+
+#### Arguments
+request: `String` - The string you want to convert, if string contains non-numerical characters, they will be stripped out.
+
+##### Returns
+`Number`
+
+##### Example
+
+```javascript
+Spektral.stringToNum('15');
+//Returns: 15
+Spektral.stringToNum('15foo45bar');
+/Returns: 1545
+```
 ---
 
 

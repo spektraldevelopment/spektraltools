@@ -42,3 +42,8 @@
         }
         return isMatch;
     };
+
+    //UTILS - STRING TO NUM
+    Spektral.stringToNum = function(request) {
+        return parseInt(request.replace(/[^0-9.]/g, ""), 10);
+    };

@@ -429,4 +429,19 @@ describe('SpektralTools: ', function() {
             expect(Spektral.isMatch(testNumTwo, testBoolOne, true)).toBeFalsy();
         });
     });
+
+    describe('UTILS - stringToNum', function(){
+
+        it('returns a number.', function(){
+            expect(getType(Spektral.stringToNum('4'))).toMatch('number');
+        });
+
+        it('converts string to a number.', function(){
+            expect(Spektral.stringToNum('5')).toEqual(5);
+        });
+
+        it('strips string of all non numbers.', function(){
+            expect(Spektral.stringToNum('foo3bar5')).toEqual(35);
+        });
+    });
 });
