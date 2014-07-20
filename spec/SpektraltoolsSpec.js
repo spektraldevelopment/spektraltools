@@ -492,8 +492,8 @@ describe('SpektralTools: ', function() {
             expect(Spektral.queryArray(testArray, 3).length).toEqual(4);
         });
 
-        it('returns zero length is no instance found.', function(){
-            expect(Spektral.queryArray(testArray, 4).length).toEqual(0);
+        it('returns false if no instance found.', function(){
+            expect(Spektral.queryArray(testArray, 4)).toBeFalsy();
         });
     });
 

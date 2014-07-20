@@ -426,7 +426,7 @@
 
     //UTILS - QUERY ARRAY
     Spektral.queryArray = function(array, value) {
-        var i, resultArray = [];
+        var result = false, i, resultArray = [];
 
         for (i = 0; i < array.length; i += 1) {
             if(array[i] === value) {
@@ -435,10 +435,12 @@
         }
 
         if(resultArray.length === 1) {
-            return resultArray[0];
-        } else {
-            return resultArray;
+            result = resultArray[0];
+        } else if (resultArray.length > 1) {
+            result = resultArray;
         }
+
+        return result;
     };
 
     //UTILS - OBJECT HAS KEY
