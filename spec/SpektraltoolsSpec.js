@@ -552,4 +552,16 @@ describe('SpektralTools: ', function() {
             expect(Spektral.getElementIds(noIdDiv).id).toMatch('NOT_SET');
         });
     });
+
+    describe('UTILS - getParameter', function(){
+        var testObject = { one: 'foo', two: 'bar' };
+
+        it('returns the value if the key is present.', function(){
+            expect(Spektral.getParameter(testObject, 'one', 'default')).toMatch('foo');
+        });
+
+        it('returns the default param if the key is not found.', function(){
+            expect(Spektral.getParameter(testObject, 'three', 'foobar')).toMatch('foobar');
+        });
+    });
 });

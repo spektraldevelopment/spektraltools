@@ -670,6 +670,31 @@ testDiv.class = 'test-class';
 Spektral.getElementIds(testDiv);
 //Returns: id - testID, class - test-class, node - div
 ```
+
+11. Spektral.getParameter(obj, key, defaultParam);
+------
+
+#### Description
+Checks an object for a value, if not set, sets a default parameter, helpful for validating passed arguments to a function
+
+#### Arguments
+obj: `Object` - The object you want to check
+key: `String` - The key you want to check for
+defaultParam: `Various` - The default value 
+
+##### Returns
+`Various`
+
+##### Example
+
+```javascript
+var testObject = { one: 'foo', two: 'bar' };
+Spektral.getParameter(testObject, 'one', 'default');
+//Returns: foo
+Spektral.getParameter(testObject, 'three', 'test');
+//Returns: test
+```
+
 ---
 
 

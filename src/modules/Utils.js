@@ -130,3 +130,18 @@
         return identifiers;
     };
 
+    //UTILS - GET PARAMETER
+    Spektral.getParameter = function (obj, val, defaultParam) {
+        var retrievedParam;
+        if (obj !== undefined) {
+            if (obj[val] === undefined) {
+                retrievedParam = defaultParam;
+            } else {
+                retrievedParam = obj[val];
+            }
+        } else {
+            retrievedParam = defaultParam;
+        }
+        return retrievedParam;
+    };
+

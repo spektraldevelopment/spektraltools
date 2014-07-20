@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-07-19
+* Build Created: 2014-07-20
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -483,6 +483,21 @@
         //to return with a type of div instead of object
         identifiers["node"] = nn;
         return identifiers;
+    };
+
+    //UTILS - GET PARAMETER
+    Spektral.getParameter = function (obj, val, defaultParam) {
+        var retrievedParam;
+        if (obj !== undefined) {
+            if (obj[val] === undefined) {
+                retrievedParam = defaultParam;
+            } else {
+                retrievedParam = obj[val];
+            }
+        } else {
+            retrievedParam = defaultParam;
+        }
+        return retrievedParam;
     };
 
 
