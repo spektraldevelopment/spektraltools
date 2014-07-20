@@ -14,13 +14,13 @@
     };
 
     //GLOBAL - query
-    Spektral.query = function(el) {
+    Spektral.queryEl = function(el) {
         var isClass = Spektral.detectCharacter(el, '.'), theElement;
 
         if (isClass === true) {
             theElement = document.querySelectorAll(el);
         } else {
-            theElement = document.getElementById(el);
+            theElement = document.querySelector(el);
         }
 
         if (theElement === null) {

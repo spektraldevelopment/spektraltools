@@ -46,7 +46,7 @@ module.exports = function(grunt) {
         watch: {
             build: {
                 files: ["src/**", "spec/**"],
-                tasks: ["concat", "uglify", "jasmine"]
+                tasks: ["concat", "uglify", "jasmine", "casper"]
             }
         },
         jasmine: {
@@ -59,6 +59,16 @@ module.exports = function(grunt) {
                     keepRunner: true
                 }
             }
+        },
+        casper : {
+            yourTask : {
+                options : {
+                    test : true
+                },
+                files : {
+                    'xunit/casper-results.xml' : ['spec/spektralCasperTest.js']
+                }
+            }
         }
     });
 
@@ -68,9 +78,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-casper');
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);
-    grunt.registerTask('build', ['concat', 'uglify', 'jasmine']);
+    grunt.registerTask('build', ['concat', 'uglify', 'jasmine', 'casper']);
     grunt.registerTask('test', ['jasmine']);
 };

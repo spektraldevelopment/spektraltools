@@ -1,12 +1,12 @@
 //JASMINE HELPER FILE
 
-var document, body;
+var documentMain, body;
 
 ////////////////////
 ////INIT HELPER
 ////////////////////
 function initHelper (doc) {
-    document = doc;
+    documentMain = doc;
     body = doc.body;
 }
 
@@ -15,7 +15,7 @@ function initHelper (doc) {
 ////////////////////
 function createTestContainer(parent, attrs) {
     parent = parent || body;
-    var tc = document.createElement('div');
+    var tc = documentMain.createElement('div');
     tc.id = getParameter(attrs, 'id', 'testContainer');
     parent.appendChild(tc);
     return tc;
@@ -26,7 +26,7 @@ function createTestContainer(parent, attrs) {
 ////////////////////
 function createTestElement(parent, type, attrs) {
     type = type || 'div';
-    var newElement = document.createElement(type), key;
+    var newElement = documentMain.createElement(type), key;
     for (key in attrs) {
         if (key === 'className') {
             newElement.className = attrs[key];
