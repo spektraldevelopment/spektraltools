@@ -600,6 +600,28 @@ Spektral.queryArray([1,2,3,3,3,3], 1);
 Spektral.queryArray([1,2,3,3,3,3], 3);
 //Returns: array with 4 instances of 3
 ```
+
+8. Spektral.objectHasKey(obj, key)
+------
+
+#### Description
+Checks an object for a key and returns the result as a boolean
+
+#### Arguments
+obj: `Object` - The object you want to check
+key: `String` - The key you want to check for
+
+##### Returns
+`Boolean`
+
+##### Example
+
+```javascript
+Spektral.objectHasKey({ one: 'foo', two: 'bar' }, 'one');
+//Returns: true
+Spektral.objectHasKey({ one: 'foo', two: 'bar' }, 'three');
+//Returns: false
+```
 ---
 
 

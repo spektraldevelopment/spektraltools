@@ -85,3 +85,14 @@
             return resultArray;
         }
     };
+
+    //UTILS - OBJECT HAS KEY
+    Spektral.objectHasKey = function (obj, key) {
+        var hasKey = false, k;
+        for (k in obj) {
+            if (k === key) {
+                hasKey = true;
+            }
+        }
+        return hasKey;
+    };

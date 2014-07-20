@@ -497,5 +497,21 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('UTILS - objectHasKey', function(){
+        var testObject = { one: 'foo', two: 'bar'};
 
+        it('returns a boolean.', function(){
+            expect(getType(Spektral.objectHasKey(testObject, 'one'))).toMatch('boolean');
+        });
+
+        it('returns true is object has key.', function(){
+            expect(Spektral.objectHasKey(testObject, 'one')).toBeTruthy();
+        });
+
+        it('returns false is object does not have key.', function(){
+            expect(Spektral.objectHasKey(testObject, 'four')).toBeFalsy();
+        });
+    });
+
+    
 });
