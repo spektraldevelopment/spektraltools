@@ -17,10 +17,32 @@
         debug = false,
         mouseEvents = ["click", "dblclick", "mousedown", "mousemove", "mouseup", "mouseover", "mouseout"];
 
-    //Debug
+    //GLOBAL - debugMode
+    Spektral.debugMode = function(){
+        return debug;
+    };
+
+    //GLOBAL - debug
     Spektral.debug = function() {
         debug = true;
-    }
+    };
+
+    //GLOBAL - query
+    Spektral.query = function(el) {
+        var isClass = Spektral.detectCharacter(el, '.'), theElement;
+
+        if (isClass === true) {
+            theElement = document.querySelectorAll(el);
+        } else {
+            theElement = document.getElementById(el);
+        }
+
+        if (theElement === null) {
+            Spektral.log('query: element not found.', 'warn');
+        } else {
+            return theElement;
+        }
+    };
 
     //DOM - ADD ELEMENT
     Spektral.addElement = function(parent, type, attrs) {
@@ -297,7 +319,8 @@
 
     //STRING - DETECT CHARACTER
     Spektral.detectCharacter = function (request, character) {
-        var detected = false, test = request.match(character);
+        character = '\\' + character;
+        var detected = false, regEx = new RegExp(character, 'g'), test = request.match(regEx);
         if(test !== null) {
             detected = true;
         }

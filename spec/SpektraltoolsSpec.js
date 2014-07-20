@@ -1,10 +1,18 @@
 describe('SpektralTools: ', function() {
 
     initHelper(document);
-    Spektral.debug();
 
     it('Spektraltools is defined.', function() {
-       expect(Spektral).toBeDefined();
+        expect(Spektral).toBeDefined();
+    });
+
+    it('debug mode is set to false.', function(){
+        expect(Spektral.debugMode()).toBeFalsy();
+    });
+
+    it('debug mode is set to true.', function(){
+        Spektral.debug();
+        expect(Spektral.debugMode()).toBeTruthy();
     });
 
     describe('DOM - addElement', function() {
@@ -307,6 +315,10 @@ describe('SpektralTools: ', function() {
         it('returns false if character is not detected.', function(){
             expect(Spektral.detectCharacter(testString, '*')).toBeFalsy();
         });
+
+        it('returns false if period is not detected.', function(){
+            expect(Spektral.detectCharacter(testString, '.')).toBeFalsy();
+        });
     });
 
     describe('STRING - stripWhiteSpace', function(){
@@ -551,6 +563,8 @@ describe('SpektralTools: ', function() {
         it('object returns NOT_SET for keys that could not be found.', function(){
             expect(Spektral.getElementIds(noIdDiv).id).toMatch('NOT_SET');
         });
+
+        destroyTestContainer(testContainer);
     });
 
     describe('UTILS - getParameter', function(){

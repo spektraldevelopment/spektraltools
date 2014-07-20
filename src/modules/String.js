@@ -89,7 +89,8 @@
 
     //STRING - DETECT CHARACTER
     Spektral.detectCharacter = function (request, character) {
-        var detected = false, test = request.match(character);
+        character = '\\' + character;
+        var detected = false, regEx = new RegExp(character, 'g'), test = request.match(regEx);
         if(test !== null) {
             detected = true;
         }
