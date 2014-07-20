@@ -622,6 +622,29 @@ Spektral.objectHasKey({ one: 'foo', two: 'bar' }, 'one');
 Spektral.objectHasKey({ one: 'foo', two: 'bar' }, 'three');
 //Returns: false
 ```
+
+9. Spektral.queryObject(obj, key);
+------
+
+#### Description
+Queries and object for a key and returns the value if found, if not found, returns false
+
+#### Arguments
+obj: `Object` - The object you want to check
+key: `String` - The key you want to get the value of
+
+##### Returns
+`Various or Boolean`
+
+##### Example
+
+```javascript
+var testObject = { one: 'foo', two: 'bar'};
+Spektral.queryObject(testObject, 'two');
+//Returns: bar
+Spektral.queryObject(testObject, 'three');
+//Returns: false
+```
 ---
 
 

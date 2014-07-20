@@ -452,6 +452,17 @@
         return hasKey;
     };
 
+    //UTILS - QUERY OBJECT
+    Spektral.queryObject = function (obj, key) {
+        var value = false, k;
+        for (k in obj) {
+            if (k === key) {
+                value = obj[k];
+            }
+        }
+        return value;
+    };
+
 
     //DEBUG - LOG
     Spektral.log = function(msg, type, obj) {

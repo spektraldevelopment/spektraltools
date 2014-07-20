@@ -513,5 +513,15 @@ describe('SpektralTools: ', function() {
         });
     });
 
-    
+    describe('UTILS - queryObject', function(){
+        var testObject = { one: 'foo', two: 'bar'};
+
+        it('it returns a value.', function(){
+            expect(Spektral.queryObject(testObject, 'two')).toMatch('bar');
+        });
+
+        it('if no key is found, returns false.', function(){
+            expect(Spektral.queryObject(testObject, 'three')).toBeFalsy();
+        });
+    });
 });
