@@ -524,4 +524,32 @@ describe('SpektralTools: ', function() {
             expect(Spektral.queryObject(testObject, 'three')).toBeFalsy();
         });
     });
+
+    describe('UTILS - getElementIds', function(){
+        var
+            testContainer = createTestContainer(),
+            testDiv = createTestElement(testContainer, 'div', { id: 'testId', className: 'test-class' }),
+            noIdDiv = createTestElement(testContainer, 'div'),
+            elIds = Spektral.getElementIds(testDiv);
+
+        it('returns an object.', function(){
+            expect(getType(elIds)).toMatch('object');
+        });
+
+        it('object has key id.', function(){
+            expect(elIds.id).toMatch('testId');
+        });
+
+        it('object has key class.', function(){
+            expect(elIds.class).toMatch('test-class');
+        });
+
+        it('object has key node.', function(){
+            expect(elIds.node).toMatch('div');
+        });
+
+        it('object returns NOT_SET for keys that could not be found.', function(){
+            expect(Spektral.getElementIds(noIdDiv).id).toMatch('NOT_SET');
+        });
+    });
 });

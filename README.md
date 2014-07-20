@@ -648,6 +648,28 @@ Spektral.queryObject(testObject, 'two');
 Spektral.queryObject(testObject, 'three');
 //Returns: false
 ```
+
+10. Spektral.getElementIds(element);
+------
+
+#### Description
+Gets the id and class of a node if set
+
+#### Arguments
+element: `HTMLElement` - The element you want to get ids from
+
+##### Returns
+`Object`
+
+##### Example
+
+```javascript
+var testDiv = document.createElement('div');
+testDiv.id = 'testID';
+testDiv.class = 'test-class';
+Spektral.getElementIds(testDiv);
+//Returns: id - testID, class - test-class, node - div
+```
 ---
 
 

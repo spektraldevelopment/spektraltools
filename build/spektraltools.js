@@ -465,6 +465,27 @@
         return value;
     };
 
+    //UTILS - GET ELEMENT IDS
+    Spektral.getElementIds = function (element) {
+        var identifiers = {}, nn;
+        nn = Spektral.convertCase(element.nodeName);
+        if(element.id !== '') {
+            identifiers["id"] = element.id;
+        } else {
+            identifiers["id"] = 'NOT_SET';
+        }
+        if(element.className !== '') {
+            identifiers["class"] = element.className;
+        } else {
+            identifiers["class"] = 'NOT_SET';
+        }
+        //using nodeName as the key caused identifiers
+        //to return with a type of div instead of object
+        identifiers["node"] = nn;
+        return identifiers;
+    };
+
+
 
     //DEBUG - LOG
     Spektral.log = function(msg, type, obj) {
