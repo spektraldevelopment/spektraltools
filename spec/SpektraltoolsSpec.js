@@ -564,4 +564,22 @@ describe('SpektralTools: ', function() {
             expect(Spektral.getParameter(testObject, 'three', 'foobar')).toMatch('foobar');
         });
     });
+
+    describe('UTILS - getExtension', function(){
+        var
+            jpgExt = 'test.jpg', txtExt = 'test.txt',
+            mutiplePeriods = 'test.test.png';
+
+        it('returns a string.', function(){
+            expect(getType(Spektral.getExtension(jpgExt))).toMatch('string');
+        });
+
+        it('returns the correct extension.', function(){
+            expect(Spektral.getExtension(txtExt)).toMatch('txt');
+        });
+
+        it('if file name has multiple periods, still returns extension correctly.', function(){
+            expect(Spektral.getExtension(mutiplePeriods)).toMatch('png');
+        });
+    });
 });

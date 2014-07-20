@@ -500,6 +500,17 @@
         return retrievedParam;
     };
 
+    //UTILS - GET EXTENSION
+    Spektral.getExtension = function (file) {
+        var type = Spektral.getType(file);
+        if (file === undefined) {
+            Spektral.log("getExtension: file is undefined. Did you pass a file name to this function?", "warn");
+        } else if (type !== "string") {
+            Spektral.log("getExtension: file needs to be string.", "warn");
+        }
+        return file.split(".").pop();
+    };
+
 
 
     //DEBUG - LOG

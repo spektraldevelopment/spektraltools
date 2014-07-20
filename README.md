@@ -693,6 +693,24 @@ Spektral.getParameter(testObject, 'one', 'default');
 //Returns: foo
 Spektral.getParameter(testObject, 'three', 'test');
 //Returns: test
+
+12. Spektral.getExtension(file);
+------
+
+#### Description
+Checks a file name, and returns it's extension
+
+#### Arguments
+file: `String` - The file name
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+Spektral.getExtension('test.jpg');
+//Returns: jpg
 ```
 
 ---
