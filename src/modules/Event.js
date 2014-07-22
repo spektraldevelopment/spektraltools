@@ -50,3 +50,19 @@
             obj.dispatchEvent(newEvent);
         }
     };
+
+    //EVENT - GET TARGET
+    Spektral.getTarget = function (evt) {
+        return evt.relatedTarget || evt.fromElement || evt.target;
+    };
+
+    //EVENT - GET TARGET ID
+    Spektral.getTargetID = function (obj) {
+        var targetID, element = Spektral.isElement(obj);
+        if (element === true) {
+            targetID = obj.id;
+        } else {
+            targetID = obj.target.id;
+        }
+        return targetID;
+    };

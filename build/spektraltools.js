@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-07-20
+* Build Created: 2014-07-21
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -218,6 +218,22 @@
             newEvent = Spektral.createEvent(evt);
             obj.dispatchEvent(newEvent);
         }
+    };
+
+    //EVENT - GET TARGET
+    Spektral.getTarget = function (evt) {
+        return evt.relatedTarget || evt.fromElement || evt.target;
+    };
+
+    //EVENT - GET TARGET ID
+    Spektral.getTargetID = function (obj) {
+        var targetID, element = Spektral.isElement(obj);
+        if (element === true) {
+            targetID = obj.id;
+        } else {
+            targetID = obj.target.id;
+        }
+        return targetID;
     };
 
     //NUMBER - roundNum
