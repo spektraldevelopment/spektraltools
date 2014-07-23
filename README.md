@@ -224,6 +224,105 @@ Spektral.isElement(testObject);
 ```
 ---
 
+
+## EVENT
+
+1. Spektral.attachEventListener(eventTarget, eventType, eventHandler);
+------
+
+##### Description
+Attaches an event to an element
+
+##### Arguments
+eventTarget: `HTMLElement` - The element you want to attach the event to
+eventType: `String` - The name of the event you want to attach (prepending 'on' to the event name is not required)
+eventHandler: `Function` - The function you want to call when the event is triggered
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+var tDiv = document.queryElement('#testDiv');
+Spektral.attachEventListener(tDiv, 'click', function(){
+	console.log('I was clicked!');
+});
+```
+
+2. Spektral.detachEventListener(eventTarget, eventType, eventHandler);
+------
+
+##### Description
+Detaches an event from an element
+
+##### Arguments
+eventTarget: `HTMLElement` - The element you want to detach the event from
+eventType: `String` - The name of the event you want to detach (prepending 'on' to the event name is not required)
+eventHandler: `Function` - The function you want detach
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+var tDiv = document.queryElement('#testDiv');
+Spektral.detachEventListener(tDiv, 'click', function(){
+	console.log('I will never be clicked!');
+});
+```
+
+2. Spektral.getTarget(evt);
+------
+
+##### Description
+Used in a function triggered by an event, returns the element that triggered the event
+
+##### Arguments
+evt: `Event object` - The event obj that was returned when the event was triggered
+
+##### Returns
+`HTMLElement`
+
+##### Example
+
+```javascript
+var tDiv = document.queryElement('#testDiv');
+tDiv.onclick = function(evt){
+	var target = Spektral.getTarget(evt);
+	//Returns: tDiv
+}
+```
+
+3. Spektral.getTargetID(evt);
+------
+
+##### Description
+Returns the ID of an element via its event object
+
+##### Arguments
+evt: `Event object` - The event obj that was returned when the event was triggered
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+var tDiv = document.queryElement('#testDiv');
+tDiv.onclick = function(evt){
+	var target = Spektral.getTargetID(evt);
+	//Returns: testDiv
+}
+```
+
+
+
+
+
+
+
 ## NUMBER
 
 1. Spektral.roundNum(num, type);

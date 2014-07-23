@@ -57,12 +57,6 @@
     };
 
     //EVENT - GET TARGET ID
-    Spektral.getTargetID = function (obj) {
-        var targetID, element = Spektral.isElement(obj);
-        if (element === true) {
-            targetID = obj.id;
-        } else {
-            targetID = obj.target.id;
-        }
-        return targetID;
+    Spektral.getTargetID = function (evt) {
+        return evt.target.id;
     };
