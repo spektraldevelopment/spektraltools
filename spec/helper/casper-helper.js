@@ -15,3 +15,9 @@ casper.getVar = function(variable) {
         return window[v];
     }, variable);
 };
+
+casper.getInfo = function(obj) {
+    return this.evaluate(function(o){
+        return JSON.stringify(o);
+    }, obj);
+};

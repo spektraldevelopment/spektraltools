@@ -13,9 +13,6 @@
 
     //EVENT - DETACH EVENT LISTENER
     Spektral.detachEventListener = function (eventTarget, eventType, eventHandler) {
-        if(targetType === "string") {
-            eventTarget = Spektral.getElement(eventTarget);
-        }
         if (eventTarget.removeEventListener) {
             eventTarget.removeEventListener(eventType, eventHandler, false);
         } else if (eventTarget.detachEvent) {

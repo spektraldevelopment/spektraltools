@@ -13,7 +13,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
         this.methodHeader('EVENT - attachEventListener');
         this.evaluate(function(){
-            var tb = document.querySelector('#testButton');
+            var tb = document.querySelector('#aelButton');
             Spektral.attachEventListener(tb, 'click', onTestButtonClick);
 
             function onTestButtonClick (evt){
@@ -25,7 +25,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     });
 
     casper.then(function(){
-        this.click('#testButton');
+        this.click('#aelButton');
         this.test.assert(this.getVar('eventTestObject').testButtonClicked, 'Test button was clicked');
 
         this.methodHeader('EVENT - getTarget');
@@ -34,7 +34,24 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
         this.methodHeader('EVENT - getTargetID');
 
-        this.test.assertEqual(this.getVar('eventTestObject').testTargetID, 'testButton', 'targetID matches.');
+        this.test.assertEqual(this.getVar('eventTestObject').testTargetID, 'aelButton', 'targetID matches.');
+    });
+
+    casper.then(function(){
+        this.evaluate(function(){
+            var tb = document.querySelector('#delButton');
+            Spektral.attachEventListener(tb, 'click', onTestButtonClick);
+            Spektral.detachEventListener(tb, 'click', onTestButtonClick);
+
+            function onTestButtonClick(evt) {
+                eventTestObject.eventDetached = false;
+            }
+        });
+
+        this.click('#delButton');
+        this.methodHeader('EVENT - detachEventListener');
+        this.echo(this.getVar('eventTestObject').eventDetached);
+        this.test.assert(this.getVar('eventTestObject').eventDetached, 'Event was detached.');
     });
 
     casper.run(function() {
