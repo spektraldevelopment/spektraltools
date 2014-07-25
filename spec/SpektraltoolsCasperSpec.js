@@ -1,4 +1,5 @@
 casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
+
     casper.start('CasperTest.html', function() {
         this.echo(this.getTitle(), 'GREEN_BAR');
     });
@@ -48,28 +49,25 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     });
 
     casper.then(function(){
+
         this.evaluate(function(){
-            var tb = document.querySelector('#ceButton'),
-                testEvent = Spektral.createEvent('testEvent');;
+            
+                var 
+                    tb = document.querySelector('#ceButton'),
+                    testEvent = Spektral.createEvent('testEvent');;
 
             Spektral.attachEventListener(tb, 'testEvent', onTestEvent);
 
             function onTestEvent(evt) {
                 customEventTest.eventExists = true;
-//                customEventTest.fooIs = evt.detail.foo;
-//                customEventTest.spektralIs = evt.detail.spektral;
             }
-            Spektral.triggerEvent(tb, testEvent);
-            //cb.dispatchEvent(customEvent);
-//            this.emit(customEvent);
 
-            //customEventTest.eventExists = true;
+            Spektral.triggerEvent(tb, testEvent);
+            
         });
 
         this.methodHeader('EVENT - createEvent');
-        //this.test.assert(this.getVar('customEventTest').eventExists, 'custom event was created.');
-        this.click('#ceButton')
-        this.echo(this.getVar('customEventTest').eventExists);
+        this.test.assert(this.getVar('customEventTest').eventExists, 'custom event was created and triggered.');
     });
 
     casper.run(function() {

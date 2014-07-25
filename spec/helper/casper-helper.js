@@ -1,3 +1,26 @@
+//EVENTS
+casper.on('remote.message', function(msg) {
+    this.echo('Remote message: ' + msg);
+});
+
+casper.on('remote.alert', function(msg) {
+    this.echo('Remote alert: ' + msg);
+});
+
+casper.on('resource.received', function(resource) {
+    var status = resource.status;
+    if(status >= 400) {
+        casper.log('Resource ' + resource.url + ' failed to load (' + status + ')', 'error');
+
+        resourceErrors.push({
+            url: resource.url,
+            status: resource.status
+        });
+    }
+
+});
+
+//HELPER METHODS
 casper.header = function(msg, type){
     type = type || 'INFO'
     this.echo(msg, type);

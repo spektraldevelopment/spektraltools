@@ -10,9 +10,26 @@
         <div type="button" id="ceButton">Custom Event Test Button</div>
     </section>
     <script>
+        (function () {
+            function CustomEvent ( event, params ) {
+                params = params || { bubbles: false, cancelable: false, detail: undefined };
+                var evt = document.createEvent( 'CustomEvent' );
+                evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+                return evt;
+            };
+
+            CustomEvent.prototype = window.Event.prototype;
+
+            window.CustomEvent = CustomEvent;
+        })();
+        
         var eventTest = { testButtonClicked: false, testTarget: null, testTargetID: null, eventDetached: true };
         var customEventTest = { eventExists: false, fooIs: null, spektralIs: null };
-;    </script>
+
+        function logToConsole(msg) {
+            console.log(msg);
+        }
+    </script>
     <script src="build/spektraltools.js"></script>
 </body>
 </html>

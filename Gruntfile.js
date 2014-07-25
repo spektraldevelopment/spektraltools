@@ -46,7 +46,7 @@ module.exports = function(grunt) {
         watch: {
             build: {
                 files: ["src/**", "spec/**"],
-                tasks: ["concat", "uglify", "jasmine"]
+                tasks: ["concat", "uglify", "casper"]
             }
         },
         jasmine: {
