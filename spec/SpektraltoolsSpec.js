@@ -215,11 +215,11 @@ describe('SpektralTools: ', function() {
         });
 
         it('rounds a number up.', function(){
-            expect(Spektral.roundNum(testNumCeil, 'up')).toEqual(9);
+            expect(Spektral.roundNum(testNumCeil, { roundType: 'up' })).toEqual(9);
         });
 
         it('rounds a number down.', function(){
-            expect(Spektral.roundNum(testNumFloor, 'down')).toEqual(3);
+            expect(Spektral.roundNum(testNumFloor, { roundType: 'down' })).toEqual(3);
         });
     });
 

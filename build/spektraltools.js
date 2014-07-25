@@ -228,14 +228,13 @@
     };
 
     //NUMBER - roundNum
-    Spektral.roundNum = function (num, type) {
-        type = type || "regular";
-        var roundedNum = 0;
-        if (type === "regular") {
+    Spektral.roundNum = function (num, options) {
+        var roundedNum = 0, roundType = Spektral.getParameter(options, 'roundType', 'regular');
+        if (roundType === "regular") {
             roundedNum = Math.round(num);
-        } else if (type === "up") {
+        } else if (roundType === "up") {
             roundedNum = Math.ceil(num)
-        } else if (type === "down") {
+        } else if (roundType === "down") {
             roundedNum = Math.floor(num);
         }
         return roundedNum;

@@ -326,7 +326,7 @@ tDiv.onclick = function(evt){
 
 ## NUMBER
 
-1. Spektral.roundNum(num, type);
+1. Spektral.roundNum(num, options);
 ------
 
 #### Description
@@ -334,7 +334,14 @@ Rounds a number. Also has the option to round up and down.
 
 #### Arguments
 num: `Number` - The number you want to round
-type: `String default:regular` - Also accepts params: 'up', and 'down'
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	roundType: 'up' //Setting 'up' rounds the number up using Math.ceil, 'down' rounds the number down using Math.floor
+}
+```
 
 ##### Returns
 `Number`
@@ -344,9 +351,9 @@ type: `String default:regular` - Also accepts params: 'up', and 'down'
 ```javascript
 Spektral.roundNum(4.56);
 //Returns 5
-Spektral.roundNum(3.4, 'up');
+Spektral.roundNum(3.4, { roundType: 'up' });
 //Returns 4
-Spektral.roundNum(8.8, 'down');
+Spektral.roundNum(8.8, { roundType: 'down' });
 //Returns 8
 ```
 ---
