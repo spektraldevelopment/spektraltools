@@ -285,14 +285,14 @@
     };
 
     //STRING - SPLIT STRING
-    Spektral.splitString = function (request, character) {
-        character = character || ",";
+    Spektral.splitString = function (request, options) {
         var
-            splitArray = [], split,
-            i, detectCharacter = Spektral.detectCharacter(request, character),
-            stripped;
+            splitArray = [], split, character = Spektral.getParameter(options, 'character', ','),
+            i, detectChar, stripped;
 
-        if(detectCharacter === false && character !== " ") {
+        detectChar = Spektral.detectCharacter(request, character)
+
+        if(detectChar === false && character !== " ") {
 
             log("splitString: Could not split string because character [" + character + "] was not in string.", "warn");
         } else {
@@ -316,7 +316,7 @@
     Spektral.convertToCamel = function (request, options) {
         var
             character = Spektral.getParameter(options, 'character', '-'),
-            splitRequest = Spektral.splitString(request, character),
+            splitRequest = Spektral.splitString(request, { character: character }),
             newString, stringToConvert, i;
 
         newString = splitRequest[0];

@@ -266,7 +266,7 @@ describe('SpektralTools: ', function() {
     describe('STRING - splitString', function(){
         var
             testArray = Spektral.splitString('test-one, test-two, test-three'),
-            testArrayColon = Spektral.splitString('testOne:testTwo:testThree', ':');
+            testArrayColon = Spektral.splitString('testOne:testTwo:testThree', { character: ':' });
 
         it('returns an array.', function(){
             expect(getType(testArray)).toMatch('array');

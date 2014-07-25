@@ -395,7 +395,10 @@ options: `Object` - All optional parameters are passed through this object
 #### Available Options
 ```JavaScript
 {
-	mode: 'first' //If set to 'all', will remove character from entire string, if set to 'first', will on remove only the first instance of the character, if set to a number, will remove the character specifically at it's index (note: won't work with RegEx special characters such as * yet)
+	mode: 'first' //If set to 'all', will remove character from entire string, if set 
+	//to 'first', will on remove only the first instance of the character, if set to a 
+	//number, will remove the character specifically at it's index (note: won't work 
+	//with RegEx special characters such as * yet)
 }
 ```
 
@@ -413,15 +416,22 @@ Spektral.stripString('#foo#ba#r#', '#', { mode: 2 });
 //Returns: #foo#bar#
 ```
 
-3. Spektral.splitString(request, character);
+3. Spektral.splitString(request, options);
 ------
 
 #### Description
-Splits a string that uses a common character for separation, and returns an array of each individual value. Ex. 'This, string, has, lots, of, commas'
+Splits a string that uses a common character for separation, default character is a comma, and returns an array of each individual value. Ex. 'This, string, has, lots, of, commas'
 
 #### Arguments
 request: `String` - The string you want to split
-character: `String default:,` - The character you want to split the string with, default is comma.
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	character: '#' //The character you want to split the string with
+}
+```
 
 ##### Returns
 `Array`
@@ -431,7 +441,7 @@ character: `String default:,` - The character you want to split the string with,
 ```javascript
 Spektral.splitString('Split, on, these, commas');
 Returns: ['Split', 'on', 'these', 'commas']
-Spektral.splitString('Split#on#these#hashtags');
+Spektral.splitString('Split#on#these#hashtags', { character: '#'});
 Returns: ['Split', 'on', 'these', 'hashtags']
 ```
 4. Spektral.convertCamel(request, options);
