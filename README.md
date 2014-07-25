@@ -381,7 +381,7 @@ var testPattern = Spektral.hasPattern('This foobar string has foobar in it twice
 //testPattern.amount = 2;
 ```
 
-2. Spektral.stripString(request, character, mode)
+2. Spektral.stripString(request, character, options)
 ------
 
 #### Description
@@ -390,9 +390,14 @@ Strips a requested character from a string
 #### Arguments
 request: `String` - The string you want to strip
 character: `String` - The character you want to remove
-mode: `String or Number default:all` - If set to 'all', will remove character from entire string, 
-if set to 'first', will on remove only the first instance of the character, if set to a number, will remove
-the character specifically at it's index (note: won't work with RegEx special characters such as * yet)
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	mode: 'first' //If set to 'all', will remove character from entire string, if set to 'first', will on remove only the first instance of the character, if set to a number, will remove the character specifically at it's index (note: won't work with RegEx special characters such as * yet)
+}
+```
 
 ##### Returns
 `String`
@@ -402,9 +407,9 @@ the character specifically at it's index (note: won't work with RegEx special ch
 ```javascript
 Spektral.stripString('These #hashtags wi#ll be rem#oved.', '#');
 //Returns: These hashtags will be removed.
-Spektral.stripString('@foobar@', '@', 'first');
+Spektral.stripString('@foobar@', '@', { mode: 'first'});
 //Returns: foobar@
-Spektral.stripString('#foo#ba#r#', '#', 2);
+Spektral.stripString('#foo#ba#r#', '#', { mode: 2 });
 //Returns: #foo#bar#
 ```
 

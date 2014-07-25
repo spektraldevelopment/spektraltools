@@ -15,19 +15,17 @@
     };
 
     //STRING - STRIP STRING
-    Spektral.stripString = function (request, character, mode) {
-        mode = mode || "all";
+    Spektral.stripString = function (request, character, options) {
         var
-            first, all, newString = "",
-            characterFound = 0, letter, i, re;
+            rex, newString = "", mode = Spektral.getParameter(options, 'mode', 'all'),
+            characterFound = 0, letter, i;
 
         if(mode === "all") {
-
-            all = new RegExp(character, "g");
-            newString = request.replace(all, "");
+            rex = new RegExp(character, "g");
+            newString = request.replace(rex, "");
         } else if (mode === "first") {
-            first = new RegExp(character, "");
-            newString = request.replace(first, "");
+            rex = new RegExp(character, "");
+            newString = request.replace(rex, "");
         } else {
             //Target index
             //Not working at the moment with special RegEx character, for ex. *

@@ -255,11 +255,11 @@ describe('SpektralTools: ', function() {
         });
 
         it('it strips only the first character, when mode is set to \'first\'.', function(){
-            expect(Spektral.stripString('@foobar@', '@', 'first')).toMatch('foobar@');
+            expect(Spektral.stripString('@foobar@', '@', { mode: 'first' })).toMatch('foobar@');
         });
 
         it('it strips only the third character from string.', function(){
-            expect(Spektral.stripString('#foo#ba#r#', '#', 2)).toMatch('#foo#bar#');
+            expect(Spektral.stripString('#foo#ba#r#', '#', { mode: 2 })).toMatch('#foo#bar#');
         });
     });
 
