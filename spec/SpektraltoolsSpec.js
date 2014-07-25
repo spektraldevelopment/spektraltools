@@ -179,7 +179,7 @@ describe('SpektralTools: ', function() {
             expect(testContainer.innerHTML).toMatch('Here is some text.');
         });
 
-        Spektral.setInnerText(testContainer, ' And here is even more text.', true);
+        Spektral.setInnerText(testContainer, ' And here is even more text.', { append: true });
 
         it('appends text to the existing inner text of testContainer.', function(){
             expect(testContainer.innerHTML).toMatch('Here is some text. And here is even more text.');
@@ -297,7 +297,7 @@ describe('SpektralTools: ', function() {
         });
 
         it('converts to camel case using a non-hyphen character.', function(){
-            expect(Spektral.convertToCamel('test#test#test', '#')).toMatch('testTestTest');
+            expect(Spektral.convertToCamel('test#test#test', { character: '#' })).toMatch('testTestTest');
         });
     });
 
@@ -333,7 +333,7 @@ describe('SpektralTools: ', function() {
         });
 
         it('strips all white space from the string.', function(){
-            expect(Spektral.stripWhiteSpace(testString, true)).toMatch('foobar');
+            expect(Spektral.stripWhiteSpace(testString, { stripAll: true })).toMatch('foobar');
         });
     });
 
@@ -434,11 +434,11 @@ describe('SpektralTools: ', function() {
         });
 
         it('returns true when the type of two items match.', function(){
-            expect(Spektral.isMatch(testNumOne, testNumTwo, true)).toBeTruthy();
+            expect(Spektral.isMatch(testNumOne, testNumTwo, { useType: true })).toBeTruthy();
         });
 
         it('returns false when the type of two items does not match.', function(){
-            expect(Spektral.isMatch(testNumTwo, testBoolOne, true)).toBeFalsy();
+            expect(Spektral.isMatch(testNumTwo, testBoolOne, { useType: true })).toBeFalsy();
         });
     });
 

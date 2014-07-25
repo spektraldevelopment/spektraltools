@@ -181,7 +181,7 @@ Spektral.getInnerText(testDiv)
 //Returns 'Testing'
 ```
 
-9. Spektral.setInnerText(element, textContent, append);
+9. Spektral.setInnerText(element, textContent, options);
 ------
 
 #### Description
@@ -190,7 +190,14 @@ Sets the inner text of an element, as well as appends text to exisiting text.
 #### Arguments
 element: `HTMLElement` - The element you want set the innerHTML of.
 textContent: `String` - The text content.
-append: `Boolean default:false` - If set to true, will append text to the existing text.
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	append: true //Appends new text to the existing text
+}
+```
 
 ##### Returns
 `Nothing`
@@ -199,7 +206,7 @@ append: `Boolean default:false` - If set to true, will append text to the existi
 
 ```javascript
 Spektral.setInnerText(testContainer, 'Here is some text.');
-Spektral.setInnerText(testContainer, 'Here is even more text.', true);
+Spektral.setInnerText(testContainer, 'Here is even more text.', { append: true });
 ```
 
 10. Spektral.isElement(possibleElement);
@@ -223,7 +230,6 @@ Spektral.isElement(testObject);
 //Returns false
 ```
 ---
-
 
 ## EVENT
 
@@ -316,12 +322,7 @@ tDiv.onclick = function(evt){
 	//Returns: testDiv
 }
 ```
-
-
-
-
-
-
+---
 
 ## NUMBER
 
@@ -421,7 +422,7 @@ Returns: ['Split', 'on', 'these', 'commas']
 Spektral.splitString('Split#on#these#hashtags');
 Returns: ['Split', 'on', 'these', 'hashtags']
 ```
-4. Spektral.convertCamel(request, character);
+4. Spektral.convertCamel(request, options);
 ------
 
 #### Description
@@ -429,7 +430,14 @@ Converts a string separated by hyphens to camel case.
 
 #### Arguments
 request: `String` - The string you want to convert to camel case
-character: `String default:-` - The character you want to target, you can use another character optionally
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	character: ',' //Sets separating character to one of your choice
+}
+```
 
 ##### Returns
 `String`
@@ -438,7 +446,9 @@ character: `String default:-` - The character you want to target, you can use an
 
 ```javascript
 Spektral.convertToCamel('camel-case');
-Returns: camelCase
+//Returns: camelCase
+Spektral.convertToCamel('camel,case', { character: ',' });
+//Returns: camelCase
 ```
 
 5. Spektral.detectCharacter(request, character);
@@ -462,7 +472,7 @@ Spektral.detectCharacter('$#@!', '#');
 Spektral.detectCharacter('$#@!', '*');
 //Returns: false
 ```
-6. Spektral.stripWhiteSpace(request, removeAll);
+6. Spektral.stripWhiteSpace(request, options);
 ------
 
 #### Description
@@ -470,7 +480,14 @@ Strips a string of extra white space at the beginning and end of the string, can
 
 #### Arguments
 request: `String` - The string you want to strip
-removeAll: `Boolean default:false` - If set to true, removes all white space from string
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	stripAll: true //Strips string of all white space
+}
+```
 
 ##### Returns
 `String`
@@ -480,7 +497,7 @@ removeAll: `Boolean default:false` - If set to true, removes all white space fro
 ```javascript
 Spektral.stripWhiteSpace(' foo bar ');
 //Returns: 'foo bar';
-Spektral.stripWhiteSpace(' foo bar ');
+Spektral.stripWhiteSpace(' foo bar ', { stripAll: true });
 //Returns: 'foobar'
 ```
 
@@ -590,7 +607,7 @@ obj: `Various` - The object you want to stringify.
 Spektral.getInfo(testObj);
 ```
 
-3. Spektral.isMatch(itemA, itemB, useType);
+3. Spektral.isMatch(itemA, itemB, options);
 ------
 
 #### Description
@@ -599,7 +616,14 @@ Compares two values and returns a boolean, can also compare the type of two valu
 #### Arguments
 itemA: `Various` - The value or item you want to compare.
 itemB: `Various` - The value or item you want to compare against itemA.
-useType `Boolean default:false` - If set to true, will compare variables type, instead of value.
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	useType: true //If set to true, will compare variables type, instead of their literal value.
+}
+```
 
 ##### Returns
 `Boolean`
@@ -610,7 +634,7 @@ useType `Boolean default:false` - If set to true, will compare variables type, i
 var testNumOne = 4, testNumTwo = 8;
 Spektral.isMatch(testNumOne, testNumTwo);
 //Will return false
-Spektral.isMatch(testNumOne, testNumTwo, true);
+Spektral.isMatch(testNumOne, testNumTwo, { useType: true });
 //Will return true because both values are numbers
 ```
 
@@ -792,6 +816,7 @@ Spektral.getParameter(testObject, 'one', 'default');
 //Returns: foo
 Spektral.getParameter(testObject, 'three', 'test');
 //Returns: test
+```
 
 12. Spektral.getExtension(file);
 ------

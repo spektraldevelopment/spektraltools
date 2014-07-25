@@ -96,11 +96,10 @@
     };
 
     //DOM - SET INNER TEXT
-    Spektral.setInnerText = function (element, textContent, append) {
-        append = append || false;
+    Spektral.setInnerText = function (element, textContent, options) {
         var
             currentContent = Spektral.getInnerText(element),
-            newContent;
+            newContent, append = Spektral.getParameter(options, 'append', false);
         if(append === true) {
             newContent = currentContent + textContent;
             element.innerHTML = newContent;

@@ -25,10 +25,9 @@
     };
 
     //UTILS - IS MATCH
-    Spektral.isMatch = function (itemA, itemB, useType) {
-        useType = useType || false;
+    Spektral.isMatch = function (itemA, itemB, options) {
         var
-            isMatch = false,
+            isMatch = false, useType = Spektral.getParameter(options, 'useType', false),
             itemAType = Spektral.getType(itemA),
             itemBType = Spektral.getType(itemB);
         if(useType === true) {

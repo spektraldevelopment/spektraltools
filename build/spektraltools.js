@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-07-22
+* Build Created: 2014-07-24
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -146,11 +146,10 @@
     };
 
     //DOM - SET INNER TEXT
-    Spektral.setInnerText = function (element, textContent, append) {
-        append = append || false;
+    Spektral.setInnerText = function (element, textContent, options) {
         var
             currentContent = Spektral.getInnerText(element),
-            newContent;
+            newContent, append = Spektral.getParameter(options, 'append', false);
         if(append === true) {
             newContent = currentContent + textContent;
             element.innerHTML = newContent;
@@ -208,13 +207,14 @@
 
     //EVENT - TRIGGER EVENT
     Spektral.triggerEvent = function (obj, evt) {
-        var newEvent, evtType = Spektral.getType(evt);
-        if(evtType === "event" || evtType === "customevent") {
-            obj.dispatchEvent(evt);
-        } else if (evtType === "string") {
-            newEvent = Spektral.createEvent(evt);
-            obj.dispatchEvent(newEvent);
-        }
+        //var newEvent, evtType = Spektral.getType(evt);
+//        if(evtType === "event" || evtType === "customevent") {
+//            obj.dispatchEvent(evt);
+//        } else if (evtType === "string") {
+//            newEvent = Spektral.createEvent(evt);
+//            obj.dispatchEvent(newEvent);
+//        }
+        obj.dispatchEvent(evt);
     };
 
     //EVENT - GET TARGET
@@ -316,9 +316,12 @@
     };
 
     //STRING - CONVERT TO CAMEL
-    Spektral.convertToCamel = function (request, character) {
-        character = character || "-";
-        var splitRequest = Spektral.splitString(request, character), newString, stringToConvert, i;
+    Spektral.convertToCamel = function (request, options) {
+        var
+            character = Spektral.getParameter(options, 'character', '-'),
+            splitRequest = Spektral.splitString(request, character),
+            newString, stringToConvert, i;
+
         newString = splitRequest[0];
         for (i = 0; i < splitRequest.length; i += 1) {
             if (i !== 0) {
@@ -340,10 +343,9 @@
     };
 
     //STRING - STRIP WHITE SPACE
-    Spektral.stripWhiteSpace = function (request, removeAll) {
-        removeAll = removeAll || false;
-        var newString;
-        if(removeAll !== false) {
+    Spektral.stripWhiteSpace = function (request, options) {
+        var newString, stripAll = Spektral.getParameter(options, 'stripAll', false);
+        if(stripAll !== false) {
             newString = request.replace(/\s+/g, '');
         } else {
             newString = request.replace(/(^\s+|\s+$)/g,'');
@@ -415,10 +417,9 @@
     };
 
     //UTILS - IS MATCH
-    Spektral.isMatch = function (itemA, itemB, useType) {
-        useType = useType || false;
+    Spektral.isMatch = function (itemA, itemB, options) {
         var
-            isMatch = false,
+            isMatch = false, useType = Spektral.getParameter(options, 'useType', false),
             itemAType = Spektral.getType(itemA),
             itemBType = Spektral.getType(itemB);
         if(useType === true) {

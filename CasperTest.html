@@ -5,11 +5,13 @@
 </head>
 <body>
     <section id="mainContent">
-        <button type="button" id="aelButton">Test Button</button>
-        <button type="button" id="delButton">Test Button</button>
+        <button type="button" id="aelButton">Attach Event Listener Test Button</button>
+        <button type="button" id="delButton">Detach Event Listener Test Button</button>
+        <div type="button" id="ceButton">Custom Event Test Button</div>
     </section>
     <script>
-        var eventTestObject = { testButtonClicked: false, testTarget: null, testTargetID: null, eventDetached: true };
+        var eventTest = { testButtonClicked: false, testTarget: null, testTargetID: null, eventDetached: true };
+        var customEventTest = { eventExists: false, fooIs: null, spektralIs: null };
 ;    </script>
     <script src="build/spektraltools.js"></script>
 </body>

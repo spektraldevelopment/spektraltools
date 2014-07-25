@@ -74,9 +74,12 @@
     };
 
     //STRING - CONVERT TO CAMEL
-    Spektral.convertToCamel = function (request, character) {
-        character = character || "-";
-        var splitRequest = Spektral.splitString(request, character), newString, stringToConvert, i;
+    Spektral.convertToCamel = function (request, options) {
+        var
+            character = Spektral.getParameter(options, 'character', '-'),
+            splitRequest = Spektral.splitString(request, character),
+            newString, stringToConvert, i;
+
         newString = splitRequest[0];
         for (i = 0; i < splitRequest.length; i += 1) {
             if (i !== 0) {
@@ -98,10 +101,9 @@
     };
 
     //STRING - STRIP WHITE SPACE
-    Spektral.stripWhiteSpace = function (request, removeAll) {
-        removeAll = removeAll || false;
-        var newString;
-        if(removeAll !== false) {
+    Spektral.stripWhiteSpace = function (request, options) {
+        var newString, stripAll = Spektral.getParameter(options, 'stripAll', false);
+        if(stripAll !== false) {
             newString = request.replace(/\s+/g, '');
         } else {
             newString = request.replace(/(^\s+|\s+$)/g,'');
