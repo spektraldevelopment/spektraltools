@@ -279,7 +279,7 @@ Spektral.detachEventListener(tDiv, 'click', function(){
 });
 ```
 
-2. Spektral.getTarget(evt);
+3. Spektral.getTarget(evt);
 ------
 
 ##### Description
@@ -301,7 +301,7 @@ tDiv.onclick = function(evt){
 }
 ```
 
-3. Spektral.getTargetID(evt);
+4. Spektral.getTargetID(evt);
 ------
 
 ##### Description
@@ -321,6 +321,45 @@ tDiv.onclick = function(evt){
 	var target = Spektral.getTargetID(evt);
 	//Returns: testDiv
 }
+```
+
+5. Spektral.createEvent(eventName, options);
+------
+
+##### Description
+Creates a custom event
+
+##### Arguments
+eventName: `String` - The name of the event you want to create
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	detail:{}, //You can pass in values to the function that gets called on firing of custom event
+	bubbles:true,//A boolean indicating whether the event bubbles up through the DOM or not, default is true
+	cancelable:true//A boolean indicating whether the event is cancelable, default is true
+}
+```
+
+##### Returns
+`Event`
+
+##### Example
+
+```javascript
+var 
+    testDiv = document.querySelector('#test'),
+    testEvent = Spektral.createEvent('testEvent', { detail: {foo: 'bar', spektral: 'tools'} });
+
+Spektral.attachEventListener(testDiv, 'testEvent', onTestEvent);
+
+function onTestEvent(evt) {
+    //evt.detail.foo returns 'bar'
+    //evt.detail.spektral returns 'tools'
+}
+
+Spektral.triggerEvent(testDiv, testEvent);
 ```
 ---
 

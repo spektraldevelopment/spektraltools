@@ -51,23 +51,25 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     casper.then(function(){
 
         this.evaluate(function(){
-            
-                var 
-                    tb = document.querySelector('#ceButton'),
-                    testEvent = Spektral.createEvent('testEvent');;
+            var
+                tb = document.querySelector('#ceButton'),
+                testEvent = Spektral.createEvent('testEvent', { detail: {foo: 'bar', spektral: 'tools'} });
 
             Spektral.attachEventListener(tb, 'testEvent', onTestEvent);
 
             function onTestEvent(evt) {
                 customEventTest.eventExists = true;
+                customEventTest.fooIs = evt.detail.foo;
+                customEventTest.spektralIs = evt.detail.spektral;
             }
 
             Spektral.triggerEvent(tb, testEvent);
-            
         });
 
         this.methodHeader('EVENT - createEvent');
         this.test.assert(this.getVar('customEventTest').eventExists, 'custom event was created and triggered.');
+        this.test.assertEqual(this.getVar('customEventTest').fooIs, 'bar', 'foo equals bar in detail object.');
+        this.test.assertEqual(this.getVar('customEventTest').spektralIs, 'tools', 'spektral equals tools in detail object.')
     });
 
     casper.run(function() {

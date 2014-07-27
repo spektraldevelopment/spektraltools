@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-07-25
+* Build Created: 2014-07-27
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -192,12 +192,12 @@
     };
 
     //EVENT - CREATE EVENT
-    Spektral.createEvent = function (eventName, detail, bub, can) {
-        detail = detail || null;
-        bub = bub || true;
-        can = can || true;
-
-        var evt = new CustomEvent(eventName, { detail: detail, bubbles: bub, cancelable: can });
+    Spektral.createEvent = function (eventName, options) {
+        var
+            detail = Spektral.getParameter(options, 'detail', null),
+            eventBubbles = Spektral.getParameter(options, 'bubbles', true),
+            eventCancelable = Spektral.getParameter(options, 'cancelable', true),
+            evt = new CustomEvent(eventName, { detail: detail, bubbles: eventBubbles, cancelable: eventCancelable });
         if(evt === undefined) {
             Spektral.log("createEvent: CustomEvent not available. Using Event instead.")
             evt = new Event(eventName);
@@ -207,14 +207,13 @@
 
     //EVENT - TRIGGER EVENT
     Spektral.triggerEvent = function (obj, evt) {
-        //var newEvent, evtType = Spektral.getType(evt);
-//        if(evtType === "event" || evtType === "customevent") {
-//            obj.dispatchEvent(evt);
-//        } else if (evtType === "string") {
-//            newEvent = Spektral.createEvent(evt);
-//            obj.dispatchEvent(newEvent);
-//        }
-        obj.dispatchEvent(evt);
+        var newEvent, evtType = Spektral.getType(evt);
+        if(evtType === "event" || evtType === "customevent") {
+            obj.dispatchEvent(evt);
+        } else if (evtType === "string") {
+            newEvent = Spektral.createEvent(evt);
+            obj.dispatchEvent(newEvent);
+        }
     };
 
     //EVENT - GET TARGET
