@@ -368,9 +368,8 @@
     };
 
     //STRING - CONVERT CASE
-    Spektral.convertCase = function (request, newCase) {
-        newCase = newCase || "lower";
-        var newString;
+    Spektral.convertCase = function (request, options) {
+        var newString, newCase = Spektral.getParameter(options, 'newCase', 'lower');
         if (newCase === "lower") {
             newString = request.toLowerCase();
         } else if (newCase === "upper") {

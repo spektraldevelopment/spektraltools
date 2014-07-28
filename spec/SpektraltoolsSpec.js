@@ -359,11 +359,11 @@ describe('SpektralTools: ', function() {
         });
 
         it('converts string to upper case.', function(){
-            expect(Spektral.convertCase('foobar', 'upper')).toMatch('FOOBAR');
+            expect(Spektral.convertCase('foobar', { newCase: 'upper' })).toMatch('FOOBAR');
         });
 
         it('converts first letter only to upper case.', function(){
-            expect(Spektral.convertCase('foobar', 'first')).toMatch('Foobar');
+            expect(Spektral.convertCase('foobar', { newCase: 'first' })).toMatch('Foobar');
         });
     });
 
