@@ -57,3 +57,10 @@
     Spektral.getTargetID = function (evt) {
         return evt.target.id;
     };
+
+    //EVENT - CANCEL EVENT
+    Spektral.cancelEvent = function (evt) {
+        if (evt.preventDefault) {
+            evt.preventDefault();
+        } else { evt.returnValue = false; }
+    };

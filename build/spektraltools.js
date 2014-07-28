@@ -226,6 +226,13 @@
         return evt.target.id;
     };
 
+    //EVENT - CANCEL EVENT
+    Spektral.cancelEvent = function (evt) {
+        if (evt.preventDefault) {
+            evt.preventDefault();
+        } else { evt.returnValue = false; }
+    };
+
     //NUMBER - roundNum
     Spektral.roundNum = function (num, options) {
         var roundedNum = 0, roundType = Spektral.getParameter(options, 'roundType', 'regular');

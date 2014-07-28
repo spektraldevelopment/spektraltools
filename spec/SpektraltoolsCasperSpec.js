@@ -75,18 +75,32 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     casper.then(function(){
         this.evaluate(function(){
             var testDiv = document.querySelector('#teDiv');
-
             testDiv.addEventListener('click', onTestClick);
-
             function onTestClick(evt){
                 triggerEventTest.eventTriggered = true;
             }
-
             Spektral.triggerEvent(testDiv, 'click');
         });
 
         this.methodHeader('EVENT - triggerEvent');
         this.test.assert(this.getVar('triggerEventTest').eventTriggered, 'event was triggered.');
+    });
+
+    casper.then(function(){
+        this.evaluate(function(){
+            var testDiv = document.querySelector('#ceDiv');
+            testDiv.addEventListener('click', onTestClick);
+
+            function onTestClick(evt) {
+                cancelEventTest.eventCanceled = false;
+                Spektral.cancelEvent(evt);
+            }
+
+            testDiv.dispatchEvent('click');
+        });
+
+        this.methodHeader('EVENT - cancelEvent');
+        this.test.assert(this.getVar('cancelEventTest').eventCanceled, 'event was cancelled.')
     });
 
     casper.run(function() {

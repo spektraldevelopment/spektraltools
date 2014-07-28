@@ -9,6 +9,7 @@
         <button type="button" id="delButton">Detach Event Listener Test Button</button>
         <button type="button" id="ceButton">Custom Event Test Button</button>
         <div id="teDiv">Trigger Event Div</div>
+        <div id="ceDiv">Cancel Event Div</div>
     </section>
     <script>
         (function () {
@@ -27,7 +28,8 @@
         var
             eventTest = { testButtonClicked: false, testTarget: null, testTargetID: null, eventDetached: true },
             customEventTest = { eventExists: false, fooIs: null, spektralIs: null },
-            triggerEventTest = { eventTriggered: false };
+            triggerEventTest = { eventTriggered: false },
+            cancelEventTest = { eventCanceled: true };
 
         function logToConsole(msg) {
             console.log(msg);

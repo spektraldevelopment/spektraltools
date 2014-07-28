@@ -361,6 +361,57 @@ function onTestEvent(evt) {
 
 Spektral.triggerEvent(testDiv, testEvent);
 ```
+
+6. Spektral.triggerEvent(obj, evt);
+------
+
+##### Description
+Triggers an event
+
+##### Arguments
+obj: `Object or HTMLElement` - The object or element that has the event attached to it
+evt: `Event or String` - The event that you want to trigger, if evt is a string, the event will be created using CustomEvent
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+var testDiv = document.querySelector('#testDiv');
+testDiv.addEventListener('click', onTestClick);
+function onTestClick(evt){
+    console.log('Triggered');
+}
+Spektral.triggerEvent(testDiv, 'click');
+```
+
+7. Spektral.cancelEvent(evt);
+------
+
+##### Description
+Cancels the event without stopping further propagation
+
+##### Arguments
+evt: `Event object` - The event object returned by the triggered function
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+var testDiv = document.querySelector('#ceDiv'), eventCanceled = true;
+testDiv.addEventListener('click', onTestClick);
+
+function onTestClick(evt) {
+    eventCanceled = false;
+    Spektral.cancelEvent(evt);
+}
+
+testDiv.dispatchEvent('click');
+//eventCanceled still equals true
+```
 ---
 
 ## NUMBER
@@ -717,7 +768,7 @@ request: `String` - The string you want to convert, if string contains non-numer
 Spektral.stringToNum('15');
 //Returns: 15
 Spektral.stringToNum('15foo45bar');
-/Returns: 1545
+//Returns: 1545
 ```
 
 5. Spektral.isObjectEmpty(obj);
