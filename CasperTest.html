@@ -10,6 +10,7 @@
         <button type="button" id="ceButton">Custom Event Test Button</button>
         <div id="teDiv">Trigger Event Div</div>
         <div id="ceDiv">Cancel Event Div</div>
+        <div id="cpDiv">Cancel Propagation Div</div>
     </section>
     <script>
         (function () {
@@ -29,7 +30,8 @@
             eventTest = { testButtonClicked: false, testTarget: null, testTargetID: null, eventDetached: true },
             customEventTest = { eventExists: false, fooIs: null, spektralIs: null },
             triggerEventTest = { eventTriggered: false },
-            cancelEventTest = { eventCanceled: true };
+            cancelEventTest = { eventCanceled: true },
+            cancelPropTest = { callCount: 0 };
 
         function logToConsole(msg) {
             console.log(msg);

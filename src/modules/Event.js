@@ -62,5 +62,16 @@
     Spektral.cancelEvent = function (evt) {
         if (evt.preventDefault) {
             evt.preventDefault();
-        } else { evt.returnValue = false; }
+        } else {
+            evt.returnValue = false;
+        }
+    };
+
+    //EVENT - CANCEL PROPAGATION
+    Spektral.cancelPropagation = function (evt) {
+        if (evt.stopPropagation) {
+            evt.stopPropagation();
+        } else {
+            evt.cancelBubble = true;
+        }
     };

@@ -412,6 +412,37 @@ function onTestClick(evt) {
 testDiv.dispatchEvent('click');
 //eventCanceled still equals true
 ```
+
+8. Spektral.cancelPropagation(evt);
+------
+
+##### Description
+Stops the event from bubbling up the event chain
+
+##### Arguments
+evt: `Event object` - The event object returned by the triggered function
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+var
+    parent = document.querySelector('#parent'),
+    child = document.querySelector('#child'),
+    custEvent = Spektral.createEvent('testEvent');
+
+parent.addEventListener('testEvent', onTestEvent);
+child.addEventListener('testEvent', onTestEvent);
+
+function onTestEvent(evt) {
+    Spektral.cancelPropagation(evt);
+    //Only called once because event does not bubble up to parent
+}
+
+child.dispatchEvent(custEvent);
+```
 ---
 
 ## NUMBER

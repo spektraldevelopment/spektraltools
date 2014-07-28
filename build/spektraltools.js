@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-07-27
+* Build Created: 2014-07-28
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -230,7 +230,18 @@
     Spektral.cancelEvent = function (evt) {
         if (evt.preventDefault) {
             evt.preventDefault();
-        } else { evt.returnValue = false; }
+        } else {
+            evt.returnValue = false;
+        }
+    };
+
+    //EVENT - CANCEL PROPAGATION
+    Spektral.cancelPropagation = function (evt) {
+        if (evt.stopPropagation) {
+            evt.stopPropagation();
+        } else {
+            evt.cancelBubble = true;
+        }
     };
 
     //NUMBER - roundNum

@@ -103,6 +103,28 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assert(this.getVar('cancelEventTest').eventCanceled, 'event was cancelled.')
     });
 
+    casper.then(function(){
+        this.evaluate(function(){
+            var
+                parent = document.querySelector('#mainContent'),
+                testDiv = document.querySelector('#cpDiv'),
+                custEvent = Spektral.createEvent('testEvent');
+
+            parent.addEventListener('testEvent', onTestEvent);
+            testDiv.addEventListener('testEvent', onTestEvent);
+
+            function onTestEvent(evt) {
+                cancelPropTest.callCount += 1;
+                Spektral.cancelPropagation(evt);
+            }
+
+            testDiv.dispatchEvent(custEvent);
+        });
+
+        this.methodHeader('EVENT - cancelPropagation');
+        this.test.assertEqual(this.getVar('cancelPropTest').callCount, 1, 'event was only called once.');
+    });
+
     casper.run(function() {
         this.echo(' ');
         test.done();
