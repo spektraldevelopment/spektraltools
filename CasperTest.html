@@ -7,7 +7,8 @@
     <section id="mainContent">
         <button type="button" id="aelButton">Attach Event Listener Test Button</button>
         <button type="button" id="delButton">Detach Event Listener Test Button</button>
-        <div type="button" id="ceButton">Custom Event Test Button</div>
+        <button type="button" id="ceButton">Custom Event Test Button</button>
+        <div id="teDiv">Trigger Event Div</div>
     </section>
     <script>
         (function () {
@@ -23,8 +24,10 @@
             window.CustomEvent = CustomEvent;
         })();
         
-        var eventTest = { testButtonClicked: false, testTarget: null, testTargetID: null, eventDetached: true };
-        var customEventTest = { eventExists: false, fooIs: null, spektralIs: null };
+        var
+            eventTest = { testButtonClicked: false, testTarget: null, testTargetID: null, eventDetached: true },
+            customEventTest = { eventExists: false, fooIs: null, spektralIs: null },
+            triggerEventTest = { eventTriggered: false };
 
         function logToConsole(msg) {
             console.log(msg);

@@ -6,7 +6,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
     casper.then(function(){
         this.waitForResource('build/spektraltools.js', function() {
-            this.header('spektraltools loaded');
+            this.echo('spektraltools loaded', 'GREEN_BAR');
         });
     });
 
@@ -70,6 +70,23 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assert(this.getVar('customEventTest').eventExists, 'custom event was created and triggered.');
         this.test.assertEqual(this.getVar('customEventTest').fooIs, 'bar', 'foo equals bar in detail object.');
         this.test.assertEqual(this.getVar('customEventTest').spektralIs, 'tools', 'spektral equals tools in detail object.')
+    });
+
+    casper.then(function(){
+        this.evaluate(function(){
+            var testDiv = document.querySelector('#teDiv');
+
+            testDiv.addEventListener('click', onTestClick);
+
+            function onTestClick(evt){
+                triggerEventTest.eventTriggered = true;
+            }
+
+            Spektral.triggerEvent(testDiv, 'click');
+        });
+
+        this.methodHeader('EVENT - triggerEvent');
+        this.test.assert(this.getVar('triggerEventTest').eventTriggered, 'event was triggered.');
     });
 
     casper.run(function() {
