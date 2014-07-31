@@ -11,7 +11,12 @@
         <div id="teDiv">Trigger Event Div</div>
         <div id="ceDiv">Cancel Event Div</div>
         <div id="cpDiv">Cancel Propagation Div</div>
+        <div id="idTest">Query ID Div</div>
+        <div class="classTest">Query Class Div</div>
+        <div class="multiTest">Query Multiple Class Div #1</div>
+        <div class="multiTest">Query Multiple Class Div #2</div>
     </section>
+    <script src="build/spektraltools.js"></script>
     <script>
         (function () {
             function CustomEvent ( event, params ) {
@@ -31,12 +36,13 @@
             customEventTest = { eventExists: false, fooIs: null, spektralIs: null },
             triggerEventTest = { eventTriggered: false },
             cancelEventTest = { eventCanceled: true },
-            cancelPropTest = { callCount: 0 };
+            cancelPropTest = { callCount: 0 },
+            queryIDTest, queryClassTest, queryMultiTest;
 
         function logToConsole(msg) {
             console.log(msg);
         }
+
     </script>
-    <script src="build/spektraltools.js"></script>
 </body>
 </html>

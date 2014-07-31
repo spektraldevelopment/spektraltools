@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-07-28
+* Build Created: 2014-07-31
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -33,20 +33,21 @@
     };
 
     //GLOBAL - query
-    Spektral.queryEl = function(el) {
-        var isClass = Spektral.detectCharacter(el, '.'), theElement;
-
+    Spektral.query = function(el) {
+        var isClass = Spektral.detectCharacter(el, '.'), theElement, i;
         if (isClass === true) {
             theElement = document.querySelectorAll(el);
+
+            if(theElement.length === 1) {
+              theElement = theElement[0];
+            }
         } else {
             theElement = document.querySelector(el);
         }
-
         if (theElement === null) {
             Spektral.log('query: element not found.', 'warn');
-        } else {
-            return theElement;
         }
+        return theElement;
     };
 
     //DOM - ADD ELEMENT

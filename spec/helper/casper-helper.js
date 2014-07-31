@@ -44,3 +44,15 @@ casper.getInfo = function(obj) {
         return JSON.stringify(o);
     }, obj);
 };
+
+casper.getType = function(obj){
+    var type;
+    if(obj.nodeName !== undefined) {
+        //element
+        type = (obj.nodeName);
+    } else {
+        //everything else
+        type = ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1]
+    }
+    return type.toLowerCase();
+};

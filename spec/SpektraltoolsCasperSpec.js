@@ -11,7 +11,40 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     });
 
     casper.then(function(){
-        this.methodHeader('EVENT - attachEventListener');
+        this.evaluate(function(){
+            queryIDTest = Spektral.query('#idTest');
+        });
+
+        this.methodHeader('GLOBAL - query');
+
+        this.test.assertEqual(this.getType(this.getVar('queryIDTest')), 'div', 'query returned element by Id.');
+        this.test.assertEqual(this.getVar('queryIDTest').id, 'idTest', 'element id is correct.');
+    });
+
+    casper.then(function(){
+        this.evaluate(function(){
+            queryClassTest = Spektral.query('.classTest');
+        });
+        this.test.assertEqual(this.getType(this.getVar('queryClassTest')), 'div', 'query returned element by class.');
+        this.test.assertEqual(this.getVar('queryClassTest').className, 'classTest', 'element class name is correct.')
+    });
+
+//Will come back to this, apparently evaluate() does not work for
+//    casper.then(function(){
+//        this.evaluate(function(){
+//            queryMultiTest = Spektral.query('.multiTest');
+//        });
+//
+//        this.test.assertEqual(this.getVar('queryMultiTest').length, 2, 'query returned two elements.');
+//
+//        this.test.assertEqual(this.getType(this.getVar('queryMultiTest')[0]), 'div', 'the first element is a div.');
+//        this.test.assertEqual(this.getVar('queryMultiTest')[0].className, 'multiTest', 'the first element class name is correct.');
+//
+//        //this.test.assertEqual(this.getType(this.getVar('queryMultiTest')[1]), 'div', 'the second element is a div.');
+//        //this.test.assertEqual(this.getVar('queryMultiTest')[1].className, 'multiTest', 'the first element class name is correct.');
+//    });
+
+    casper.then(function(){
         this.evaluate(function(){
             var tb = document.querySelector('#aelButton');
             Spektral.attachEventListener(tb, 'click', onTestButtonClick);
@@ -22,10 +55,10 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
                 eventTest.testButtonClicked = true;
             }
         });
-    });
 
-    casper.then(function(){
         this.click('#aelButton');
+
+        this.methodHeader('EVENT - attachEventListener');
         this.test.assert(this.getVar('eventTest').testButtonClicked, 'test button was clicked');
         this.methodHeader('EVENT - getTarget');
         this.test.assertType(this.getVar('eventTest').testTarget, 'object', 'target was returned.');
