@@ -980,6 +980,28 @@ Spektral.getExtension('test.jpg');
 //Returns: jpg
 ```
 
+13. Spektral.getKey(evt);
+------
+
+#### Description
+Converts the key code recieved from a keydown/keyup event to a human readable string. Note: does not work for keypress events
+
+#### Arguments
+evt: `Event object` - The event object returned
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+testInput.onkeydown = function(evt){
+	Spektral.getKey(evt);	
+}
+//If enter key hit, returns: ENTER
+//If shift + 4 hit, returns: DOLLAR_SIGN
+```
+
 ---
 
 

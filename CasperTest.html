@@ -15,6 +15,10 @@
         <div class="classTest">Query Class Div</div>
         <div class="multiTest">Query Multiple Class Div #1</div>
         <div class="multiTest">Query Multiple Class Div #2</div>
+        <input type="text" id="alphaNumericInput"/>
+        <input type="text" id="characterInput"/>
+        <input type="text" id="characterShiftInput"/>
+        <input type="text" id="commandInput"/>
     </section>
     <script src="build/spektraltools.js"></script>
     <script>
@@ -37,7 +41,8 @@
             triggerEventTest = { eventTriggered: false },
             cancelEventTest = { eventCanceled: true },
             cancelPropTest = { callCount: 0 },
-            queryIDTest, queryClassTest, queryMultiTest;
+            queryIDTest, queryClassTest, queryMultiTest,
+            alphaNumericMapTest = [], characterMapTest = [], characterShiftMapTest = [], commandMapTest = [];
 
         function logToConsole(msg) {
             console.log(msg);

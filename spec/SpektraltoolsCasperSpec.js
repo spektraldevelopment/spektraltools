@@ -158,6 +158,176 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getVar('cancelPropTest').callCount, 1, 'event was only called once.');
     });
 
+    casper.then(function(){
+        this.methodHeader('UTILS - getKey');
+        this.echo('Alpha Numeric', 'INFO');
+        this.evaluate(function(){
+            try {
+                var testInput = document.querySelector('#alphaNumericInput');
+
+                testInput.onkeydown = function(evt){
+                    var keyEntry = {};
+                    keyEntry['returnedCode'] = evt.keyCode;
+                    keyEntry['returnedKey'] = Spektral.getKey(evt);
+                    alphaNumericMapTest.push(keyEntry);
+                }
+            } catch(err) {
+                logToConsole('onkeydown error!');
+            }
+        });
+
+        //Note: only works for keydown and keyup, not keypress
+        var
+            alphaNumericArray = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'], i;
+
+        for (i = 0; i < alphaNumericArray.length; i += 1){
+            this.sendKeys('#alphaNumericInput', alphaNumericArray[i]);
+            var kMap = this.getVar('alphaNumericMapTest');
+            kMap[i]['testKey'] = alphaNumericArray[i];
+            this.test.assertEqual(kMap[i].returnedKey, alphaNumericArray[i], alphaNumericArray[i] + ' returned key was correct.');
+        }
+    });
+
+    casper.then(function(){
+        this.echo('Characters', 'INFO');
+        this.evaluate(function(){
+            try {
+                var testInput = document.querySelector('#characterInput');
+
+                testInput.onkeydown = function(evt){
+                    var keyEntry = {};
+                    keyEntry['returnedCode'] = evt.keyCode;
+                    keyEntry['returnedKey'] = Spektral.getKey(evt);
+                    characterMapTest.push(keyEntry);
+                }
+            } catch(err) {
+                logToConsole('onkeydown error!');
+            }
+        });
+
+        var characterArray = [
+            ['`', 'BACK_TICK'],
+            ['[', 'OPEN_SQUARE_BRACKET'],
+            [']', 'CLOSE_SQUARE_BRACKET'],
+            ['\\', 'BACK_SLASH'],
+            [';', 'SEMI_COLON'],
+            ['\'', 'SINGLE_QUOTE'],
+            [',', 'COMMA'],
+            ['.', 'PERIOD'],
+            ['/', 'FORWARD_SLASH']
+        ], i;
+
+        for (i = 0; i < characterArray.length; i += 1){
+            this.sendKeys('#characterInput', characterArray[i][0]);
+            var kMap = this.getVar('characterMapTest');
+            kMap[i]['testKey'] = characterArray[i][0];
+            this.test.assertEqual(kMap[i].returnedKey, characterArray[i][1], characterArray[i][1] + ' returned key was correct.');
+        }
+    });
+
+    casper.then(function(){
+        this.echo('Characters + Shift', 'INFO');
+        this.evaluate(function(){
+            try {
+                var testInput = document.querySelector('#characterShiftInput');
+
+                testInput.onkeydown = function(evt){
+                    var keyEntry = {};
+                    keyEntry['returnedCode'] = evt.keyCode;
+                    keyEntry['returnedKey'] = Spektral.getKey(evt);
+                    characterShiftMapTest.push(keyEntry);
+                }
+            } catch(err) {
+                logToConsole('onkeydown error!');
+            }
+        });
+
+        var characterShiftArray = [
+            ['`', 'TILDA'],
+            ['1', 'EXCLAMATION_POINT'],
+            ['2', 'AT_SIGN'],
+            ['3', 'HASHTAG'],
+            ['4', 'DOLLAR_SIGN'],
+            ['5', 'PERCENT'],
+            ['6', 'CARET'],
+            ['7', 'AMPERSAND'],
+            ['8', 'ASTERISK'],
+            ['9', 'OPEN_BRACKET'],
+            ['0', 'CLOSE_BRACKET'],
+            ['-', 'UNDERSCORE'],
+            ['=', 'PLUS_SIGN'],
+            ['[', 'OPEN_CURLY_BRACKET'],
+            [']', 'CLOSE_CURLY_BRACKET'],
+            ['\\', 'VERTICAL_BAR'],
+            [';', 'COLON'],
+            ['\'', 'QUOTATION_MARK'],
+            [',', 'LESS_THAN_SIGN'],
+            ['.', 'GREATER_THAN_SIGN'],
+            ['/', 'QUESTION_MARK']
+        ], i;
+
+        for (i = 0; i < characterShiftArray.length; i += 1) {
+            this.sendKeys('#characterShiftInput', characterShiftArray[i][0], { modifiers: 'shift'});
+            var kMap = this.getVar('characterShiftMapTest');
+            kMap[i]['testKey'] = characterShiftArray[i][0];
+            this.test.assertEqual(kMap[i].returnedKey, characterShiftArray[i][1], characterShiftArray[i][1] + ' returned key was correct.');
+        }
+    });
+
+    casper.then(function(){
+        this.echo('Command + Modifiers', 'INFO');
+        this.evaluate(function(){
+            try {
+                var testInput = document.querySelector('#commandInput');
+
+                testInput.onkeydown = function(evt){
+                    var keyEntry = {};
+                    keyEntry['returnedCode'] = evt.keyCode;
+                    keyEntry['returnedKey'] = Spektral.getKey(evt);
+                    commandMapTest.push(keyEntry);
+                }
+            } catch(err) {
+                logToConsole('onkeydown error!');
+            }
+        });
+
+        var commandArray = [
+            [casper.page.event.key.Escape, 'ESCAPE'],
+            [casper.page.event.key.F1, 'F1'],
+            [casper.page.event.key.F2, 'F2'],
+            [casper.page.event.key.F3, 'F3'],
+            [casper.page.event.key.F4, 'F4'],
+            [casper.page.event.key.F5, 'F5'],
+            [casper.page.event.key.F6, 'F6'],
+            [casper.page.event.key.F7, 'F7'],
+            [casper.page.event.key.F8, 'F8'],
+            [casper.page.event.key.F9, 'F9'],
+            [casper.page.event.key.F10, 'F10'],
+            [casper.page.event.key.F11, 'F11'],
+            [casper.page.event.key.F12, 'F12'],
+            [casper.page.event.key.Delete, 'DELETE'],
+            [casper.page.event.key.Tab, 'TAB'],
+            [casper.page.event.key.CapsLock, 'CAPS_LOCK'],
+            [casper.page.event.key.Enter, 'ENTER'],
+            [casper.page.event.key.Shift, 'SHIFT'],
+            [casper.page.event.key.Control, 'CTRL'],
+            [casper.page.event.key.Alt, 'ALT'],
+            [casper.page.event.key.Up, 'UP'],
+            [casper.page.event.key.Left, 'LEFT'],
+            [casper.page.event.key.Down, 'DOWN'],
+            [casper.page.event.key.Right, 'RIGHT'],
+        ], i;
+
+        for (i = 0; i < commandArray.length; i += 1) {
+            this.sendKeys('#commandInput', commandArray[i][0], { keepFocus: true });
+            var kMap = this.getVar('commandMapTest');
+            kMap[i]['testKey'] = commandArray[i][0];
+            this.test.assertEqual(kMap[i].returnedKey, commandArray[i][1], commandArray[i][1] + ' returned key was correct.');
+        }
+    });
+
     casper.run(function() {
         this.echo(' ');
         test.done();
