@@ -1002,6 +1002,53 @@ testInput.onkeydown = function(evt){
 //If shift + 4 hit, returns: DOLLAR_SIGN
 ```
 
+14. Spektral.getMousePos(evt);
+------
+
+#### Description
+Gets mouse's position via an event object returned by mouseup, mousemove, or mousedown.
+
+#### Arguments
+evt: `Event object` - The event object returned
+
+##### Returns
+`Object`
+
+#### Keys
+`innerX/innerY`: The position of the mouse within the element
+`offsetX/offsetY`: The position relative to the scrollLeft/scrollTop position of the page
+`pageX/pageY`: The position relative to the page/document
+`screenX/screenY`: The position relative to the screen itself
+`viewportX/viewportY`: The position in the visible display area of the browser
+
+##### Example
+
+````css
+#mouseTestArea {
+            position: absolute;
+            top: 25px;
+            left: 10px;
+            padding: 0;
+            margin: 0;
+            height: 400px;
+            width: 400px;
+            background-color: #8bbfd1;
+        }
+````
+
+````html
+<div id="mouseTestArea">Mouse Test Area</div>
+````
+
+```javascript
+var mouseTestArea = document.querySelector('#mouseTestArea'), mousePos;
+mouseTestArea.onmousemove = function(evt){
+    mousePos = Spektral.getMousePos(evt);
+};
+//If mouse is moved to left: 100px, top: 50px
+//Returns: {"innerX":90,"innerY":25,"offsetX":0,"offsetY":0,"pageX":100,"pageY":50,"screenX":88,"screenY":140,"viewportX":100,"viewportY":50}
+```
+
 ---
 
 

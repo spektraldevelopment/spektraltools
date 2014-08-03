@@ -45,3 +45,4 @@ dwsync.xml
 .sass-cache
 .grunt
 test/*
+captures/*

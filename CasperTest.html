@@ -2,9 +2,28 @@
 <html>
 <head>
     <title>Casper Test</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            cursor: crosshair;
+        }
+
+        #mouseTestArea {
+            position: absolute;
+            top: 25px;
+            left: 10px;
+            padding: 0;
+            margin: 0;
+            height: 400px;
+            width: 400px;
+            background-color: #8bbfd1;
+        }
+    </style>
 </head>
 <body>
     <section id="mainContent">
+        <div id="mouseTestArea">Mouse Test Area</div>
         <button type="button" id="aelButton">Attach Event Listener Test Button</button>
         <button type="button" id="delButton">Detach Event Listener Test Button</button>
         <button type="button" id="ceButton">Custom Event Test Button</button>
@@ -42,7 +61,13 @@
             cancelEventTest = { eventCanceled: true },
             cancelPropTest = { callCount: 0 },
             queryIDTest, queryClassTest, queryMultiTest,
-            alphaNumericMapTest = [], characterMapTest = [], characterShiftMapTest = [], commandMapTest = [];
+            alphaNumericMapTest = [], characterMapTest = [], characterShiftMapTest = [], commandMapTest = [],
+            mousePosTest = [], mta = document.querySelector('#mouseTestArea')
+
+        mta.onmousemove = function(evt){
+            var newMousePos = Spektral.getMousePos(evt);
+            console.log('newMousePos: ' + JSON.stringify(newMousePos));
+        }
 
         function logToConsole(msg) {
             console.log(msg);

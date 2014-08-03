@@ -1,3 +1,6 @@
+//MOUSE
+var mouse = require("mouse").create(casper);
+
 //EVENTS
 casper.on('remote.message', function(msg) {
     this.echo('Remote message: ' + msg);

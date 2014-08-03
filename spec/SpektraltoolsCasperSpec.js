@@ -328,6 +328,71 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         }
     });
 
+    casper.then(function(){
+        this.methodHeader('UTILS - getMousePos');
+        this.evaluate(function(){
+            try {
+                var mouseTestArea = document.querySelector('#mouseTestArea'), mousePos;
+                mouseTestArea.onmousemove = function(evt){
+                    mousePos = Spektral.getMousePos(evt);
+                    mousePosTest.push(mousePos);
+                };
+            } catch (err) {
+                logToConsole('getMousePos Error');
+            }
+        });
+    });
+
+    casper.then(function(){
+        this.echo('Mouse: x:100 y:50', 'INFO');
+        this.mouse.move(100, 50);
+        //this.echo('Mouse Test Area Bounds: ' + this.getInfo(this.getElementBounds('#mouseTestArea')));
+    });
+
+    casper.then(function(){
+        this.wait(1000, function(){
+
+            //Mouse Test Area: top: 25px, left: 10px
+            var leftPos = 10, topPos = 25, xPos = 90, yPos = 25;
+            this.echo('New Mouse Pos 0: ' + this.getInfo(this.getVar('mousePosTest')[0]));
+
+            this.test.assertEqual(this.getVar('mousePosTest')[0].innerX, xPos, ' innerX was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[0].innerY, yPos, ' innerY was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[0].offsetX, 0, ' offsetX was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[0].offsetY, 0, ' offsetY was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[0].pageX, xPos + leftPos, ' pageX was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[0].pageY, yPos + topPos, ' pageY was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[0].viewportX, xPos + leftPos, ' viewportX was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[0].viewportY, yPos + topPos, ' viewportY was correct.');
+
+        });
+    });
+
+    casper.then(function(){
+        this.echo('Mouse: x:150 y:100', 'INFO');
+        this.mouse.move(150, 100);
+        //this.echo('Mouse Test Area Bounds: ' + this.getInfo(this.getElementBounds('#mouseTestArea')));
+    });
+
+    casper.then(function(){
+        this.wait(1000, function(){
+
+            //Mouse Test Area: top: 25px, left: 10px
+            var leftPos = 10, topPos = 25, xPos = 140, yPos = 75;
+            this.echo('New Mouse Pos 0: ' + this.getInfo(this.getVar('mousePosTest')[0]));
+
+            this.test.assertEqual(this.getVar('mousePosTest')[1].innerX, xPos, ' innerX was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[1].innerY, yPos, ' innerY was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[1].offsetX, 0, ' offsetX was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[1].offsetY, 0, ' offsetY was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[1].pageX, xPos + leftPos, ' pageX was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[1].pageY, yPos + topPos, ' pageY was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[1].viewportX, xPos + leftPos, ' viewportX was correct.');
+            this.test.assertEqual(this.getVar('mousePosTest')[1].viewportY, yPos + topPos, ' viewportY was correct.');
+
+        });
+    });
+
     casper.run(function() {
         this.echo(' ');
         test.done();

@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-08-01
+* Build Created: 2014-08-03
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -727,6 +727,145 @@
             keyName = keyMap[code];
         }
         return keyName;
+    };
+
+    //UTILS - GET MOUSE POS
+    Spektral.getMousePos = function (evt) {
+        var
+            mousePos = {},
+            target = Spektral.getTarget(evt),
+            targetX = Spektral.getPos(target).elX,
+            targetY = Spektral.getPos(target).elY,
+            pageX = evt.pageX, pageY = evt.pageY,
+            screenX = evt.screenX, screenY = evt.screenY,
+            clientX = evt.clientX, clientY = evt.clientY,
+            offsetX, offsetY,
+            docElem = document.documentElement;
+        try {
+
+            // if documentElement.scrollLeft supported
+            if (docElem.scrollLeft) {
+
+                offsetX = docElem.scrollLeft;
+                offsetY = docElem.scrollTop;
+            } else if (document.body) {
+
+                offsetX = document.body.scrollLeft;
+                offsetY = document.body.scrollTop;
+            }
+
+            //pageX/Y = documentX/Y
+            //screenX/Y = screenX/Y
+            //clientX/Y = viewportX/Y
+
+            mousePos["innerX"] = Spektral.roundNum(clientX - targetX);
+            mousePos["innerY"] = Spektral.roundNum(clientY - targetY);
+
+            mousePos["pageX"] = Spektral.roundNum(pageX);
+            mousePos["pageY"] = Spektral.roundNum(pageY);
+
+            mousePos["screenX"] = Spektral.roundNum(screenX);
+            mousePos["screenY"] = Spektral.roundNum(screenY);
+
+            mousePos["viewportX"] = Spektral.roundNum(clientX);
+            mousePos["viewportY"] = Spektral.roundNum(clientY);
+
+            mousePos["offsetX"] = Spektral.roundNum(offsetX);
+            mousePos["offsetY"] = Spektral.roundNum(offsetY);
+        } catch (err) {
+            Spektral.log('getMousePos error: ' + err, 'warn')
+        }
+
+        return mousePos;
+    };
+
+    //UTILS - GET POS
+    Spektral.getPos = function (element) {
+
+        var
+            pos = {},
+            viewport = Spektral.getViewportSize(),
+            parent = element.parentNode,
+            par = parent.getBoundingClientRect(),
+            el = element.getBoundingClientRect(),
+            left, top, right, bottom,
+            dLeft, dTop, dRight, dBottom,
+            elTop, elRight, elBottom, elLeft,
+            viewWidth = viewport.width,
+            viewHeight = viewport.height;
+
+        //Position relative to parent
+        top = (el.top - par.top);
+        right = (par.right - el.right);
+        bottom = (par.bottom - el.bottom);
+        left = (el.left - par.left);
+
+        //The properties returned from getBoundingClientRect
+        elTop = el.top;
+        elRight = el.right;
+        elBottom = el.bottom;
+        elLeft = el.left;
+
+        //position relative to document
+        dTop = el.top;
+        dRight = (viewWidth - el.right);
+        dBottom = (viewHeight - el.bottom);
+        dLeft = el.left;
+
+        //Relative to parent
+        pos["x"] = left;
+        pos["y"] = top;
+
+        pos["top"] = top;
+        pos["right"] = right;
+        pos["bottom"] = bottom;
+        pos["left"] = left;
+
+        //getBoundingClientRect
+        pos["elX"] = elLeft;
+        pos["elY"] = elTop;
+
+        pos["elTop"] = elTop;
+        pos["elRight"] = elRight;
+        pos["elBottom"] = elBottom;
+        pos["elLeft"] = elLeft;
+
+        //Relative to document
+        pos["dX"] = dLeft;
+        pos["dY"] = dTop;
+
+        pos["dTop"] = dTop;
+        pos["dRight"] = dRight;
+        pos["dBottom"] = dBottom;
+        pos["dLeft"] = dLeft;
+
+        return pos;
+    };
+
+    //UTILS - GET VIEWPORT SIZE
+    Spektral.getViewportSize = function () {
+        var w, h, vPort = {};
+        //Width
+        if (window.innerWidth) {
+            w = window.innerWidth;
+        } else if (document.body && document.body.offsetWidth) {
+            w = document.body.offsetWidth;
+        } else {
+            w = null;
+        }
+        //Height
+        if (window.innerHeight) {
+            h = window.innerHeight;
+        } else if (document.body && document.body.offsetHeight) {
+            h = document.body.offsetHeight;
+        } else {
+            h = null;
+        }
+
+        vPort["width"] = w;
+        vPort["height"] = h;
+
+        return vPort;
     };
 
 

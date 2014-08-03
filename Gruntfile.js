@@ -44,6 +44,11 @@ module.exports = function(grunt) {
             }
         },
         watch: {
+            clear: {
+                //clear terminal on any watch task. beauty.
+                files: ['spec/**'], //or be more specific
+                tasks: ['clear']
+            },
             build: {
                 files: ["src/**", "spec/**"],
                 tasks: ["concat", "uglify", "casper"]
@@ -81,6 +86,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-casper');
+    grunt.loadNpmTasks('grunt-clear');
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);
