@@ -1074,6 +1074,53 @@ None
 var viewportSize = Spektral.getViewportSize();
 //For example a viewport of 1024 x 768 would return viewportSize.width of 1024 and viewportSize.height of 768
 ```
+
+16. Spektral.getPosition(element);
+------
+
+#### Description
+Returns an object container the position of the element
+
+#### Arguments
+element: `HTMLElement` - The element you want to get the position of
+
+##### Returns
+`Object`
+
+##### Keys
+`x/y`: The left and top positions relative to the parent element
+
+`top/right/bottom/left`: The top, left, bottom, and right positions relative to the parent element
+
+`boundX/boundY`: The left and top positions returned via the getBoundingClientRect() method
+
+`boundTop/boundRight/boundBottom/boundLeft`: The top, right, bottom, and left positions returned via the getBoundingClientRect() method
+
+`docX/docY`: The left and top positions relative to the document
+
+`docTop/docRight/docBottom/docLeft`: The top, left, bottom, and left positions relative to the document
+
+##### Example
+
+````css
+#testDiv {
+    position:  absolute;
+    top: 475px;
+    left: 125px;
+}
+````
+
+````html
+<div id='testDiv'></div>
+````
+
+```javascript
+var 
+	tDiv = document.querySelector('#testDiv'), 
+	posObj = Spektral.getPosition(tDiv);
+//posObj.x = 125px;
+//posObj.y = 475px;
+```
 ---
 
 

@@ -1,6 +1,7 @@
 casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
     casper.start('CasperTest.html', function() {
+        this.viewport(800, 600);
         this.echo(this.getTitle(), 'GREEN_BAR');
     });
 
@@ -398,8 +399,46 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.evaluate(function(){
             viewportSizeTest = Spektral.getViewportSize();
         });
-        this.test.assertEqual(this.getVar('viewportSizeTest').width, 400, ' returned width was correct.');
-        this.test.assertEqual(this.getVar('viewportSizeTest').height, 300, ' returned height was correct.');
+        this.test.assertEqual(this.getVar('viewportSizeTest').width, 800, ' returned width was correct.');
+        this.test.assertEqual(this.getVar('viewportSizeTest').height, 600, ' returned height was correct.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('UTILS - getPos');
+        this.evaluate(function(){
+            var posTestDiv = document.querySelector('#getPosTest');
+            positionTest = Spektral.getPosition(posTestDiv);
+            logToConsole('Position: ' + JSON.stringify(positionTest));
+        });
+
+        var posObj = this.getVar('positionTest');
+
+        this.capture('captures/getPosTest.jpg');
+
+        this.test.assertEqual(posObj.x , 125, ' x was correct.');
+        this.test.assertEqual(posObj.y , 475, ' y was correct.');
+
+        this.test.assertEqual(posObj.top , 475, ' top was correct.');
+        this.test.assertEqual(posObj.right , 475, ' right was correct.');
+        this.test.assertEqual(posObj.bottom , -75, ' bottom was correct.');
+        this.test.assertEqual(posObj.left , 125, ' left was correct.');
+
+        this.test.assertEqual(posObj.boundX , 125, ' boundX was correct.');
+        this.test.assertEqual(posObj.boundY , 475, ' boundY was correct.');
+
+        this.test.assertEqual(posObj.boundTop , 475, ' boundTop was correct.');
+        this.test.assertEqual(posObj.boundRight , 325, ' boundRight was correct.');
+        this.test.assertEqual(posObj.boundBottom , 675, ' boundBottom was correct.');
+        this.test.assertEqual(posObj.boundLeft , 125, ' boundLeft was correct.');
+
+        this.test.assertEqual(posObj.docX , 125, ' docX was correct.');
+        this.test.assertEqual(posObj.docY , 475, ' docY was correct.');
+
+        this.test.assertEqual(posObj.docTop , 475, ' docTop was correct.');
+        this.test.assertEqual(posObj.docRight , 475, ' docRight was correct.');
+        this.test.assertEqual(posObj.docBottom , -75, ' docBottom was correct.');
+        this.test.assertEqual(posObj.docLeft , 125, ' docLeft was correct.');
+
     });
 
     casper.run(function() {

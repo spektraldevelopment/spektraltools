@@ -328,8 +328,8 @@
         var
             mousePos = {},
             target = Spektral.getTarget(evt),
-            targetX = Spektral.getPos(target).elX,
-            targetY = Spektral.getPos(target).elY,
+            targetX = Spektral.getPosition(target).boundX,
+            targetY = Spektral.getPosition(target).boundY,
             pageX = evt.pageX, pageY = evt.pageY,
             screenX = evt.screenX, screenY = evt.screenY,
             clientX = evt.clientX, clientY = evt.clientY,
@@ -373,9 +373,8 @@
         return mousePos;
     };
 
-    //UTILS - GET POS
-    Spektral.getPos = function (element) {
-
+    //UTILS - GET POSITION
+    Spektral.getPosition = function (element) {
         var
             pos = {},
             viewport = Spektral.getViewportSize(),
@@ -416,22 +415,22 @@
         pos["left"] = left;
 
         //getBoundingClientRect
-        pos["elX"] = elLeft;
-        pos["elY"] = elTop;
+        pos["boundX"] = elLeft;
+        pos["boundY"] = elTop;
 
-        pos["elTop"] = elTop;
-        pos["elRight"] = elRight;
-        pos["elBottom"] = elBottom;
-        pos["elLeft"] = elLeft;
+        pos["boundTop"] = elTop;
+        pos["boundRight"] = elRight;
+        pos["boundBottom"] = elBottom;
+        pos["boundLeft"] = elLeft;
 
         //Relative to document
-        pos["dX"] = dLeft;
-        pos["dY"] = dTop;
+        pos["docX"] = dLeft;
+        pos["docY"] = dTop;
 
-        pos["dTop"] = dTop;
-        pos["dRight"] = dRight;
-        pos["dBottom"] = dBottom;
-        pos["dLeft"] = dLeft;
+        pos["docTop"] = dTop;
+        pos["docRight"] = dRight;
+        pos["docBottom"] = dBottom;
+        pos["docLeft"] = dLeft;
 
         return pos;
     };
