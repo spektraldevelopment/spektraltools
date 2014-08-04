@@ -393,6 +393,15 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         });
     });
 
+    casper.then(function(){
+        this.methodHeader('UTILS - getViewportSize');
+        this.evaluate(function(){
+            viewportSizeTest = Spektral.getViewportSize();
+        });
+        this.test.assertEqual(this.getVar('viewportSizeTest').width, 400, ' returned width was correct.');
+        this.test.assertEqual(this.getVar('viewportSizeTest').height, 300, ' returned height was correct.');
+    });
+
     casper.run(function() {
         this.echo(' ');
         test.done();

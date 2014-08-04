@@ -62,12 +62,15 @@
             cancelPropTest = { callCount: 0 },
             queryIDTest, queryClassTest, queryMultiTest,
             alphaNumericMapTest = [], characterMapTest = [], characterShiftMapTest = [], commandMapTest = [],
-            mousePosTest = [], mta = document.querySelector('#mouseTestArea')
+            mousePosTest = [], mta = document.querySelector('#mouseTestArea'), viewportSizeTest;
 
-        mta.onmousemove = function(evt){
-            var newMousePos = Spektral.getMousePos(evt);
-            console.log('newMousePos: ' + JSON.stringify(newMousePos));
-        }
+//        mta.onmousemove = function(evt){
+//            var newMousePos = Spektral.getMousePos(evt);
+//            console.log('newMousePos: ' + JSON.stringify(newMousePos));
+//        }
+
+        var viewportSize = Spektral.getViewportSize();
+        console.log('VIEWPORT SIZE: ' + JSON.stringify(viewportSize));
 
         function logToConsole(msg) {
             console.log(msg);

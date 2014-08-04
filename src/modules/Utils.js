@@ -455,7 +455,6 @@
         } else {
             h = null;
         }
-
         vPort["width"] = w;
         vPort["height"] = h;
 

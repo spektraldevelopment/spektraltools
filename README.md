@@ -1014,11 +1014,15 @@ evt: `Event object` - The event object returned
 ##### Returns
 `Object`
 
-#### Keys
+##### Keys
 `innerX/innerY`: The position of the mouse within the element
+
 `offsetX/offsetY`: The position relative to the scrollLeft/scrollTop position of the page
+
 `pageX/pageY`: The position relative to the page/document
+
 `screenX/screenY`: The position relative to the screen itself
+
 `viewportX/viewportY`: The position in the visible display area of the browser
 
 ##### Example
@@ -1049,6 +1053,27 @@ mouseTestArea.onmousemove = function(evt){
 //Returns: {"innerX":90,"innerY":25,"offsetX":0,"offsetY":0,"pageX":100,"pageY":50,"screenX":88,"screenY":140,"viewportX":100,"viewportY":50}
 ```
 
+15. Spektral.getViewportSize();
+------
+
+#### Description
+Returns an object containing the width and height of the viewport
+
+#### Arguments
+None
+
+##### Returns
+`Object`
+
+##### Keys
+`width/height`: The width and height of the viewport
+
+##### Example
+
+```javascript
+var viewportSize = Spektral.getViewportSize();
+//For example a viewport of 1024 x 768 would return viewportSize.width of 1024 and viewportSize.height of 768
+```
 ---
 
 
