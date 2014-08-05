@@ -116,3 +116,51 @@
         }
         return isAnElement;
     };
+
+    //DOM - GET STYLE
+    Spektral.getStyle = function (element, styleProperty) {
+
+        styleProperty = styleProperty || undefined;
+        var style;
+        if(styleProperty !== undefined) {
+            try {
+                style = element.currentStyle[styleProperty];
+            } catch (err) {
+                style = document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProperty);
+            }
+        } else {
+            try {
+                style = Spektral.getInlineStyle(element);
+            } catch (err) {
+                Spektral.log("getStyle: Could not get style.", "warn");
+            }
+        }
+
+        return style;
+    };
+
+    //DOM - GET INLINE STYLE
+    Spektral.getInlineStyle = function (element) {
+        var
+            inlineStyle = element.style.cssText,
+            properties,
+            property, key, val, i,
+            styleObject = {};
+
+        if(inlineStyle === "") {
+            styleObject = false;
+            //Spektral.log("getInlineStyle: No inline style set.");
+        } else {
+            properties = Spektral.splitString(inlineStyle, ";");
+
+            for (i = 0; i < properties.length; i += 1) {
+                property = Spektral.splitString(properties[i], ":");
+                key = property[0];
+                val = property[1];
+                styleObject[key] = val;
+            }
+        }
+
+        return styleObject;
+    };
+

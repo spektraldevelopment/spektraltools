@@ -1079,7 +1079,7 @@ var viewportSize = Spektral.getViewportSize();
 ------
 
 #### Description
-Returns an object container the position of the element
+Returns an object containing the position of the element
 
 #### Arguments
 element: `HTMLElement` - The element you want to get the position of
@@ -1121,6 +1121,59 @@ var
 //posObj.x = 125px;
 //posObj.y = 475px;
 ```
+
+17. Spektral.getDimensions(element);
+------
+
+#### Description
+Returns an object containing the dimensions of the element
+
+#### Arguments
+element: `HTMLElement` - The element you want to get the dimensions of
+
+##### Returns
+`Object`
+
+##### Keys
+`width/height`: The width and height of the element itself without any padding, borders, or margins
+
+`innerWidth/innerHeight`: The width and height of the element itself + padding
+
+`borderWidth/borderHeight`: The width and height of the element itself + padding + border
+
+`totalWidth/totalHeight`: The width and height of the element itself + padding + border + margin
+
+`paddingTop/paddingRight/paddingBottom/paddingLeft`: The padding values for the top, right, bottom, and left of the element
+
+`borderTop/borderRight/borderBottom/borderLeft`: The border values for the top, right, bottom, and left of the element
+
+`marginTop/marginRight/marginBottom/marginLeft`: The margin values for the top, right, bottom, and left of the element
+
+`padding`: Only returned if the padding is the same value for all sides
+
+`margin`: Only returned if the margin is the same value for all sides
+
+##### Example
+
+````css
+#testDiv {
+    margin: 20px;
+    padding: 5px 10px 5px 10px;
+}
+````
+
+````html
+<div id='testDiv'></div>
+````
+
+```javascript
+var 
+	tDiv = document.querySelector('#testDiv'), 
+	dimensionsObj = Spektral.getDimensions(tDiv);
+//Returns: dimensionsObj.margin = 20
+//Returns: dimensionsObj.paddingRight = 10
+```
+
 ---
 
 

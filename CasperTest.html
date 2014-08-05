@@ -33,6 +33,20 @@
             height: 200px;
             background-color: #5cd138;
         }
+
+        #getDimTest {
+            border: 2px solid #ff9245;
+            padding: 5px 10px 15px 20px;
+            margin: 10px 20px 5px 15px;
+            width: 125px;
+            height: 90px;
+            background-color: #d10007;
+        }
+
+        #marginPaddingTest {
+            padding: 6px;
+            margin: 8px;
+        }
     </style>
 </head>
 <body>
@@ -53,6 +67,8 @@
         <input type="text" id="characterShiftInput"/>
         <input type="text" id="commandInput"/>
         <div id="getPosTest">Get Position Test</div>
+        <div id="getDimTest">Get Dimensions Test</div>
+        <div id="marginPaddingTest">Get Dimensions Margin Padding Test</div>
     </section>
     <script src="build/spektraltools.js"></script>
     <script>
@@ -77,7 +93,8 @@
             cancelPropTest = { callCount: 0 },
             queryIDTest, queryClassTest, queryMultiTest,
             alphaNumericMapTest = [], characterMapTest = [], characterShiftMapTest = [], commandMapTest = [],
-            mousePosTest = [], mta = document.querySelector('#mouseTestArea'), viewportSizeTest, positionTest;
+            mousePosTest = [], mta = document.querySelector('#mouseTestArea'), viewportSizeTest, positionTest,
+            dimensionTest, padMarginTest;
 
 //        mta.onmousemove = function(evt){
 //            var newMousePos = Spektral.getMousePos(evt);

@@ -408,7 +408,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.evaluate(function(){
             var posTestDiv = document.querySelector('#getPosTest');
             positionTest = Spektral.getPosition(posTestDiv);
-            logToConsole('Position: ' + JSON.stringify(positionTest));
+            //logToConsole('Position: ' + JSON.stringify(positionTest));
         });
 
         var posObj = this.getVar('positionTest');
@@ -439,6 +439,56 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(posObj.docBottom , -75, ' docBottom was correct.');
         this.test.assertEqual(posObj.docLeft , 125, ' docLeft was correct.');
 
+    });
+
+    casper.then(function(){
+        this.methodHeader('UTILS - getDimensions');
+        this.evaluate(function(){
+            var getDimTest = document.querySelector('#getDimTest');
+            dimensionTest = Spektral.getDimensions(getDimTest);
+            //logToConsole('Dimensions: ' + JSON.stringify(dimensionTest));
+        });
+
+        var dObj = this.getVar('dimensionTest');
+
+        this.test.assertEqual(dObj.width, 125, ' the returned width was correct.');
+        this.test.assertEqual(dObj.height, 90, ' the returned height was correct.');
+
+        this.test.assertEqual(dObj.innerWidth, 155, ' the returned innerWidth was correct.');
+        this.test.assertEqual(dObj.innerHeight, 110, ' the returned innerHeight was correct.');
+
+        this.test.assertEqual(dObj.borderWidth, 159, ' the returned borderWidth was correct.');
+        this.test.assertEqual(dObj.borderHeight, 114, ' the returned borderHeight was correct.');
+
+        this.test.assertEqual(dObj.totalWidth, 194, ' the returned totalWidth was correct.');
+        this.test.assertEqual(dObj.totalHeight, 129, ' the returned totalHeight was correct.');
+
+        this.test.assertEqual(dObj.paddingTop, 5, ' the returned paddingTop was correct.');
+        this.test.assertEqual(dObj.paddingRight, 10, ' the returned paddingRight was correct.');
+        this.test.assertEqual(dObj.paddingBottom, 15, ' the returned paddingBottom was correct.');
+        this.test.assertEqual(dObj.paddingLeft, 20, ' the returned paddingLeft was correct.');
+
+        this.test.assertEqual(dObj.borderTop, 2, ' the returned borderTop was correct.');
+        this.test.assertEqual(dObj.borderRight, 2, ' the returned borderRight was correct.');
+        this.test.assertEqual(dObj.borderBottom, 2, ' the returned borderBottom was correct.');
+        this.test.assertEqual(dObj.borderLeft, 2, ' the returned borderLeft was correct.');
+
+        this.test.assertEqual(dObj.marginTop, 10, ' the returned marginTop was correct.');
+        this.test.assertEqual(dObj.marginRight, 20, ' the returned marginRight was correct.');
+        this.test.assertEqual(dObj.marginBottom, 5, ' the returned marginBottom was correct.');
+        this.test.assertEqual(dObj.marginLeft, 15, ' the returned marginLeft was correct.');
+    });
+
+    casper.then(function(){
+        this.evaluate(function(){
+            var padMarginDiv = document.querySelector('#marginPaddingTest');
+            padMarginTest = Spektral.getDimensions(padMarginDiv);
+            //logToConsole('Dimensions: ' + JSON.stringify(padMarginTest));
+        });
+        var pmTest = this.getVar('padMarginTest');
+
+        this.test.assertEqual(pmTest.padding, 6, ' the returned padding was correct.');
+        this.test.assertEqual(pmTest.margin, 8, ' the returned margin was correct.');
     });
 
     casper.run(function() {

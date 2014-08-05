@@ -168,6 +168,55 @@
         return isAnElement;
     };
 
+    //DOM - GET STYLE
+    Spektral.getStyle = function (element, styleProperty) {
+
+        styleProperty = styleProperty || undefined;
+        var style;
+        if(styleProperty !== undefined) {
+            try {
+                style = element.currentStyle[styleProperty];
+            } catch (err) {
+                style = document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProperty);
+            }
+        } else {
+            try {
+                style = Spektral.getInlineStyle(element);
+            } catch (err) {
+                Spektral.log("getStyle: Could not get style.", "warn");
+            }
+        }
+
+        return style;
+    };
+
+    //DOM - GET INLINE STYLE
+    Spektral.getInlineStyle = function (element) {
+        var
+            inlineStyle = element.style.cssText,
+            properties,
+            property, key, val, i,
+            styleObject = {};
+
+        if(inlineStyle === "") {
+            styleObject = false;
+            //Spektral.log("getInlineStyle: No inline style set.");
+        } else {
+            properties = Spektral.splitString(inlineStyle, ";");
+
+            for (i = 0; i < properties.length; i += 1) {
+                property = Spektral.splitString(properties[i], ":");
+                key = property[0];
+                val = property[1];
+                styleObject[key] = val;
+            }
+        }
+
+        return styleObject;
+    };
+
+
+
     //EVENT - ATTACH EVENT LISTENER
     Spektral.attachEventListener = function (eventTarget, eventType, eventHandler) {
         if (eventTarget.addEventListener) {
@@ -256,6 +305,17 @@
             roundedNum = Math.floor(num);
         }
         return roundedNum;
+    };
+
+    //NUMBER - allAreEqualTo
+    Spektral.allAreEqualTo = function(val, arr) {
+        var i, areEqual = true;
+        for (i = 0; i < arr.length; i += 1) {
+            if(arr[i] !== val) {
+                areEqual = false;
+            }
+        }
+        return areEqual;
     };
 
     //STRING - HAS PATTERN
@@ -864,6 +924,128 @@
         vPort["height"] = h;
 
         return vPort;
+    };
+
+    //UTILS - GET DIMENSIONS
+    Spektral.getDimensions = function (element) {
+        var
+            dimensions = {},
+            width = Spektral.getStyle(element, "width"),
+            height = Spektral.getStyle(element, "height"),
+
+            padding,
+            paddingTop = Spektral.getStyle(element, "padding-top"),
+            paddingRight = Spektral.getStyle(element, "padding-right"),
+            paddingBottom = Spektral.getStyle(element, "padding-bottom"),
+            paddingLeft = Spektral.getStyle(element, "padding-left"),
+
+            border = Spektral.getStyle(element, "border"),
+            borderTop = Spektral.getStyle(element, "border-top-width"),
+            borderRight = Spektral.getStyle(element, "border-right-width"),
+            borderBottom = Spektral.getStyle(element, "border-bottom-width"),
+            borderLeft = Spektral.getStyle(element, "border-left-width"),
+
+            margin = Spektral.getStyle(element, "margin"),
+            marginTop = Spektral.getStyle(element, "margin-top"),
+            marginRight = Spektral.getStyle(element, "margin-right"),
+            marginBottom = Spektral.getStyle(element, "margin-bottom"),
+            marginLeft = Spektral.getStyle(element, "margin-left"),
+            innerWidth, innerHeight,
+            borderWidth, borderHeight,
+            totalWidth, totalHeight,
+            borderCheck, paddingArr, marginArr;
+
+        //width/height = width/height of element itself, no border/padding/margin
+        dimensions["width"] = Spektral.stringToNum(width);
+        dimensions["height"] = Spektral.stringToNum(height);
+
+        //innerWidth/innerHeight = element width/height + padding
+        innerWidth = Spektral.stringToNum(paddingLeft) +
+            Spektral.stringToNum(width) +
+            Spektral.stringToNum(paddingRight);
+
+        dimensions["innerWidth"] = innerWidth;
+
+        innerHeight = Spektral.stringToNum(paddingTop) +
+            Spektral.stringToNum(height) +
+            Spektral.stringToNum(paddingBottom);
+
+        dimensions["innerHeight"] = innerHeight;
+
+        //borderWidth/borderHeight - returns border + padding + width/height
+        borderWidth = Spektral.stringToNum(borderLeft) +
+            Spektral.stringToNum(paddingLeft) +
+            Spektral.stringToNum(width) +
+            Spektral.stringToNum(paddingRight) +
+            Spektral.stringToNum(borderRight);
+
+        dimensions["borderWidth"] = borderWidth;
+
+        borderHeight = Spektral.stringToNum(borderTop) +
+            Spektral.stringToNum(paddingTop) +
+            Spektral.stringToNum(height) +
+            Spektral.stringToNum(paddingBottom) +
+            Spektral.stringToNum(borderBottom);
+
+        dimensions["borderHeight"] = borderHeight;
+
+        dimensions["paddingTop"] = Spektral.stringToNum(paddingTop);
+        dimensions["paddingRight"] = Spektral.stringToNum(paddingRight);
+        dimensions["paddingBottom"] = Spektral.stringToNum(paddingBottom);
+        dimensions["paddingLeft"] = Spektral.stringToNum(paddingLeft);
+
+        //Check if padding is the same all around, and return a padding key with that value
+        paddingArr = [dimensions["paddingTop"], dimensions["paddingRight"], dimensions["paddingBottom"], dimensions["paddingLeft"]];
+        if (Spektral.allAreEqualTo(dimensions["paddingTop"], paddingArr) === true) {
+            dimensions['padding'] = dimensions["paddingTop"];
+        }
+
+        //Border
+        //If border shorthand isn't being used. ex. border: 1px solid blue
+        //Then border returns nothing
+        borderCheck = Spektral.hasPattern(border, "px").match;
+
+        if(borderCheck === true) {
+            dimensions["border"] = border;
+        }
+
+        dimensions["borderTop"] = Spektral.stringToNum(borderTop);
+        dimensions["borderRight"] = Spektral.stringToNum(borderRight);
+        dimensions["borderBottom"] = Spektral.stringToNum(borderBottom);
+        dimensions["borderLeft"] = Spektral.stringToNum(borderLeft);
+
+        dimensions["marginTop"] = Spektral.stringToNum(marginTop);
+        dimensions["marginRight"] = Spektral.stringToNum(marginRight);
+        dimensions["marginBottom"] = Spektral.stringToNum(marginBottom);
+        dimensions["marginLeft"] = Spektral.stringToNum(marginLeft);
+
+        //If margins are same value all around, return margin key with value
+        marginArr = [dimensions["marginTop"], dimensions["marginRight"], dimensions["marginBottom"], dimensions["marginLeft"]];
+        if (Spektral.allAreEqualTo(dimensions["marginTop"], marginArr)) {
+            dimensions['margin'] = dimensions["marginTop"];
+        }
+
+        //totalWidth/totalHeight = element width/height + padding + border + margin
+        totalWidth = Spektral.stringToNum(marginLeft) +
+            Spektral.stringToNum(borderLeft) +
+            Spektral.stringToNum(paddingLeft) +
+            Spektral.stringToNum(width) +
+            Spektral.stringToNum(paddingRight) +
+            Spektral.stringToNum(borderRight) +
+            Spektral.stringToNum(marginRight);
+
+        totalHeight = Spektral.stringToNum(marginTop) +
+            Spektral.stringToNum(borderTop) +
+            Spektral.stringToNum(paddingTop) +
+            Spektral.stringToNum(height) +
+            Spektral.stringToNum(paddingBottom) +
+            Spektral.stringToNum(borderBottom) +
+            Spektral.stringToNum(marginBottom);
+
+        dimensions["totalWidth"] = totalWidth;
+        dimensions["totalHeight"] = totalHeight;
+
+        return dimensions;
     };
 
 
