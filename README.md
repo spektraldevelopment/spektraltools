@@ -1173,6 +1173,27 @@ var
 //Returns: dimensionsObj.margin = 20
 //Returns: dimensionsObj.paddingRight = 10
 ```
+18. Spektral.allAreEqualTo(val, arr);
+------
+
+#### Description
+Checks an array to see if all values in it match a certain value, and returns a boolean
+
+#### Arguments
+val: `String/Number/Boolean` - The value you want to check for
+arr: `Array` - The values you want to check against
+
+##### Returns
+`Boolean`
+
+##### Example
+
+```javascript
+Spektral.allAreEqualTo(5, [5, 5, 5]);
+//Returns: true
+Spektral.allAreEqualTo('foobar', ['foo', 'bar', 'spektral']);
+//Returns: false
+```
 
 ---
 

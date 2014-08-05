@@ -11,14 +11,3 @@
         }
         return roundedNum;
     };
-
-    //NUMBER - allAreEqualTo
-    Spektral.allAreEqualTo = function(val, arr) {
-        var i, areEqual = true;
-        for (i = 0; i < arr.length; i += 1) {
-            if(arr[i] !== val) {
-                areEqual = false;
-            }
-        }
-        return areEqual;
-    };

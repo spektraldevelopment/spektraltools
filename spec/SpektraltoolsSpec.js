@@ -596,4 +596,18 @@ describe('SpektralTools: ', function() {
             expect(Spektral.getExtension(mutiplePeriods)).toMatch('png');
         });
     });
+
+    describe('UTILS - allAreEqualTo', function(){
+        var
+            testArrayOne = [5,5,5],
+            testArrayTwo = [5,1,5];
+
+        it('returns true if all values in array are equal to requested value.', function(){
+            expect(Spektral.allAreEqualTo(5, testArrayOne)).toBeTruthy();
+        });
+
+        it('returns false if all values in array are not equal to requested value.', function(){
+            expect(Spektral.allAreEqualTo(5, testArrayTwo)).toBeFalsy();
+        });
+    });
 });

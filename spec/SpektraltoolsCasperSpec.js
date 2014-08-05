@@ -365,7 +365,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             this.test.assertEqual(this.getVar('mousePosTest')[0].pageY, yPos + topPos, ' pageY was correct.');
             this.test.assertEqual(this.getVar('mousePosTest')[0].viewportX, xPos + leftPos, ' viewportX was correct.');
             this.test.assertEqual(this.getVar('mousePosTest')[0].viewportY, yPos + topPos, ' viewportY was correct.');
-
         });
     });
 
