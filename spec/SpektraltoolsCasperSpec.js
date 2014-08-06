@@ -500,6 +500,38 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getVar('docDimTest').height, 675, ' returned height was correct.');
     });
 
+    casper.then(function(){
+        this.methodHeader('UTILS - createTimer');
+        this.evaluate(function(){
+            var newTimer = Spektral.createTimer(1, function(){
+               timerTest += 1;
+
+               if (timerTest >= 5){
+                   Spektral.stopTimer(newTimer);
+               }
+            });
+        });
+
+        this.wait(5000, function(){
+            this.test.assertEqual(this.getVar('timerTest'), 5, ' timer was created.');
+        });
+    });
+
+    casper.then(function(){
+        this.methodHeader('UTILS - stopTimer');
+        this.evaluate(function(){
+            var timer = Spektral.createTimer(1, function(){
+               stopTimerTest = false;
+            });
+            Spektral.stopTimer(timer);
+        });
+
+        this.wait(2000, function(){
+            this.test.assert(this.getVar('stopTimerTest'), ' time was stopped.');
+        });
+    });
+
+
     casper.run(function() {
         this.echo(' ');
         test.done();

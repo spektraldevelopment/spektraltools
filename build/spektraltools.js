@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-08-05
+* Build Created: 2014-08-06
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -1068,6 +1068,28 @@
             }
         }
         return areEqual;
+    };
+
+    //UTILS - CREATE TIMER
+    Spektral.createTimer = function (time, handler) {
+        var convertedTime = time * 1000;
+        return setInterval(handler, convertedTime);
+    };
+
+    //UTILS - STOP TIMER
+    Spektral.stopTimer = function (timer) {
+        clearInterval(timer);
+    };
+
+    //UTILS - CREATE TIME OUT
+    Spektral.createTimeOut = function (time, handler) {
+        var convertedTime = time * 1000;
+        setTimeout(handler, convertedTime);
+    };
+
+    //UTILS - STOP TIME OUT
+    Spektral.stopTimeOut = function (timeout) {
+        clearTimeout(timeout);
     };
 
 

@@ -615,3 +615,25 @@
         return areEqual;
     };
 
+    //UTILS - CREATE TIMER
+    Spektral.createTimer = function (time, handler) {
+        var convertedTime = time * 1000;
+        return setInterval(handler, convertedTime);
+    };
+
+    //UTILS - STOP TIMER
+    Spektral.stopTimer = function (timer) {
+        clearInterval(timer);
+    };
+
+    //UTILS - CREATE TIME OUT
+    Spektral.createTimeOut = function (time, handler) {
+        var convertedTime = time * 1000;
+        setTimeout(handler, convertedTime);
+    };
+
+    //UTILS - STOP TIME OUT
+    Spektral.stopTimeOut = function (timeout) {
+        clearTimeout(timeout);
+    };
+

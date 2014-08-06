@@ -1216,6 +1216,50 @@ Spektral.allAreEqualTo(5, [5, 5, 5]);
 Spektral.allAreEqualTo('foobar', ['foo', 'bar', 'spektral']);
 //Returns: false
 ```
+
+20. Spektral.createTimer(time, handler);
+------
+
+#### Description
+Sets and returns a timer 
+
+#### Arguments
+time: `Number` - The interval in seconds at which you'd like the handler to fire
+handler: `Function` - The function to be called when the timer is fired
+
+##### Returns
+`Timer`
+
+##### Example
+
+```javascript
+var timer = Spektral.createTimer(2, function(){
+	//Will fire every two seconds
+});
+```
+
+21. Spektral.stopTimer(timer);
+------
+
+#### Description
+Clears a timer and stops it from firing
+
+#### Arguments
+timer: `Timer` - The timer you want to clear
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+var timer = Spektral.createTimer(2, function(){
+	//Will fire every two seconds
+});
+Spektral.stopTimer(timer);
+//timer has been stopped
+```
+
 ---
 
 
