@@ -490,6 +490,16 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(pmTest.margin, 8, ' the returned margin was correct.');
     });
 
+    casper.then(function(){
+        this.methodHeader('UTILS - getDocDimensions');
+        this.evaluate(function(){
+            docDimTest = Spektral.getDocDimensions();
+        });
+
+        this.test.assertEqual(this.getVar('docDimTest').width, 800, ' returned width was correct.');
+        this.test.assertEqual(this.getVar('docDimTest').height, 675, ' returned height was correct.');
+    });
+
     casper.run(function() {
         this.echo(' ');
         test.done();

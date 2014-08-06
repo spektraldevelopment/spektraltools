@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-08-04
+* Build Created: 2014-08-05
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -915,6 +915,28 @@
         return vPort;
     };
 
+    //UTILS - GET DOC DIMENSIONS
+    Spektral.getDocDimensions = function () {
+        var docDim = {}, width, height;
+        width = Math.max(
+            document.body.scrollWidth,
+            document.body.offsetWidth,
+            document.documentElement.clientWidth,
+            document.documentElement.scrollWidth,
+            document.documentElement.offsetWidth
+        );
+        height = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+        );
+        docDim["width"] = width;
+        docDim["height"] = height;
+        return docDim;
+    };
+
     //UTILS - GET DIMENSIONS
     Spektral.getDimensions = function (element) {
         var
@@ -1037,7 +1059,7 @@
         return dimensions;
     };
 
-    //NUMBER - allAreEqualTo
+    //UTILS - ALL ARE EQUAL TO
     Spektral.allAreEqualTo = function(val, arr) {
         var i, areEqual = true;
         for (i = 0; i < arr.length; i += 1) {

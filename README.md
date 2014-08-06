@@ -1173,7 +1173,29 @@ var
 //Returns: dimensionsObj.margin = 20
 //Returns: dimensionsObj.paddingRight = 10
 ```
-18. Spektral.allAreEqualTo(val, arr);
+
+18. Spektral.getDocDimensions();
+------
+
+#### Description
+Returns an object containing the overall width and height of the document
+
+#### Arguments
+None
+
+##### Returns
+`Object`
+
+##### Keys
+`width/height`: The width and height of the document
+
+##### Example
+
+```javascript
+var docDim = Spektral.getDocDimensions();
+```
+
+19. Spektral.allAreEqualTo(val, arr);
 ------
 
 #### Description
@@ -1194,7 +1216,6 @@ Spektral.allAreEqualTo(5, [5, 5, 5]);
 Spektral.allAreEqualTo('foobar', ['foo', 'bar', 'spektral']);
 //Returns: false
 ```
-
 ---
 
 
