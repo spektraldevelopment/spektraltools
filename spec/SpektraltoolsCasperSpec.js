@@ -531,6 +531,29 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         });
     });
 
+    casper.then(function(){
+        this.methodHeader('UTILS - createTimeOut');
+        this.evaluate(function(){
+            Spektral.createTimeOut(1, function(){
+                timeoutTest = true;
+            });
+        });
+
+        this.wait(2000, function(){
+            this.test.assert(this.getVar('timeoutTest'), ' timeout was created.');
+        });
+    });
+
+    casper.then(function(){
+        this.methodHeader('UTILS - stopTimeOut');
+        this.evaluate(function(){
+            var timeout = Spektral.createTimeOut(1, function(){
+                stopTimeoutTest = false;
+            });
+            Spektral.stopTimeOut(timeout);
+        });
+        this.test.assert(this.getVar('stopTimeoutTest'), ' timeout was stopped.');
+    });
 
     casper.run(function() {
         this.echo(' ');
