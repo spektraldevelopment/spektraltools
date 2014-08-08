@@ -76,6 +76,14 @@ module.exports = function(grunt) {
                     'xunit/casper-results.xml' : ['spec/SpektraltoolsCasperSpec.js']
                 }
             }
+        },
+        notify: {
+            watch: {
+                options: {
+                    title: 'Task Complete',
+                    message: 'SASS and Uglify finished running'
+                }
+            }
         }
     });
 
@@ -87,9 +95,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-casper');
     grunt.loadNpmTasks('grunt-clear');
+    grunt.loadNpmTasks('grunt-notify');
 
     // Default task(s).
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', ['watch', 'notify:watch']);
     grunt.registerTask('build', ['concat', 'uglify', 'jasmine', 'casper']);
     grunt.registerTask('test', ['jasmine']);
 };
