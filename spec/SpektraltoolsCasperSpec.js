@@ -553,7 +553,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             Spektral.stopTimeOut(timeout);
         });
         this.test.assert(this.getVar('stopTimeoutTest'), ' timeout was stopped.');
-
     });
 
     casper.run(function() {

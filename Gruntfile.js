@@ -51,7 +51,7 @@ module.exports = function(grunt) {
             },
             build: {
                 files: ["src/**", "spec/**"],
-                tasks: ["concat", "uglify", "casper"]
+                tasks: ["concat", "uglify", "casper", "notify:watch"]
             }
         },
         jasmine: {
@@ -81,7 +81,7 @@ module.exports = function(grunt) {
             watch: {
                 options: {
                     title: 'Task Complete',
-                    message: 'SASS and Uglify finished running'
+                    message: 'Watch tasks run'
                 }
             }
         }
@@ -98,7 +98,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-notify');
 
     // Default task(s).
-    grunt.registerTask('default', ['watch', 'notify:watch']);
+    grunt.registerTask('default', ['watch']);
     grunt.registerTask('build', ['concat', 'uglify', 'jasmine', 'casper']);
     grunt.registerTask('test', ['jasmine']);
 };
