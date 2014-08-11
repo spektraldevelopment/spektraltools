@@ -22,6 +22,18 @@
             pType = Spektral.getType(props), currentStyle = Spektral.getInlineStyle(element), propString = "", i;
         if (pType === 'object') {
             console.log('INLINE STYLE: ' + currentStyle);
+            if (currentStyle === false) {
+                //No style set yet
+                for (i in props) {
+                    propString += i + ':' + prop[i] + '; ';        
+                }
+                propString = propString.substr(0, propString.length - 1);
+            } else {
+                //Style property already set
+                for (i in props) {
+                    
+                }
+            }
         } else {
             Spektral.log("setStyle: Property must be a string or array.", "warn");
         }
