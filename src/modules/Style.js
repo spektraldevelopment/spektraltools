@@ -19,16 +19,18 @@
     Spektral.setStyle = function (element, props, options) {
         var
             append = Spektral.getParameter(options, 'append', false),
-            pType = Spektral.getType(props), currentStyle = Spektral.getInlineStyle(element), propString = "", i;
+            pType = Spektral.getType(props), currentStyle = Spektral.getInlineStyle(element), 
+            propString = "", i;
         if (pType === 'object') {
             console.log('INLINE STYLE: ' + currentStyle);
             if (currentStyle === false) {
                 //No style set yet
                 for (i in props) {
-                    propString += i + ':' + prop[i] + '; ';        
+                    propString += i + ':' + props[i] + '; ';        
                 }
                 propString = propString.substr(0, propString.length - 1);
             } else {
+                console.log('currentStyle: ' + JSON.stringify(currentStyle));
                 //Style property already set
                 for (i in props) {
                     
@@ -37,21 +39,6 @@
         } else {
             Spektral.log("setStyle: Property must be a string or array.", "warn");
         }
-        // if(pType === 'string') {
-        //     if (append === false) {
-        //         propString = prop;
-        //     } else {
-        //         //Working on this
-        //     }
-        // } else if(pType === 'object'){
-        //     for (i in prop) {
-        //         console.log('setStyle: ' + i + ' : ' + prop[i]);
-        //         propString += i + ':' + prop[i] + '; ';
-        //     }
-        //     propString = propString.substr(0, propString.length - 1);
-        // } else {
-        //     Spektral.log("setStyle: Property must be a string or array.", "warn");
-        // }
         Spektral.setAttributes(element, { style: propString });
     };
 

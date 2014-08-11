@@ -570,9 +570,27 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             });
         });
 
-        this.echo('setStyle with string.', 'INFO');
+        this.echo('setStyle - no append.', 'INFO');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'padding'), '20px', ' padding was set correctly.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'margin'), '5px', ' margin was set correctly.');
+
+    });
+
+    casper.then(function(){
+        this.echo('setStyle - append.', 'INFO');
+        this.evaluate(function(){
+            try {
+                var setStyleDiv = document.querySelector('#setStyleDiv');
+                Spektral.setStyle(setStyleDiv, { 
+                    padding: '10px',
+                    margin: '15px',
+                    display: 'block'    
+                }, { append: true });
+            } catch (err) {
+                logToConsole('setStyle: err: ' + err);
+            }
+        });
+        this.echo(this.getHTML('#setStyleDiv', true));
     });
 
     casper.run(function() {
