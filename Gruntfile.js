@@ -66,7 +66,7 @@ module.exports = function(grunt) {
             }
         },
         casper : {
-            yourTask : {
+            spektralToolsTest : {
                 options : {
                     test : true,
                     includes : 'spec/helper/casper-helper.js',

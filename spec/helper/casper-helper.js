@@ -42,6 +42,18 @@ casper.getVar = function(variable) {
     }, variable);
 };
 
+casper.getElement = function(id) {
+  return this.evaluate(function(i){
+      return document.querySelector(i);
+  }, id);
+};
+
+casper.getElementStyle = function(id, prop){
+    return this.evaluate(function(i, p){
+        return document.querySelector(i).style[p];
+    }, id, prop);
+};
+
 casper.getInfo = function(obj) {
     return this.evaluate(function(o){
         return JSON.stringify(o);

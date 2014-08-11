@@ -3,6 +3,11 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     casper.start('CasperTest.html', function() {
         this.viewport(800, 600);
         this.echo(this.getTitle(), 'GREEN_BAR');
+
+        var js = this.evaluate(function() {
+            return document;
+        });
+        //this.echo(js.all[0].outerHTML);
     });
 
     casper.then(function(){
@@ -355,7 +360,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
             //Mouse Test Area: top: 25px, left: 10px
             var leftPos = 10, topPos = 25, xPos = 90, yPos = 25;
-            this.echo('New Mouse Pos 0: ' + this.getInfo(this.getVar('mousePosTest')[0]));
+            //this.echo('New Mouse Pos 0: ' + this.getInfo(this.getVar('mousePosTest')[0]));
 
             this.test.assertEqual(this.getVar('mousePosTest')[0].innerX, xPos, ' innerX was correct.');
             this.test.assertEqual(this.getVar('mousePosTest')[0].innerY, yPos, ' innerY was correct.');
@@ -379,7 +384,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
             //Mouse Test Area: top: 25px, left: 10px
             var leftPos = 10, topPos = 25, xPos = 140, yPos = 75;
-            this.echo('New Mouse Pos 0: ' + this.getInfo(this.getVar('mousePosTest')[0]));
+            //this.echo('New Mouse Pos 0: ' + this.getInfo(this.getVar('mousePosTest')[0]));
 
             this.test.assertEqual(this.getVar('mousePosTest')[1].innerX, xPos, ' innerX was correct.');
             this.test.assertEqual(this.getVar('mousePosTest')[1].innerY, yPos, ' innerY was correct.');
@@ -553,6 +558,32 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             Spektral.stopTimeOut(timeout);
         });
         this.test.assert(this.getVar('stopTimeoutTest'), ' timeout was stopped.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('STYLE - setStyle');
+        this.evaluate(function(){
+            var setStyleDiv = document.querySelector('#setStyleDiv');
+            Spektral.setStyle(setStyleDiv, 'padding:20px; margin:5px;');
+        });
+
+        this.echo('setStyle with string.', 'INFO');
+        this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'padding'), '20px', ' padding was set correctly.');
+        this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'margin'), '5px', ' margin was set correctly.');
+
+        this.evaluate(function(){
+            var setStyleDivTwo = document.querySelector('#setStyleDivTwo');
+            Spektral.setStyle(setStyleDivTwo, {
+                padding: '5px',
+                margin: '2px',
+                border: '1px solid #cecece'
+            });
+        });
+
+        this.echo('setStyle with object.', 'INFO');
+        this.test.assertEqual(this.getElementStyle('#setStyleDivTwo', 'padding'), '5px', ' padding was set correctly.');
+        this.test.assertEqual(this.getElementStyle('#setStyleDivTwo', 'margin'), '2px', ' margin was set correctly.');
+        this.test.assertEqual(this.getElementStyle('#setStyleDivTwo', 'border'), '1px solid rgb(206, 206, 206)', ' border was set correctly.');
     });
 
     casper.run(function() {
