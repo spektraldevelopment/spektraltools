@@ -1,5 +1,5 @@
 
-    //STYLE - matchHeight
+    //STYLE - MATCH HEIGHT
     Spektral.matchHeight = function(reference, target, options) {
         var
             type = Spektral.getParameter(options, type, 'normal'),
@@ -15,30 +15,35 @@
         Spektral.setStyle(target, "height:" + refHeight + "px");
     };
 
-    //STYLE - setStyle
-    Spektral.setStyle = function (element, prop, options) {
+    //STYLE - SET STYLE
+    Spektral.setStyle = function (element, props, options) {
         var
             append = Spektral.getParameter(options, 'append', false),
-            pType = Spektral.getType(prop), propString = "", i;
-        if(pType === 'string') {
-            if (append === false) {
-                propString = prop;
-            } else {
-                //Working on this
-            }
-        } else if(pType === 'object'){
-            for (i in prop) {
-                console.log('setStyle: ' + i + ' : ' + prop[i]);
-                propString += i + ':' + prop[i] + '; ';
-            }
-            propString = propString.substr(0, propString.length - 1);
+            pType = Spektral.getType(props), currentStyle = Spektral.getInlineStyle(element), propString = "", i;
+        if (pType === 'object') {
+            console.log('INLINE STYLE: ' + currentStyle);
         } else {
             Spektral.log("setStyle: Property must be a string or array.", "warn");
         }
+        // if(pType === 'string') {
+        //     if (append === false) {
+        //         propString = prop;
+        //     } else {
+        //         //Working on this
+        //     }
+        // } else if(pType === 'object'){
+        //     for (i in prop) {
+        //         console.log('setStyle: ' + i + ' : ' + prop[i]);
+        //         propString += i + ':' + prop[i] + '; ';
+        //     }
+        //     propString = propString.substr(0, propString.length - 1);
+        // } else {
+        //     Spektral.log("setStyle: Property must be a string or array.", "warn");
+        // }
         Spektral.setAttributes(element, { style: propString });
     };
 
-    //STYLE - getInlineStyle
+    //STYLE - GET INLINE STYLE
     Spektral.getInlineStyle = function (element) {
         var
             inlineStyle = element.style.cssText,

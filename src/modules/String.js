@@ -53,7 +53,7 @@
 
         if(detectChar === false && character !== " ") {
 
-            log("splitString: Could not split string because character [" + character + "] was not in string.", "warn");
+            Spektral.log("splitString: Could not split string because character [" + character + "] was not in string.", "warn");
         } else {
             if(character !== " ") {
                 split = request.split(character);

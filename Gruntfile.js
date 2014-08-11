@@ -100,5 +100,6 @@ module.exports = function(grunt) {
     // Default task(s).
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('build', ['concat', 'uglify', 'jasmine', 'casper']);
+    grunt.registerTask('buildCasper', ['concat', 'uglify', 'casper']);
     grunt.registerTask('test', ['jasmine']);
 };

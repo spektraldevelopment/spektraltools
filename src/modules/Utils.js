@@ -637,3 +637,16 @@
         clearTimeout(timeout);
     };
 
+    //UTILS - CREATE STYLE OBJECT
+    Spektral.createStyleObject = function(str) {
+        var 
+            propArray = Spektral.splitString(str, { character: ';' }), i, 
+            property, styleObj = {};
+
+        for (i = 0; i < propArray.length; i += 1) {
+            property = Spektral.splitString(propArray[i], { character: ':' });
+            styleObj[Spektral.stripWhiteSpace(property[0])] = Spektral.stripWhiteSpace(property[1]);
+        }
+        return styleObj;
+    }
+

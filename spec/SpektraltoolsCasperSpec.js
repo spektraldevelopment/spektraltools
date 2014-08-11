@@ -564,26 +564,15 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.methodHeader('STYLE - setStyle');
         this.evaluate(function(){
             var setStyleDiv = document.querySelector('#setStyleDiv');
-            Spektral.setStyle(setStyleDiv, 'padding:20px; margin:5px;');
+            Spektral.setStyle(setStyleDiv, { 
+                padding: '20px',
+                margin: '5px'    
+            });
         });
 
         this.echo('setStyle with string.', 'INFO');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'padding'), '20px', ' padding was set correctly.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'margin'), '5px', ' margin was set correctly.');
-
-        this.evaluate(function(){
-            var setStyleDivTwo = document.querySelector('#setStyleDivTwo');
-            Spektral.setStyle(setStyleDivTwo, {
-                padding: '5px',
-                margin: '2px',
-                border: '1px solid #cecece'
-            });
-        });
-
-        this.echo('setStyle with object.', 'INFO');
-        this.test.assertEqual(this.getElementStyle('#setStyleDivTwo', 'padding'), '5px', ' padding was set correctly.');
-        this.test.assertEqual(this.getElementStyle('#setStyleDivTwo', 'margin'), '2px', ' margin was set correctly.');
-        this.test.assertEqual(this.getElementStyle('#setStyleDivTwo', 'border'), '1px solid rgb(206, 206, 206)', ' border was set correctly.');
     });
 
     casper.run(function() {
