@@ -586,6 +586,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
                     margin: '15px',
                     display: 'block'    
                 }, { append: true });
+
             } catch (err) {
                 logToConsole('setStyle: err: ' + err);
             }

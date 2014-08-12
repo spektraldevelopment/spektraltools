@@ -45,19 +45,19 @@
     //STYLE - GET INLINE STYLE
     Spektral.getInlineStyle = function (element) {
         var
-            inlineStyle = element.style.cssText,
+            inlineStyle = element.getAttribute('style'),
             properties,
             property, key, val, i,
             styleObject = {};
-        if(inlineStyle === "") {
+        if(inlineStyle === null) {
             styleObject = false;
             //Spektral.log("getInlineStyle: No inline style set.");
         } else {
-            properties = Spektral.splitString(inlineStyle, ";");
+            properties = Spektral.splitString(inlineStyle, { character: ';' });
             for (i = 0; i < properties.length; i += 1) {
-                property = Spektral.splitString(properties[i], ":");
-                key = property[0];
-                val = property[1];
+                property = Spektral.splitString(properties[i], { character: ':' });
+                key = Spektral.stripWhiteSpace(property[0]);
+                val = Spektral.stripWhiteSpace(property[1]);
                 styleObject[key] = val;
             }
         }
