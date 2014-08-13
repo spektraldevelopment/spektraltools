@@ -1392,4 +1392,29 @@ inlineStyle = Spektral.getInlineStyle(testDiv);
 //Returns: {"display":"block","margin":"10px","padding":"2px"}
 ```
 
+3. Spektral.clearInlineStyle(element);
+------
+
+#### Description
+Clears the inline style of an element
+
+#### Arguments
+element: `HTMLElement` - The element you want to clear the inline style of
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```html
+<div id="testDiv" style="margin:10px; padding:2px; display:block"></div>
+```
+
+```javascript
+var testDiv = document.querySelector('#testDiv');
+
+Spektral.clearInlineStyle(testDiv);
+//<div id="testDiv"></div>
+```
+
 

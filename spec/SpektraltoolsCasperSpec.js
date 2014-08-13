@@ -648,6 +648,16 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getVar('inlineStyleTest').padding, '2px', ' padding was returned.');
     });
 
+    casper.then(function(){
+        this.methodHeader('STYLE - clearInlineStyle');
+        this.evaluate(function(){
+            var clearStyleDiv = document.querySelector('#clearStyleDiv');
+            Spektral.clearInlineStyle(clearStyleDiv);
+        });
+
+        this.test.assertEqual(this.getElementAttr('#clearStyleDiv', 'style'), '', ' style attribute was cleared.');
+    });
+
     casper.run(function() {
         this.echo(' ');
         test.done();

@@ -74,3 +74,8 @@
         }
         return styleObject;
     };
+
+    //STYLE - CLEAR INLINE STYLE
+    Spektral.clearInlineStyle = function (element) {
+        Spektral.destroyAttribute(element, "style");
+    };
