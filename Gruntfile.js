@@ -51,7 +51,15 @@ module.exports = function(grunt) {
             },
             build: {
                 files: ["src/**", "spec/**"],
+                tasks: ["concat", "uglify", "jasmine", "casper", "notify:watch"]
+            },
+            buildCasper: {
+                files: ["src/**", "spec/**"],
                 tasks: ["concat", "uglify", "casper", "notify:watch"]
+            },
+            buildJasmine: {
+                files: ["src/**", "spec/**"],
+                tasks: ["concat", "uglify", "jasmine", "notify:watch"]
             }
         },
         jasmine: {
@@ -99,7 +107,8 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);
-    grunt.registerTask('build', ['concat', 'uglify', 'jasmine', 'casper']);
-    grunt.registerTask('buildCasper', ['concat', 'uglify', 'casper']);
-    grunt.registerTask('test', ['jasmine']);
+    grunt.registerTask('watch-casper', ['watch:buildCasper']);
+    grunt.registerTask('watch-jasmine', ['watch:buildJasmine']);
+    grunt.registerTask('build', ['concat', 'uglify']);
+    grunt.registerTask('test', ['jasmine', 'casper']);
 };
