@@ -707,6 +707,34 @@ end: `Number` - The end index
 Spektral.trimString('foobar', 1, 5);
 //Returns: ooba
 ```
+
+10. Spektral.concatCamel(request, options)
+------
+
+#### Description
+Separates words in a camel case string and returns them concatenated using a hyphen
+
+#### Arguments
+request: `String` - The string you want to concatenate
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	character: '#' //The character you want to use
+	//default: '-'
+}
+```
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+var testString = Spektral.concatCamel('fooBar');
+//Returns: foo-bar
+```
 ---
 
 ## UTILS

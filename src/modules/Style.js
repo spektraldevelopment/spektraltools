@@ -29,16 +29,16 @@
             if (append === false) {
                 //No style set yet
                 for (i in props) {
-                    propString += Spektral.convertCamel(i) + ':' + props[i] + '; ';
+                    propString += Spektral.concatCamel(i) + ':' + props[i] + '; ';
                 }
                 propString = propString.substr(0, propString.length - 1);
             } else {
                 //Style property already set
                 for (i in props) {
-                    currentStyle[Spektral.convertCamel(i)] = props[i];
+                    currentStyle[Spektral.concatCamel(i)] = props[i];
                 }
                 for (j in currentStyle) {
-                    propString += Spektral.convertCamel(j) + ':' + currentStyle[j] + '; ';
+                    propString += Spektral.concatCamel(j) + ':' + currentStyle[j] + '; ';
                 }
                 propString = propString.substr(0, propString.length - 1);
             }
