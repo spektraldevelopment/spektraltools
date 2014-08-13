@@ -378,6 +378,20 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('STRING - convertCamel', function(){
+        var
+            testString = Spektral.convertCamel('fooBarBar'),
+            testStringChar = Spektral.convertCamel('fooBarBar', { character: '#' });
+
+        it('converts a camel case string.', function(){
+            expect(testString).toEqual('foo-bar-bar');
+        });
+
+        it('converts a camel case string with chosen character.', function(){
+            expect(testStringChar).toEqual('foo#bar#bar');
+        });
+    });
+
     describe('UTILS - getType', function(){
         var
             testContainer = createTestContainer(),

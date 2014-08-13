@@ -1260,6 +1260,84 @@ Spektral.stopTimer(timer);
 //timer has been stopped
 ```
 
+22. Spektral.createTimeOut(time, handler);
+------
+
+#### Description
+Creates a time out
+
+#### Arguments
+time: `Number` - The amount of time in seconds you want to wait before triggering the time out
+handler: `Function` - The function you want to call when the time out is triggered
+
+##### Returns
+`Timeout`
+
+##### Example
+
+```javascript
+var timeout = Spektral.createTimeOut(2, function(){
+	//Will fire once after two seconds
+});
+```
+
+23. Spektral.stopTimeOut(timeout);
+------
+
+#### Description
+Clears a time out before it can fire
+
+#### Arguments
+timeout: `Timeout` - The timeout you want to clear
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+var timeout = Spektral.createTimeOut(2, function(){
+	//Will fire once after two seconds
+});
+Spektral.stopTimeOut(timeout);
+//timeout has been stopped
+```
 ---
+
+## STYLE
+
+1. Spektral.setStyle(element, props, options);
+------
+
+##### Description
+Sets the inline style of an element, and appends an existing style.
+
+##### Arguments
+element: `HTMLElement` - The element you want to set style of 
+props: `Object` - The css properties you want to set
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	append: true //Appends new style properties to exisiting style
+}
+```
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```html
+<div id='testDiv' style='padding:10px'></div>
+```
+
+```javascript
+var tDiv = document.querySelector('#testDiv');
+
+Spektral.setStyle(tDiv, { padding: '5px', margin: '10px' }, { append: true });
+//Sets: <div id='testDiv' style='padding:5px; margin:10px;'></div>
+```
 
 

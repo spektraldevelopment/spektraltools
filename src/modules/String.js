@@ -88,6 +88,12 @@
         return newString;
     };
 
+    //STRING - CONVERT CAMEL
+    Spektral.convertCamel = function (request, options) {
+        var spacer = Spektral.getParameter(options, 'character', '-');
+        return Spektral.convertCase(request.replace( /([A-Z])/g, spacer + "$1" ));
+    };
+
     //STRING - DETECT CHARACTER
     Spektral.detectCharacter = function (request, character) {
         character = '\\' + character;

@@ -505,60 +505,60 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getVar('docDimTest').height, 675, ' returned height was correct.');
     });
 
-    casper.then(function(){
-        this.methodHeader('UTILS - createTimer');
-        this.evaluate(function(){
-            var newTimer = Spektral.createTimer(1, function(){
-               timerTest += 1;
-
-               if (timerTest >= 5){
-                   Spektral.stopTimer(newTimer);
-               }
-            });
-        });
-
-        this.wait(5000, function(){
-            this.test.assertEqual(this.getVar('timerTest'), 5, ' timer was created.');
-        });
-    });
-
-    casper.then(function(){
-        this.methodHeader('UTILS - stopTimer');
-        this.evaluate(function(){
-            var timer = Spektral.createTimer(1, function(){
-               stopTimerTest = false;
-            });
-            Spektral.stopTimer(timer);
-        });
-
-        this.wait(2000, function(){
-            this.test.assert(this.getVar('stopTimerTest'), ' time was stopped.');
-        });
-    });
-
-    casper.then(function(){
-        this.methodHeader('UTILS - createTimeOut');
-        this.evaluate(function(){
-            Spektral.createTimeOut(1, function(){
-                timeoutTest = true;
-            });
-        });
-
-        this.wait(2000, function(){
-            this.test.assert(this.getVar('timeoutTest'), ' timeout was created.');
-        });
-    });
-
-    casper.then(function(){
-        this.methodHeader('UTILS - stopTimeOut');
-        this.evaluate(function(){
-            var timeout = Spektral.createTimeOut(1, function(){
-                stopTimeoutTest = false;
-            });
-            Spektral.stopTimeOut(timeout);
-        });
-        this.test.assert(this.getVar('stopTimeoutTest'), ' timeout was stopped.');
-    });
+//    casper.then(function(){
+//        this.methodHeader('UTILS - createTimer');
+//        this.evaluate(function(){
+//            var newTimer = Spektral.createTimer(1, function(){
+//               timerTest += 1;
+//
+//               if (timerTest >= 5){
+//                   Spektral.stopTimer(newTimer);
+//               }
+//            });
+//        });
+//
+//        this.wait(5000, function(){
+//            this.test.assertEqual(this.getVar('timerTest'), 5, ' timer was created.');
+//        });
+//    });
+//
+//    casper.then(function(){
+//        this.methodHeader('UTILS - stopTimer');
+//        this.evaluate(function(){
+//            var timer = Spektral.createTimer(1, function(){
+//               stopTimerTest = false;
+//            });
+//            Spektral.stopTimer(timer);
+//        });
+//
+//        this.wait(2000, function(){
+//            this.test.assert(this.getVar('stopTimerTest'), ' time was stopped.');
+//        });
+//    });
+//
+//    casper.then(function(){
+//        this.methodHeader('UTILS - createTimeOut');
+//        this.evaluate(function(){
+//            Spektral.createTimeOut(1, function(){
+//                timeoutTest = true;
+//            });
+//        });
+//
+//        this.wait(2000, function(){
+//            this.test.assert(this.getVar('timeoutTest'), ' timeout was created.');
+//        });
+//    });
+//
+//    casper.then(function(){
+//        this.methodHeader('UTILS - stopTimeOut');
+//        this.evaluate(function(){
+//            var timeout = Spektral.createTimeOut(1, function(){
+//                stopTimeoutTest = false;
+//            });
+//            Spektral.stopTimeOut(timeout);
+//        });
+//        this.test.assert(this.getVar('stopTimeoutTest'), ' timeout was stopped.');
+//    });
 
     casper.then(function(){
         this.methodHeader('STYLE - setStyle');
@@ -570,28 +570,70 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             });
         });
 
-        this.echo('setStyle - no append.', 'INFO');
+        this.echo('setStyle.', 'INFO');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'padding'), '20px', ' padding was set correctly.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'margin'), '5px', ' margin was set correctly.');
 
+        //this.echo(this.getHTML('#setStyleDiv', true), 'INFO_BAR');
     });
 
     casper.then(function(){
         this.echo('setStyle - append.', 'INFO');
         this.evaluate(function(){
-            try {
-                var setStyleDiv = document.querySelector('#setStyleDiv');
-                Spektral.setStyle(setStyleDiv, { 
-                    padding: '10px',
-                    margin: '15px',
-                    display: 'block'    
-                }, { append: true });
-
-            } catch (err) {
-                logToConsole('setStyle: err: ' + err);
-            }
+            var setStyleDiv = document.querySelector('#setStyleDiv');
+            Spektral.setStyle(setStyleDiv, {
+                padding: '10px',
+                display: 'block'
+            }, { append: true });
         });
-        this.echo(this.getHTML('#setStyleDiv', true));
+
+        this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'padding'), '10px', ' padding was set correctly.');
+        this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'margin'), '5px', ' margin was not affected.');
+        this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'display'), 'block', ' display was set correctly.');
+
+        //this.echo(this.getHTML('#setStyleDiv', true), 'INFO_BAR');
+    });
+
+    casper.then(function(){
+        this.echo('setStyle - no append.', 'INFO');
+        this.evaluate(function(){
+            var setStyleDiv = document.querySelector('#setStyleDiv');
+            Spektral.setStyle(setStyleDiv, {
+                display: 'inline'
+            });
+        });
+
+        this.test.assertDoesntExist(this.getElementStyle('#setStyleDiv', 'padding'), ' padding was removed.');
+        this.test.assertDoesntExist(this.getElementStyle('#setStyleDiv', 'margin'), ' margin was removed.');
+        this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'display'), 'inline', ' display was set correctly.');
+
+        //this.echo(this.getHTML('#setStyleDiv', true), 'INFO_BAR');
+    });
+
+    casper.then(function(){
+        this.echo('setStyle - single property no semi-colon.', 'INFO');
+        this.evaluate(function(){
+            var singleStyleDiv = document.querySelector('#singleStyleDiv');
+            Spektral.setStyle(singleStyleDiv, {
+                margin: '7px'
+            }, { append: true });
+        });
+
+        //this.echo(this.getHTML('#singleStyleDiv', true), 'INFO_BAR');
+        this.test.assertEqual(this.getElementStyle('#singleStyleDiv', 'padding'), '5px', ' padding was set correctly.');
+        this.test.assertEqual(this.getElementStyle('#singleStyleDiv', 'margin'), '7px', ' margin was set correctly.');
+    });
+
+    casper.then(function(){
+        this.echo('setStyle - hyphen property: ex. marginTop -> margin-top.', 'INFO');
+        this.evaluate(function(){
+            var hyphenStyleDiv = document.querySelector('#hyphenStyleDiv');
+                Spektral.setStyle(hyphenStyleDiv, {
+                    paddingTop: '7px',
+                    margin: '15px'
+                }, { append: true });
+        });
+        //this.echo(this.getHTML('#hyphenStyleDiv', true), 'INFO_BAR');
     });
 
     casper.run(function() {
