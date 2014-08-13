@@ -636,6 +636,18 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         //this.echo(this.getHTML('#hyphenStyleDiv', true), 'INFO_BAR');
     });
 
+    casper.then(function(){
+        this.methodHeader('STYLE - getInlineStyle');
+        this.evaluate(function(){
+            var inlineStyleDiv = document.querySelector('#inlineStyleDiv');
+            inlineStyleTest = Spektral.getInlineStyle(inlineStyleDiv);
+        });
+
+        this.test.assertEqual(this.getVar('inlineStyleTest').display, 'block', ' display was returned.');
+        this.test.assertEqual(this.getVar('inlineStyleTest').margin, '10px', ' margin was returned.');
+        this.test.assertEqual(this.getVar('inlineStyleTest').padding, '2px', ' padding was returned.');
+    });
+
     casper.run(function() {
         this.echo(' ');
         test.done();

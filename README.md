@@ -721,8 +721,7 @@ options: `Object` - All optional parameters are passed through this object
 #### Available Options
 ```JavaScript
 {
-	character: '#' //The character you want to use
-	//default: '-'
+	character: '#' //The character you want to use, default -
 }
 ```
 
@@ -1366,6 +1365,31 @@ var tDiv = document.querySelector('#testDiv');
 
 Spektral.setStyle(tDiv, { padding: '5px', margin: '10px' }, { append: true });
 //Sets: <div id='testDiv' style='padding:5px; margin:10px;'></div>
+```
+
+2. Spektral.getInlineStyle(element);
+------
+
+#### Description
+Gets the inline style of an element, returns each property and value in an object
+
+#### Arguments
+element: `HTMLElement` - The element you want to get the inline stlye of
+
+##### Returns
+`Object`
+
+##### Example
+
+```html
+<div id="testDiv" style="margin:10px; padding:2px; display:block"></div>
+```
+
+```javascript
+var testDiv = document.querySelector('#testDiv'), inlineStyle;
+
+inlineStyle = Spektral.getInlineStyle(testDiv);
+//Returns: {"display":"block","margin":"10px","padding":"2px"}
 ```
 
 
