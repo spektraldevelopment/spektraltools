@@ -378,10 +378,10 @@ describe('SpektralTools: ', function() {
         });
     });
 
-    describe('STRING - convertCamel', function(){
+    describe('STRING - concatCamel', function(){
         var
-            testString = Spektral.convertCamel('fooBarBar'),
-            testStringChar = Spektral.convertCamel('fooBarBar', { character: '#' });
+            testString = Spektral.concatCamel('fooBarBar'),
+            testStringChar = Spektral.concatCamel('fooBarBar', { character: '#' });
 
         it('converts a camel case string.', function(){
             expect(testString).toEqual('foo-bar-bar');
@@ -622,6 +622,26 @@ describe('SpektralTools: ', function() {
 
         it('returns false if all values in array are not equal to requested value.', function(){
             expect(Spektral.allAreEqualTo(5, testArrayTwo)).toBeFalsy();
+        });
+    });
+
+    describe('UTILS - allAreSame', function(){
+        var testArrayOne = [4,4,4], testArrayTwo = [9,9,1], testArrayThree = ['10px', '10px'], testArrayFour = ['5px', '10px'];
+
+        it('returns true when all values are the same.', function(){
+            expect(Spektral.allAreSame(testArrayOne)).toBeTruthy();
+        });
+
+        it('returns false when all values are not the same.', function(){
+            expect(Spektral.allAreSame(testArrayTwo)).toBeFalsy();
+        });
+
+        it('returns true when all strings are the same.', function(){
+            expect(Spektral.allAreSame(testArrayThree)).toBeTruthy();
+        });
+
+        it('returns true when all strings are not the same.', function(){
+            expect(Spektral.allAreSame(testArrayFour)).toBeFalsy();
         });
     });
 });

@@ -486,26 +486,26 @@
     Spektral.getDimensions = function (element) {
         var
             dimensions = {},
-            width = Spektral.getStyle(element, "width"),
-            height = Spektral.getStyle(element, "height"),
+            width = Spektral.getStyleValue(element, "width"),
+            height = Spektral.getStyleValue(element, "height"),
 
             padding,
-            paddingTop = Spektral.getStyle(element, "padding-top"),
-            paddingRight = Spektral.getStyle(element, "padding-right"),
-            paddingBottom = Spektral.getStyle(element, "padding-bottom"),
-            paddingLeft = Spektral.getStyle(element, "padding-left"),
+            paddingTop = Spektral.getStyleValue(element, "padding-top"),
+            paddingRight = Spektral.getStyleValue(element, "padding-right"),
+            paddingBottom = Spektral.getStyleValue(element, "padding-bottom"),
+            paddingLeft = Spektral.getStyleValue(element, "padding-left"),
 
-            border = Spektral.getStyle(element, "border"),
-            borderTop = Spektral.getStyle(element, "border-top-width"),
-            borderRight = Spektral.getStyle(element, "border-right-width"),
-            borderBottom = Spektral.getStyle(element, "border-bottom-width"),
-            borderLeft = Spektral.getStyle(element, "border-left-width"),
+            border = Spektral.getStyleValue(element, "border"),
+            borderTop = Spektral.getStyleValue(element, "border-top-width"),
+            borderRight = Spektral.getStyleValue(element, "border-right-width"),
+            borderBottom = Spektral.getStyleValue(element, "border-bottom-width"),
+            borderLeft = Spektral.getStyleValue(element, "border-left-width"),
 
-            margin = Spektral.getStyle(element, "margin"),
-            marginTop = Spektral.getStyle(element, "margin-top"),
-            marginRight = Spektral.getStyle(element, "margin-right"),
-            marginBottom = Spektral.getStyle(element, "margin-bottom"),
-            marginLeft = Spektral.getStyle(element, "margin-left"),
+            margin = Spektral.getStyleValue(element, "margin"),
+            marginTop = Spektral.getStyleValue(element, "margin-top"),
+            marginRight = Spektral.getStyleValue(element, "margin-right"),
+            marginBottom = Spektral.getStyleValue(element, "margin-bottom"),
+            marginLeft = Spektral.getStyleValue(element, "margin-left"),
             innerWidth, innerHeight,
             borderWidth, borderHeight,
             totalWidth, totalHeight,
@@ -613,6 +613,18 @@
             }
         }
         return areEqual;
+    };
+
+    //UTILS - ALL ARE SAME
+    Spektral.allAreSame = function(arr){
+        var sample = arr[0], areSame = true, i;
+
+        for (i = 0; i < arr.length; i+=1) {
+           if (sample !== arr[i]) {
+               areSame = false;
+           }
+        }
+        return areSame;
     };
 
     //UTILS - CREATE TIMER

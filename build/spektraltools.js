@@ -168,53 +168,6 @@
         return isAnElement;
     };
 
-    //DOM - GET STYLE
-    Spektral.getStyle = function (element, styleProperty) {
-
-        styleProperty = styleProperty || undefined;
-        var style;
-        if(styleProperty !== undefined) {
-            try {
-                style = element.currentStyle[styleProperty];
-            } catch (err) {
-                style = document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProperty);
-            }
-        } else {
-            try {
-                style = Spektral.getInlineStyle(element);
-            } catch (err) {
-                Spektral.log("getStyle: Could not get style.", "warn");
-            }
-        }
-
-        return style;
-    };
-
-    //DOM - GET INLINE STYLE
-    Spektral.getInlineStyle = function (element) {
-        var
-            inlineStyle = element.style.cssText,
-            properties,
-            property, key, val, i,
-            styleObject = {};
-
-        if(inlineStyle === "") {
-            styleObject = false;
-            //Spektral.log("getInlineStyle: No inline style set.");
-        } else {
-            properties = Spektral.splitString(inlineStyle, ";");
-
-            for (i = 0; i < properties.length; i += 1) {
-                property = Spektral.splitString(properties[i], ":");
-                key = property[0];
-                val = property[1];
-                styleObject[key] = val;
-            }
-        }
-
-        return styleObject;
-    };
-
 
 
     //EVENT - ATTACH EVENT LISTENER
@@ -294,7 +247,7 @@
         }
     };
 
-    //NUMBER - roundNum
+    //NUMBER - ROUND NUM
     Spektral.roundNum = function (num, options) {
         var roundedNum = 0, roundType = Spektral.getParameter(options, 'roundType', 'regular');
         if (roundType === "regular") {
@@ -540,6 +493,26 @@
     Spektral.clearInlineStyle = function (element) {
         Spektral.destroyAttribute(element, "style");
     };
+
+    //STYLE - GET STYLE
+    Spektral.getStyleValue = function (element, styleProperty) {
+        var style, isEqual;
+        try {
+            if (styleProperty === 'padding') {
+                isEqual = Spektral.allAreEqualTo()
+            } else if (styleProperty === 'margin') {
+
+            } else {
+                style = document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProperty);
+            }
+
+        } catch (err) {
+            style = element.currentStyle[styleProperty];
+        }
+        console.log('STYLE GET STYLE: ' + style);
+        return style;
+    };
+
 
 
     //UTILS - GET TYPE
@@ -1029,26 +1002,26 @@
     Spektral.getDimensions = function (element) {
         var
             dimensions = {},
-            width = Spektral.getStyle(element, "width"),
-            height = Spektral.getStyle(element, "height"),
+            width = Spektral.getStyleValue(element, "width"),
+            height = Spektral.getStyleValue(element, "height"),
 
             padding,
-            paddingTop = Spektral.getStyle(element, "padding-top"),
-            paddingRight = Spektral.getStyle(element, "padding-right"),
-            paddingBottom = Spektral.getStyle(element, "padding-bottom"),
-            paddingLeft = Spektral.getStyle(element, "padding-left"),
+            paddingTop = Spektral.getStyleValue(element, "padding-top"),
+            paddingRight = Spektral.getStyleValue(element, "padding-right"),
+            paddingBottom = Spektral.getStyleValue(element, "padding-bottom"),
+            paddingLeft = Spektral.getStyleValue(element, "padding-left"),
 
-            border = Spektral.getStyle(element, "border"),
-            borderTop = Spektral.getStyle(element, "border-top-width"),
-            borderRight = Spektral.getStyle(element, "border-right-width"),
-            borderBottom = Spektral.getStyle(element, "border-bottom-width"),
-            borderLeft = Spektral.getStyle(element, "border-left-width"),
+            border = Spektral.getStyleValue(element, "border"),
+            borderTop = Spektral.getStyleValue(element, "border-top-width"),
+            borderRight = Spektral.getStyleValue(element, "border-right-width"),
+            borderBottom = Spektral.getStyleValue(element, "border-bottom-width"),
+            borderLeft = Spektral.getStyleValue(element, "border-left-width"),
 
-            margin = Spektral.getStyle(element, "margin"),
-            marginTop = Spektral.getStyle(element, "margin-top"),
-            marginRight = Spektral.getStyle(element, "margin-right"),
-            marginBottom = Spektral.getStyle(element, "margin-bottom"),
-            marginLeft = Spektral.getStyle(element, "margin-left"),
+            margin = Spektral.getStyleValue(element, "margin"),
+            marginTop = Spektral.getStyleValue(element, "margin-top"),
+            marginRight = Spektral.getStyleValue(element, "margin-right"),
+            marginBottom = Spektral.getStyleValue(element, "margin-bottom"),
+            marginLeft = Spektral.getStyleValue(element, "margin-left"),
             innerWidth, innerHeight,
             borderWidth, borderHeight,
             totalWidth, totalHeight,
@@ -1156,6 +1129,18 @@
             }
         }
         return areEqual;
+    };
+
+    //UTILS - ALL ARE SAME
+    Spektral.allAreSame = function(arr){
+        var sample = arr[0], areSame = true, i;
+
+        for (i = 0; i < arr.length; i+=1) {
+           if (sample !== arr[i]) {
+               areSame = false;
+           }
+        }
+        return areSame;
     };
 
     //UTILS - CREATE TIMER
