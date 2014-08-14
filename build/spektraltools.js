@@ -533,6 +533,43 @@
         return style;
     };
 
+    //STYLE - HIDE ELEMENT
+    Spektral.hideElement = function (element, options) {
+        var
+            useDisplay = Spektral.getParameter(options, 'useDisplay', false),
+            currentVState = Spektral.getStyleValue(element, "visibility"),
+            currentDState = Spektral.getStyleValue(element, "display");
+        if(currentVState !== "hidden" || currentDState !== "none") {
+            if(useDisplay === true) {
+                //set display to none
+                Spektral.setStyle(element, { display: 'none' });
+            } else {
+                //set visibility to hidden
+                Spektral.setStyle(element, { visibility: 'hidden' });
+            }
+        } else {
+            ////Spektral.log(element + " is already hidden.");
+        }
+    };
+
+    //STYLE - SHOW ELEMENT
+    Spektral.showElement = function (element, options) {
+        var
+            displayType = Spektral.getParameter(options, 'displayType', 'block'),
+            currentVState = Spektral.getStyleValue(element, "visibility"),
+            currentDState = Spektral.getStyleValue(element, "display");
+        if(currentVState !== 'visible' || currentDState === 'none') {
+            Spektral.setStyle(element, { 
+                display: displayType,
+                visibility: 'visible' 
+            });
+        } else {
+            //Element is already seen, don't do anything
+            //Spektral.log(element + " is already visible.");
+        }
+    };
+
+
 
 
     //UTILS - GET TYPE

@@ -672,6 +672,44 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getVar('getStyleTest').display, 'block', ' display was returned correctly.');
     });
 
+    casper.then(function(){
+        this.methodHeader('STYLE - hideElement - visibility');
+        this.evaluate(function(){
+            var hideShowDiv = document.querySelector('#hideShowDiv');
+            Spektral.hideElement(hideShowDiv);
+        });
+        this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'visibility'), 'hidden', ' element was hidden using visibility.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('STYLE - showElement - visibility');
+        this.evaluate(function(){
+            var hideShowDiv = document.querySelector('#hideShowDiv');
+            Spektral.showElement(hideShowDiv);
+        });
+        this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'display'), 'block', ' element display property set to block.');
+        this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'visibility'), 'visible', ' element visibility property set to visible.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('STYLE - hideElement - display');
+        this.evaluate(function(){
+            var hideShowDiv = document.querySelector('#hideShowDiv');
+            Spektral.hideElement(hideShowDiv, { useDisplay: true });
+        });
+        this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'display'), 'none', ' element display property was set to none.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('STYLE - showElement - display');
+        this.evaluate(function(){
+            var hideShowDiv = document.querySelector('#hideShowDiv');
+            Spektral.showElement(hideShowDiv, { displayType: 'inline' });
+        });
+        this.echoHTML('#hideShowDiv');
+        this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'display'), 'inline', ' element display property was set to inline.');
+    });
+
     casper.run(function() {
         this.echo(' ');
         test.done();

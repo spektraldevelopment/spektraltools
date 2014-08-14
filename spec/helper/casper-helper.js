@@ -35,6 +35,9 @@ casper.methodHeader = function(msg){
     this.echo(msg, 'GREEN_BAR')
 };
 
+casper.echoHTML = function(el) {
+    this.echo(this.getHTML(el, true));
+}
 
 casper.getVar = function(variable) {
     return this.evaluate(function(v){
