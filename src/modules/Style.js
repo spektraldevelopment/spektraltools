@@ -79,3 +79,43 @@
     Spektral.clearInlineStyle = function (element) {
         Spektral.destroyAttribute(element, "style");
     };
+
+    //STYLE - GET STYLE
+    Spektral.getStyleValue = function (element, styleProperty) {
+        var style, isEqual, pT, pR, pB, pL, mT, mR, mB, mL;
+        try {
+            if (styleProperty === 'padding') {
+                pT = document.defaultView.getComputedStyle(element, null).getPropertyValue('padding-top');
+                pR = document.defaultView.getComputedStyle(element, null).getPropertyValue('padding-right');
+                pB = document.defaultView.getComputedStyle(element, null).getPropertyValue('padding-bottom');
+                pL = document.defaultView.getComputedStyle(element, null).getPropertyValue('padding-left');
+
+                isEqual = Spektral.allAreSame([pT, pR, pB, pL]);
+
+                if (isEqual === true) {
+                    style = document.defaultView.getComputedStyle(element, null).getPropertyValue('padding-top');
+                } else {
+                    style = pT + ' ' + pR + ' ' + pB + ' ' + pL;
+                }
+            } else if (styleProperty === 'margin') {
+                mT = document.defaultView.getComputedStyle(element, null).getPropertyValue('margin-top');
+                mR = document.defaultView.getComputedStyle(element, null).getPropertyValue('margin-right');
+                mB = document.defaultView.getComputedStyle(element, null).getPropertyValue('margin-bottom');
+                mL = document.defaultView.getComputedStyle(element, null).getPropertyValue('margin-left');
+
+                isEqual = Spektral.allAreSame([mT, mR, mB, mL]);
+
+                if (isEqual === true) {
+                    style = document.defaultView.getComputedStyle(element, null).getPropertyValue('margin-top');
+                } else {
+                    style = mT + ' ' + mR + ' ' + mB + ' ' + mL;
+                }
+            } else {
+                style = document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProperty);
+            }
+        } catch (err) {
+            style = element.currentStyle[styleProperty];
+        }
+        return style;
+    };
+

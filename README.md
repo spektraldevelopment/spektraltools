@@ -1417,4 +1417,34 @@ Spektral.clearInlineStyle(testDiv);
 //<div id="testDiv"></div>
 ```
 
+4. Spektral.getStyleValue(element, styleProperty);
+------
+
+#### Description
+Gets the style property of an element and returns its value
+
+#### Arguments
+element: `HTMLElement` - The element you want to target
+styleProperty: `String` - The property you want to get the value of
+
+##### Returns
+`String`
+
+##### Example
+
+```html
+<div id="testDiv" style="margin:2px; padding:5px; display:block"></div>
+```
+
+```javascript
+var testDiv = document.querySelector('#testDiv');
+
+Spektral.getStyle(testDiv, 'margin');
+//Returns: 2px
+Spektral.getStyle(testDiv, 'padding');
+//Returns: 5px
+Spektral.getStyle(testDiv, 'block');
+//Returns: block
+```
+
 

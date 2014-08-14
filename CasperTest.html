@@ -47,6 +47,11 @@
             padding: 6px;
             margin: 8px;
         }
+
+        #getStyleDiv {
+            padding: 5px;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -74,6 +79,7 @@
         <div id="hyphenStyleDiv">Hyphen Style Div</div>
         <div id="inlineStyleDiv" style="margin:10px; padding:2px; display:block">Get Inline Style Div</div>
         <div id="clearStyleDiv" style="margin:10px; padding:2px; display:block">Clear Style Div</div>
+        <div id="getStyleDiv" style="margin:2px;">Get Style Div</div>
     </section>
     <script src="build/spektraltools.js"></script>
     <script>
@@ -100,7 +106,7 @@
             alphaNumericMapTest = [], characterMapTest = [], characterShiftMapTest = [], commandMapTest = [],
             mousePosTest = [], mta = document.querySelector('#mouseTestArea'), viewportSizeTest, positionTest,
             dimensionTest, padMarginTest, docDimTest, timerTest = 0, stopTimerTest = true, timeoutTest = false,
-            stopTimeoutTest = true, inlineStyleTest;
+            stopTimeoutTest = true, inlineStyleTest, getStyleTest = { padding: null, margin: null, display: null};
 
         function logToConsole(msg) {
             console.log(msg);

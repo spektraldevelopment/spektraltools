@@ -658,6 +658,20 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getElementAttr('#clearStyleDiv', 'style'), '', ' style attribute was cleared.');
     });
 
+    casper.then(function(){
+        this.methodHeader('STYLE - getStyle');
+        this.evaluate(function(){
+            var getStyleDiv = document.querySelector('#getStyleDiv');
+            getStyleTest['padding'] = Spektral.getStyleValue(getStyleDiv, 'padding');
+            getStyleTest['margin'] = Spektral.getStyleValue(getStyleDiv, 'margin');
+            getStyleTest['display'] = Spektral.getStyleValue(getStyleDiv, 'display');
+        });
+
+        this.test.assertEqual(this.getVar('getStyleTest').padding, '5px', ' padding was returned correctly.');
+        this.test.assertEqual(this.getVar('getStyleTest').margin, '2px', ' margin was returned correctly.');
+        this.test.assertEqual(this.getVar('getStyleTest').display, 'block', ' display was returned correctly.');
+    });
+
     casper.run(function() {
         this.echo(' ');
         test.done();

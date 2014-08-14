@@ -1,5 +1,5 @@
 
-    //NUMBER - roundNum
+    //NUMBER - ROUND NUM
     Spektral.roundNum = function (num, options) {
         var roundedNum = 0, roundType = Spektral.getParameter(options, 'roundType', 'regular');
         if (roundType === "regular") {

@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-08-13
+* Build Created: 2014-08-14
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -496,20 +496,40 @@
 
     //STYLE - GET STYLE
     Spektral.getStyleValue = function (element, styleProperty) {
-        var style, isEqual;
+        var style, isEqual, pT, pR, pB, pL, mT, mR, mB, mL;
         try {
             if (styleProperty === 'padding') {
-                isEqual = Spektral.allAreEqualTo()
-            } else if (styleProperty === 'margin') {
+                pT = document.defaultView.getComputedStyle(element, null).getPropertyValue('padding-top');
+                pR = document.defaultView.getComputedStyle(element, null).getPropertyValue('padding-right');
+                pB = document.defaultView.getComputedStyle(element, null).getPropertyValue('padding-bottom');
+                pL = document.defaultView.getComputedStyle(element, null).getPropertyValue('padding-left');
 
+                isEqual = Spektral.allAreSame([pT, pR, pB, pL]);
+
+                if (isEqual === true) {
+                    style = document.defaultView.getComputedStyle(element, null).getPropertyValue('padding-top');
+                } else {
+                    style = pT + ' ' + pR + ' ' + pB + ' ' + pL;
+                }
+            } else if (styleProperty === 'margin') {
+                mT = document.defaultView.getComputedStyle(element, null).getPropertyValue('margin-top');
+                mR = document.defaultView.getComputedStyle(element, null).getPropertyValue('margin-right');
+                mB = document.defaultView.getComputedStyle(element, null).getPropertyValue('margin-bottom');
+                mL = document.defaultView.getComputedStyle(element, null).getPropertyValue('margin-left');
+
+                isEqual = Spektral.allAreSame([mT, mR, mB, mL]);
+
+                if (isEqual === true) {
+                    style = document.defaultView.getComputedStyle(element, null).getPropertyValue('margin-top');
+                } else {
+                    style = mT + ' ' + mR + ' ' + mB + ' ' + mL;
+                }
             } else {
                 style = document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProperty);
             }
-
         } catch (err) {
             style = element.currentStyle[styleProperty];
         }
-        console.log('STYLE GET STYLE: ' + style);
         return style;
     };
 
