@@ -1447,4 +1447,64 @@ Spektral.getStyle(testDiv, 'block');
 //Returns: block
 ```
 
+5. Spektral.useHandCursor(element, options);
+------
+
+#### Description
+Changes cursor style of element to hand(pointer), helpful for letting users know non-input elements are clickable
+
+#### Arguments
+element: `HTMLElement` - The element you want to target
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	cursorType: 'pointer' //Can be set to any of the accepted cursor styles
+}
+```
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```html
+<div id="testDiv"></div>
+```
+
+```javascript
+var testDiv = document.querySelector('#testDiv');
+
+Spektral.useHandCursor(testDiv);
+//testDiv will now have a cursor style of 'pointer'
+Spektral.useHandCursor(testDiv, cursorType: 'crosshair');
+//testDiv will now have a cursor style of 'crosshair'
+```
+
+6. Spektral.useDefaultCursor(element);
+------
+
+#### Description
+Changes the elements cursor back to the default
+
+#### Arguments
+element: `HTMLElement` - The element you want to target
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```html
+<div id="testDiv" style="cursor:help"></div>
+```
+
+```javascript
+var testDiv = document.querySelector('#testDiv');
+
+Spektral.useDefaultCursor(testDiv);
+//testDiv will now have a cursor style of 'default'
+```
+
 

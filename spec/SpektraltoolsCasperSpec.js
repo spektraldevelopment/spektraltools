@@ -673,6 +673,26 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     });
 
     casper.then(function(){
+        this.methodHeader('STYLE - useHandCursor');
+        this.evaluate(function(){
+            var handCursorDiv = document.querySelector('#handCursorDiv');
+            Spektral.useHandCursor(handCursorDiv);
+        });
+
+        this.test.assertEqual(this.getElementStyle('#handCursorDiv', 'cursor'), 'pointer', ' cursor was set to pointer.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('STYLE - useDefaultCursor');
+        this.evaluate(function(){
+            var handCursorDiv = document.querySelector('#handCursorDiv');
+            Spektral.useDefaultCursor(handCursorDiv);
+        });
+
+        this.test.assertEqual(this.getElementStyle('#handCursorDiv', 'cursor'), 'default', ' cursor was set to default.');
+    });
+
+    casper.then(function(){
         this.methodHeader('STYLE - hideElement - visibility');
         this.evaluate(function(){
             var hideShowDiv = document.querySelector('#hideShowDiv');

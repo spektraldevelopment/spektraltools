@@ -533,6 +533,23 @@
         return style;
     };
 
+    //STYLE - USE HAND CURSOR
+    Spektral.useHandCursor = function (element, options) {
+        var
+            cursorType = Spektral.getParameter(options, 'cursorType', 'pointer'),
+            elemType = Spektral.getType(element);
+        if(elemType !== "input") {
+            //input elements have the hand cursor by default,
+            //there might be others so I will keep an eye out
+            Spektral.setStyle(element, { cursor: cursorType }, { append: true });
+        }
+    };
+
+    //STYLE - USE DEFAULT CURSOR
+    Spektral.useDefaultCursor = function (element) {
+        Spektral.setStyle(element, { cursor: 'default' });
+    };
+
     //STYLE - HIDE ELEMENT
     Spektral.hideElement = function (element, options) {
         var
@@ -568,8 +585,6 @@
             //Spektral.log(element + " is already visible.");
         }
     };
-
-
 
 
     //UTILS - GET TYPE
