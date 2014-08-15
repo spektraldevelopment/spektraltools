@@ -1507,4 +1507,74 @@ Spektral.useDefaultCursor(testDiv);
 //testDiv will now have a cursor style of 'default'
 ```
 
+7. Spektral.hideElement(element, options);
+------
+
+#### Description
+Hides an element by setting visibility to 'hidden' by default, or optionally display to 'none'
+
+#### Arguments
+element: `HTMLElement` - The element you want to target
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	useDisplay: false //If set to true, sets display to 'none'
+}
+```
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```html
+<div id="testDiv"></div>
+```
+
+```javascript
+var testDiv = document.querySelector('#testDiv');
+
+Spektral.hideElement(testDiv);
+//Sets: <div id="testDiv" style="visibility:hidden"></div>
+Spektral.hideElement(testDiv, { useDisplay: true });
+//Sets: <div id="testDiv" style="display:none"></div>
+```
+
+8. Spektral.showElement(element, options);
+------
+
+#### Description
+Shows an element by setting visibility to 'visible' and display to 'block'
+
+#### Arguments
+element: `HTMLElement` - The element you want to target
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	displayType: 'block' //Accepts other accepted display values
+}
+```
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```html
+<div id="testDiv" style="visibility:hidden"></div>
+```
+
+```javascript
+var testDiv = document.querySelector('#testDiv');
+
+Spektral.showElement(testDiv);
+//Sets: <div id="testDiv" style="display:block; visibility:visible;"></div>
+Spektral.hideElement(testDiv, { displayType: 'inline' });
+//Sets: <div id="testDiv" style="display:inline; visibility:visible;"></div>
+```
+
 
