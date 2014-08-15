@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-08-14
+* Build Created: 2014-08-15
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -583,6 +583,38 @@
         } else {
             //Element is already seen, don't do anything
             //Spektral.log(element + " is already visible.");
+        }
+    };
+
+    //STYLE - TOGGLE VISIBILITY
+    Spektral.toggleVisibility = function (element) {
+        var currentVState = Spektral.getStyleValue(element, "visibility");
+        if(currentVState === "visible") {
+            Spektral.setStyle(element, { visibility: 'hidden'});
+            //Spektral.log("Visible, hiding.");
+        } else {
+            Spektral.setStyle(element, { visibility: 'visible'});
+            //Spektral.log("Hidden, showing.");
+        }
+    };
+
+    //STYLE - TOGGLE DISPLAY
+    Spektral.toggleDisplay = function (element, options) {
+        var
+            displayType = Spektral.getParameter(options, 'displayType', 'block'),
+            currentDState = Spektral.getStyleValue(element, "display"),
+            currentVState = Spektral.getStyleValue(element, "visibility");
+        if(currentVState === "hidden") {
+            //element is already hidden
+            Spektral.toggleVisibility(element);
+        } else {
+            if(currentDState === "block" || currentDState === "inline" || currentDState === "inline-block" || currentDState === "inherit") {
+                Spektral.setStyle(element, { display: 'none' });
+                //Spektral.log("toggleDisplay: Visible, hiding.");
+            } else {
+                Spektral.setStyle(element, { display: displayType });
+                //Spektral.log("toggleDisplay: Hiding, showing: " + displayString);
+            }
         }
     };
 

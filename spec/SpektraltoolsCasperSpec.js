@@ -574,13 +574,8 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'padding'), '20px', ' padding was set correctly.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'margin'), '5px', ' margin was set correctly.');
 
-        //this.echo(this.getHTML('#setStyleDiv', true), 'INFO_BAR');
-    });
-
-    casper.then(function(){
         this.echo('setStyle - append.', 'INFO');
         this.evaluate(function(){
-            var setStyleDiv = document.querySelector('#setStyleDiv');
             Spektral.setStyle(setStyleDiv, {
                 padding: '10px',
                 display: 'block'
@@ -591,13 +586,8 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'margin'), '5px', ' margin was not affected.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'display'), 'block', ' display was set correctly.');
 
-        //this.echo(this.getHTML('#setStyleDiv', true), 'INFO_BAR');
-    });
-
-    casper.then(function(){
         this.echo('setStyle - no append.', 'INFO');
         this.evaluate(function(){
-            var setStyleDiv = document.querySelector('#setStyleDiv');
             Spektral.setStyle(setStyleDiv, {
                 display: 'inline'
             });
@@ -606,8 +596,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertDoesntExist(this.getElementStyle('#setStyleDiv', 'padding'), ' padding was removed.');
         this.test.assertDoesntExist(this.getElementStyle('#setStyleDiv', 'margin'), ' margin was removed.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'display'), 'inline', ' display was set correctly.');
-
-        //this.echo(this.getHTML('#setStyleDiv', true), 'INFO_BAR');
     });
 
     casper.then(function(){
@@ -619,7 +607,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             }, { append: true });
         });
 
-        //this.echo(this.getHTML('#singleStyleDiv', true), 'INFO_BAR');
         this.test.assertEqual(this.getElementStyle('#singleStyleDiv', 'padding'), '5px', ' padding was set correctly.');
         this.test.assertEqual(this.getElementStyle('#singleStyleDiv', 'margin'), '7px', ' margin was set correctly.');
     });
@@ -633,7 +620,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
                     margin: '15px'
                 }, { append: true });
         });
-        //this.echo(this.getHTML('#hyphenStyleDiv', true), 'INFO_BAR');
     });
 
     casper.then(function(){
@@ -678,17 +664,12 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             var handCursorDiv = document.querySelector('#handCursorDiv');
             Spektral.useHandCursor(handCursorDiv);
         });
-
         this.test.assertEqual(this.getElementStyle('#handCursorDiv', 'cursor'), 'pointer', ' cursor was set to pointer.');
-    });
 
-    casper.then(function(){
         this.methodHeader('STYLE - useDefaultCursor');
         this.evaluate(function(){
-            var handCursorDiv = document.querySelector('#handCursorDiv');
             Spektral.useDefaultCursor(handCursorDiv);
         });
-
         this.test.assertEqual(this.getElementStyle('#handCursorDiv', 'cursor'), 'default', ' cursor was set to default.');
     });
 
@@ -699,35 +680,42 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             Spektral.hideElement(hideShowDiv);
         });
         this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'visibility'), 'hidden', ' element was hidden using visibility.');
-    });
 
-    casper.then(function(){
         this.methodHeader('STYLE - showElement - visibility');
         this.evaluate(function(){
-            var hideShowDiv = document.querySelector('#hideShowDiv');
             Spektral.showElement(hideShowDiv);
         });
         this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'display'), 'block', ' element display property set to block.');
         this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'visibility'), 'visible', ' element visibility property set to visible.');
-    });
 
-    casper.then(function(){
         this.methodHeader('STYLE - hideElement - display');
         this.evaluate(function(){
-            var hideShowDiv = document.querySelector('#hideShowDiv');
             Spektral.hideElement(hideShowDiv, { useDisplay: true });
         });
         this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'display'), 'none', ' element display property was set to none.');
-    });
 
-    casper.then(function(){
         this.methodHeader('STYLE - showElement - display');
         this.evaluate(function(){
-            var hideShowDiv = document.querySelector('#hideShowDiv');
             Spektral.showElement(hideShowDiv, { displayType: 'inline' });
         });
         this.echoHTML('#hideShowDiv');
         this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'display'), 'inline', ' element display property was set to inline.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('STYLE - toggleVisibility');
+        this.evaluate(function(){
+            var toggleVisDiv = document.querySelector('#toggleVisDiv');
+            Spektral.toggleVisibility(toggleVisDiv);
+        });
+
+        this.test.assertEqual(this.getElementStyle('#toggleVisDiv', 'visibility'), 'hidden', ' the div is hidden.');
+
+        this.evaluate(function(){
+            Spektral.toggleVisibility(toggleVisDiv);
+        });
+
+        this.test.assertEqual(this.getElementStyle('#toggleVisDiv', 'visibility'), 'visible', ' the div is visible.');
     });
 
     casper.run(function() {
