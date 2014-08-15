@@ -716,6 +716,41 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         });
 
         this.test.assertEqual(this.getElementStyle('#toggleVisDiv', 'visibility'), 'visible', ' the div is visible.');
+
+        this.evaluate(function(){
+            var toggleVisDiv = document.querySelector('#toggleVisDiv');
+            Spektral.toggleVisibility(toggleVisDiv);
+        });
+
+        this.test.assertEqual(this.getElementStyle('#toggleVisDiv', 'visibility'), 'hidden', ' the div is hidden.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('STYLE - toggleDisplay');
+        this.evaluate(function(){
+            var toggleDisplayDiv = document.querySelector('#toggleDisplayDiv');
+            Spektral.toggleDisplay(toggleDisplayDiv);
+        });
+
+        this.test.assertEqual(this.getElementStyle('#toggleDisplayDiv', 'display'), 'none', ' display is set to none.');
+
+        this.evaluate(function(){
+            Spektral.toggleDisplay(toggleDisplayDiv);
+        });
+
+        this.test.assertEqual(this.getElementStyle('#toggleDisplayDiv', 'display'), 'block', ' display is set to block.');
+
+        this.evaluate(function(){
+            Spektral.toggleDisplay(toggleDisplayDiv);
+        });
+
+        this.test.assertEqual(this.getElementStyle('#toggleDisplayDiv', 'display'), 'none', ' display is set to none.');
+
+        this.evaluate(function(){
+            Spektral.toggleDisplay(toggleDisplayDiv, { displayType: 'inline' });
+        });
+
+        this.test.assertEqual(this.getElementStyle('#toggleDisplayDiv', 'display'), 'inline', ' display is set to inline.');
     });
 
     casper.run(function() {
