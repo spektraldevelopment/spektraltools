@@ -753,6 +753,14 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getElementStyle('#toggleDisplayDiv', 'display'), 'inline', ' display is set to inline.');
     });
 
+    casper.then(function(){
+        this.methodHeader('XHR - getXHR');
+        this.evaluate(function(){
+            XHRTest = Spektral.getXHR();
+        });
+        this.test.assertEquals(this.getType(this.getVar('XHRTest')), 'object', ' xhr was returned.');
+    });
+
     casper.run(function() {
         this.echo(' ');
         test.done();

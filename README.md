@@ -1576,5 +1576,23 @@ Spektral.showElement(testDiv);
 Spektral.hideElement(testDiv, { displayType: 'inline' });
 //Sets: <div id="testDiv" style="display:inline; visibility:visible;"></div>
 ```
+---
+
+## XHR
+
+1. Spektral.getXHR();
+------
+
+##### Description
+Returns the XMLHttpRequest object of the browser
+
+##### Returns
+`Object`
+
+##### Example
+
+```javascript
+var xhr = Spektral.getXHR();
+```
 
 
