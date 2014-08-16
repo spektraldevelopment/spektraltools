@@ -188,18 +188,13 @@
     Spektral.toggleDisplay = function (element, options) {
         var
             displayType = Spektral.getParameter(options, 'displayType', 'block'),
-            currentDState = Spektral.getStyleValue(element, "display"),
-            currentVState = Spektral.getStyleValue(element, "visibility");
-        if(currentVState === "hidden") {
-            //element is already hidden
-            Spektral.toggleVisibility(element);
+            currentDState = Spektral.getStyleValue(element, "display");
+
+        if(currentDState === "block" || currentDState === "inline" || currentDState === "inline-block" || currentDState === "inherit") {
+            Spektral.setStyle(element, { display: 'none' });
+            //Spektral.log("toggleDisplay: Visible, hiding.");
         } else {
-            if(currentDState === "block" || currentDState === "inline" || currentDState === "inline-block" || currentDState === "inherit") {
-                Spektral.setStyle(element, { display: 'none' });
-                //Spektral.log("toggleDisplay: Visible, hiding.");
-            } else {
-                Spektral.setStyle(element, { display: displayType });
-                //Spektral.log("toggleDisplay: Hiding, showing: " + displayString);
-            }
+            Spektral.setStyle(element, { display: displayType, visibility: 'visible' });
+            //Spektral.log("toggleDisplay: Hiding, showing: " + displayString);
         }
     };

@@ -648,4 +648,3 @@
     Spektral.stopTimeOut = function (timeout) {
         clearTimeout(timeout);
     };
-

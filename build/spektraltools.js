@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-08-15
+* Build Created: 2014-08-16
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -602,19 +602,14 @@
     Spektral.toggleDisplay = function (element, options) {
         var
             displayType = Spektral.getParameter(options, 'displayType', 'block'),
-            currentDState = Spektral.getStyleValue(element, "display"),
-            currentVState = Spektral.getStyleValue(element, "visibility");
-        if(currentVState === "hidden") {
-            //element is already hidden
-            Spektral.toggleVisibility(element);
+            currentDState = Spektral.getStyleValue(element, "display");
+
+        if(currentDState === "block" || currentDState === "inline" || currentDState === "inline-block" || currentDState === "inherit") {
+            Spektral.setStyle(element, { display: 'none' });
+            //Spektral.log("toggleDisplay: Visible, hiding.");
         } else {
-            if(currentDState === "block" || currentDState === "inline" || currentDState === "inline-block" || currentDState === "inherit") {
-                Spektral.setStyle(element, { display: 'none' });
-                //Spektral.log("toggleDisplay: Visible, hiding.");
-            } else {
-                Spektral.setStyle(element, { display: displayType });
-                //Spektral.log("toggleDisplay: Hiding, showing: " + displayString);
-            }
+            Spektral.setStyle(element, { display: displayType, visibility: 'visible' });
+            //Spektral.log("toggleDisplay: Hiding, showing: " + displayString);
         }
     };
 
@@ -1269,6 +1264,66 @@
         clearTimeout(timeout);
     };
 
+    //XHR - GET XHR
+    Spektral.getXHR = function () {
+        var result, versions, i;
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            result = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            versions = ["MSXML2.XmlHttp.5.0",
+                "MSXML2.XmlHttp.4.0",
+                "MSXML2.XmlHttp.3.0",
+                "MSXML2.XmlHttp.2.0",
+                "Microsoft.XmlHttp",
+                "Microsoft.XMLHTTP"];
+            for (i = 0; i < versions.length; i++) {
+                try {
+                    result = new ActiveXObject(versions[i]);
+                    return result;
+                } catch (err) {
+                    Spektral.log("getXHR: Couldn't find the proper XMLHttp version.", "warn");
+                }
+            }
+        }
+        return result;
+    };
+
+    //XHR - LOAD FILE
+    Spektral.loadFile = function (file, callback, async) {
+        async = async || true;
+        var ext = Spektral.getExtension(file), xhr = Spektral.getXHR();
+        if (ext === "json") {
+            xhr.overrideMimeType("application/json");
+        }
+        function checkIfReady() {
+            if (xhr.readyState < 4) {
+                return;
+            }
+            if (xhr.status !== 200) {
+                return;
+            }
+            if (xhr.readyState === 4) {
+                var response;
+                if (ext === "json") {
+                    response = JSON.parse(xhr.responseText);
+                } else if (ext === "xml") {
+                    response = xhr.responseXML;
+                } else {
+                    response = xhr.responseText;
+                }
+                callback(response);
+            }
+        }
+        function onLoadError(e) {
+            Spektral.log("loadFile: loadError: There was a load error: " + e, "warn");
+        }
+        Spektral.attachEventListener(xhr, 'readystatechange', checkIfReady);
+        Spektral.attachEventListener(xhr, 'error', onLoadError);
+        xhr.open("GET", file, async);
+        xhr.send();
+    };
 
 
     //DEBUG - LOG
