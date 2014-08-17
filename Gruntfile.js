@@ -78,7 +78,7 @@ module.exports = function(grunt) {
                 options : {
                     test : true,
                     includes : 'spec/helper/casper-helper.js',
-                    logLevel: 'debug'
+                    verbose: false
                 },
                 files : {
                     'xunit/casper-results.xml' : ['spec/SpektraltoolsCasperSpec.js']

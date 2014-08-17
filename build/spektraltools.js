@@ -1291,20 +1291,27 @@
     };
 
     //XHR - LOAD FILE
-    Spektral.loadFile = function (file, callback, async) {
-        async = async || true;
-        var ext = Spektral.getExtension(file), xhr = Spektral.getXHR();
+    Spektral.loadFile = function (file, callback, options) {
+        var
+            async = Spektral.getParameter(options, 'async', true),
+            onerror = Spektral.getParameter(options, 'onerror', null),
+            ext = Spektral.getExtension(file), xhr = Spektral.getXHR();
+
         if (ext === "json") {
             xhr.overrideMimeType("application/json");
         }
         function checkIfReady() {
+            if (xhr.status === 404) {
+                onerror(xhr.status);
+                xhr.abort();
+            }
             if (xhr.readyState < 4) {
                 return;
             }
             if (xhr.status !== 200) {
                 return;
             }
-            if (xhr.readyState === 4) {
+            if (xhr.readyState === 4 && xhr.status === 200) {
                 var response;
                 if (ext === "json") {
                     response = JSON.parse(xhr.responseText);
@@ -1317,14 +1324,31 @@
             }
         }
         function onLoadError(e) {
+            if ( onerror !== null ) {
+                onerror(e);
+            }
             Spektral.log("loadFile: loadError: There was a load error: " + e, "warn");
+            xhr.abort();
         }
         Spektral.attachEventListener(xhr, 'readystatechange', checkIfReady);
         Spektral.attachEventListener(xhr, 'error', onLoadError);
+
         xhr.open("GET", file, async);
         xhr.send();
     };
 
+    Spektral.getChildNodes = function (parent) {
+        var
+            children = parent.childNodes,
+            childArr = [], i, isElement;
+        for (i = 0; i < children.length; i += 1) {
+            isElement = Spektral.isElement(children[i]);
+            if(isElement === true) {
+                childArr.push(children[i]);
+            }
+        }
+        return childArr;
+    }
 
     //DEBUG - LOG
     Spektral.log = function(msg, type, obj) {

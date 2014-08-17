@@ -3,11 +3,11 @@ var mouse = require("mouse").create(casper);
 
 //EVENTS
 casper.on('remote.message', function(msg) {
-    this.echo('Remote message: ' + msg);
+    this.echo('Remote message: ' + msg, 'WARN_BAR');
 });
 
 casper.on('remote.alert', function(msg) {
-    this.echo('Remote alert: ' + msg);
+    this.echo('Remote alert: ' + msg, 'ERROR');
 });
 
 casper.on('resource.received', function(resource) {

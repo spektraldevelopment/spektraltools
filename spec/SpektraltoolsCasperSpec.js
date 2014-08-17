@@ -1,6 +1,6 @@
 casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
-    casper.start('CasperTest.html', function() {
+    casper.start('http://localhost/spektraltools/CasperTest.html', function() {
         this.viewport(800, 600);
         this.echo(this.getTitle(), 'GREEN_BAR');
 
@@ -698,7 +698,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.evaluate(function(){
             Spektral.showElement(hideShowDiv, { displayType: 'inline' });
         });
-        this.echoHTML('#hideShowDiv');
         this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'display'), 'inline', ' element display property was set to inline.');
     });
 
@@ -759,6 +758,50 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             XHRTest = Spektral.getXHR();
         });
         this.test.assertEquals(this.getType(this.getVar('XHRTest')), 'object', ' xhr was returned.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('XHR - loadFile');
+        this.echo('loadFile - txt file', 'INFO');
+        this.evaluate(function(){
+            Spektral.loadFile('http://' + host + '/spektraltools/xhrtest/test.txt', function(e) {
+                XHRTxtTest = e;
+            });
+        });
+    });
+
+    casper.then(function(){
+        this.test.assertEqual(this.getVar('XHRTxtTest'), 'Here is the text from test.txt', ' txt file was loaded.');
+    });
+
+    casper.then(function(){
+        this.echo('loadFile - json file', 'INFO');
+        this.evaluate(function(){
+            Spektral.loadFile('http://' + host + '/spektraltools/xhrtest/test.json', function(e) {
+                XHRJsonTest = e;
+            });
+        });
+    });
+
+    casper.then(function(){
+        var testObject = this.getVar('XHRJsonTest');
+        this.test.assertEqual(this.getType(testObject), 'object', ' json object was returned.');
+        this.test.assertEqual(testObject.items[1].item, 'item2', ' json object is traversable.');
+    });
+
+    casper.then(function(){
+        this.echo('loadFile - xml file', 'INFO');
+        this.evaluate(function(){
+            Spektral.loadFile('http://' + host + '/spektraltools/xhrtest/test.xml', function(e) {
+                XHRXMLTest = e.firstChild;
+            });
+        });
+    });
+
+    casper.then(function(){
+        var testObject = this.getVar('XHRXMLTest');
+
+        this.test.assertEqual(this.getType(testObject), 'data', ' XML was returned.');
     });
 
     casper.run(function() {

@@ -1595,4 +1595,39 @@ Returns the XMLHttpRequest object of the browser
 var xhr = Spektral.getXHR();
 ```
 
+2. Spektral.loadFile(file, callback, options);
+------
+
+#### Description
+Used to load external json, XML, and txt files.
+
+#### Arguments
+file: `String` - The path to the file
+callback: `Function` - The callback function on a successful load, the loaded file is accessed through the returned event object
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	async: true, //Determines whether the file should be loaded synchronously or asynchronously
+	onerror: function(){} //The optional function you can call on an error
+}
+```
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+var txtFile;
+Spektral.loadFile('path/to/text.txt', onLoaded, { onerror: function(){
+	//An error has occurred
+}});
+
+function onLoaded(e){
+	txtFile = e;
+}
+```
+
 
