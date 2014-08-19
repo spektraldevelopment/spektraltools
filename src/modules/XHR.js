@@ -72,15 +72,75 @@
         xhr.send();
     };
 
-    Spektral.getChildNodes = function (parent) {
+    //XHR - XML TO JSON
+    Spektral.xmlToJSON = function (xml, options) {
         var
-            children = parent.childNodes,
-            childArr = [], i, isElement;
-        for (i = 0; i < children.length; i += 1) {
-            isElement = Spektral.isElement(children[i]);
-            if(isElement === true) {
-                childArr.push(children[i]);
+            node = Spektral.getParameter(options, 'node', xml.firstChild.nodeName),
+            index = Spektral.getParameter(options, 'index', 0),
+            parentNode = xml.getElementsByTagName(node)[index],
+            child, type, xmlObject = {}, rootArray = [], rootObj;
+        for (child = parentNode.firstChild; child !== null; child = child.nextSibling) {
+            type = Spektral.getType(child);
+            //console.log('TYPE IS: ' + type);
+            if (type !== '#text') {
+                if (child.childNodes.length === 1) {
+                    //If node is a immediate child of xml.firstChild
+
+                    //NOTE: make sure this can handle multiple attributes
+
+                    rootObj = {};
+                    rootArray.push(Spektral.createNodeObject(child));
+                    rootObj[child.tagName] = rootArray;
+                    xmlObject['root'] = rootObj;
+                } else {
+                    xmlObject[child.tagName] = Spektral.createArray(child.childNodes);
+                }
             }
         }
-        return childArr;
-    }
+        return xmlObject;
+    };
+
+    Spektral.createNodeObject = function(node) {
+        var nodeObj = {}, attributes, attrLength, i;
+        nodeObj['inner'] = Spektral.getInnerText(node.childNodes[0]);
+        attributes = node.attributes;
+        attrLength = attributes.length;
+        if (attrLength >= 1) {
+            for (i = 0; i < attributes.length; i += 1) {
+                nodeObj[attributes.item(i).name] = attributes.item(i).value;
+            }
+        }
+        return nodeObj;
+    };
+
+    //XHR - CREATE ARRAY
+    Spektral.createArray = function (list) {
+        var
+            child, type, listArray = [],
+            listObject, attributes, attrLength,
+            hasChildren, length, i, j;
+
+        for (i = 0; i < list.length; i++) {
+            child = list[i];
+            type = Spektral.getType(child);
+            if (type !== "#text") {
+                hasChildren = child.hasChildNodes();
+                length = child.childNodes.length;
+                //Element
+                listObject = {};
+                attributes = child.attributes;
+                attrLength = attributes.length;
+                if (attrLength >= 1) {
+                    for (j = 0; j < attributes.length; j += 1) {
+                        listObject[attributes.item(j).name] = attributes.item(j).value;
+                    }
+                }
+                listObject[child.tagName] = Spektral.getInnerText(child);
+                if (hasChildren && length > 1) {
+                    listObject[child.tagName] = Spektral.createArray(child.childNodes);
+                }
+                listArray.push(listObject);
+            }
+        }
+        return listArray;
+    };

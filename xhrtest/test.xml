@@ -1,7 +1,15 @@
 <?xml version="1.0"?>
 <data>
-    <basic>
+    <foobar>
         <item id="Item1">Inner content for item1</item>
         <item id="Item2">Inner content for item2</item>
-    </basic>
+    </foobar>
+    <spektral>
+        <item id="Item3" dataTest="Testing 1">Inner content for item3</item>
+        <item id="Item4" dataTest="Testing 2">Inner content for item4</item>
+        <foo>
+            <bar>Child One</bar>
+            <bar>Child Two</bar>
+        </foo>
+    </spektral>
 </data>

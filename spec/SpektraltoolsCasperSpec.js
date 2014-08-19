@@ -800,8 +800,42 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
     casper.then(function(){
         var testObject = this.getVar('XHRXMLTest');
-
         this.test.assertEqual(this.getType(testObject), 'data', ' XML was returned.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('XHR - XMLToJson');
+        this.evaluate(function(){
+            Spektral.loadFile('http://' + host + '/spektraltools/xhrtest/test.xml', function(e) {
+                XMLToJsonTest = e;
+            });
+        });
+    });
+
+    casper.then(function(){
+        var xmlObj;
+        this.evaluate(function(){
+            XMLObject = Spektral.xmlToJSON(XMLToJsonTest);
+        });
+
+        xmlObj = this.getVar('XMLObject');
+
+        this.test.assertEqual(this.getType(xmlObj), 'object', ' JSON object was returned.');
+        this.test.assertEqual(xmlObj.spektral[1].item, 'Inner content for item4', ' object is traversable.');
+        this.test.assertEqual(xmlObj.spektral[2].foo[1].bar, 'Child Two', ' object is traversable.');
+    });
+
+    casper.then(function(){
+        var xmlObjIndex;
+        this.evaluate(function(){
+            XMLObjectIndex = Spektral.xmlToJSON(XMLToJsonTest, { node: 'spektral' });
+        });
+
+        xmlObjIndex = this.getVar('XMLObjectIndex');
+
+        this.echo(this.getInfo(xmlObjIndex));
+//        this.test.assertEqual(this.getType(xmlObjIndex), 'object', ' JSON object was returned.');
+//        this.test.assertEqual(xmlObjIndex.foo[1].bar, 'Child Two', ' object is traversable.');
     });
 
     casper.run(function() {
