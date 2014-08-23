@@ -1,21 +1,23 @@
 //JASMINE HELPER FILE
 
-var documentMain, body;
+var documentMain, body, mainContent;
 
 ////////////////////
 ////INIT HELPER
 ////////////////////
 function initHelper (doc) {
     documentMain = doc;
-    body = doc.body;
+    body = doc.body,
+    mainContent = doc.querySelector('#mainContent');
 }
 
 ////////////////////
 ////CREATE TEST CONTAINER
 ////////////////////
-function createTestContainer(parent, attrs) {
-    parent = parent || body;
-    var tc = documentMain.createElement('div');
+function createTestContainer(attrs) {
+    var
+        parent = getParameter(attrs, 'parent', body),
+        tc = documentMain.createElement('div');
     tc.id = getParameter(attrs, 'id', 'testContainer');
     parent.appendChild(tc);
     return tc;

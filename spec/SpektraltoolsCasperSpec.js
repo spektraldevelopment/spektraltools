@@ -825,18 +825,20 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(xmlObj.spektral[2].foo[1].bar, 'Child Two', ' object is traversable.');
     });
 
-    casper.then(function(){
-        var xmlObjIndex;
-        this.evaluate(function(){
-            XMLObjectIndex = Spektral.xmlToJSON(XMLToJsonTest, { node: 'spektral' });
-        });
+//    casper.then(function(){
+//        var xmlObjIndex;
+//        this.evaluate(function(){
+//            XMLObjectIndex = Spektral.xmlToJSON(XMLToJsonTest, { node: 'spektral' });
+//        });
+//
+//        xmlObjIndex = this.getVar('XMLObjectIndex');
+//
+//        this.echo(this.getInfo(xmlObjIndex));
+////        this.test.assertEqual(this.getType(xmlObjIndex), 'object', ' JSON object was returned.');
+////        this.test.assertEqual(xmlObjIndex.foo[1].bar, 'Child Two', ' object is traversable.');
+//    });
 
-        xmlObjIndex = this.getVar('XMLObjectIndex');
 
-        this.echo(this.getInfo(xmlObjIndex));
-//        this.test.assertEqual(this.getType(xmlObjIndex), 'object', ' JSON object was returned.');
-//        this.test.assertEqual(xmlObjIndex.foo[1].bar, 'Child Two', ' object is traversable.');
-    });
 
     casper.run(function() {
         this.echo(' ');

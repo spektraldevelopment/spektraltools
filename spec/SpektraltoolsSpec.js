@@ -204,6 +204,30 @@ describe('SpektralTools: ', function() {
         destroyTestContainer(testContainer);
     });
 
+    describe('DOM - getChildNodes', function(){
+        var
+            childNodesTest = createTestContainer({ id: 'childNodesTest' }),
+            childOne = createTestElement(childNodesTest, 'div', { id: 'childOne' }),
+            childTwo = createTestElement(childNodesTest, 'div', { id: 'childTwo' }),
+            nodes = Spektral.getChildNodes(childNodesTest);
+
+        it('returns an array.', function(){
+            expect(getType(nodes)).toEqual('array');
+        });
+
+        it('array contains two children.', function(){
+           expect(nodes.length).toEqual(2);
+        });
+
+        it('array contains child one.', function(){
+            expect(nodes[0].id).toEqual('childOne');
+        });
+
+        it('array contains child one.', function(){
+            expect(nodes[1].id).toEqual('childTwo');
+        });
+    });
+
     describe('NUMBER - roundNum', function(){
         var
             testNum = 6.456,

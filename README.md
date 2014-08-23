@@ -229,6 +229,34 @@ Spektral.isElement(testDiv);
 Spektral.isElement(testObject);
 //Returns false
 ```
+
+11. Spektral.getChildNodes(parent);
+------
+
+#### Description
+Gets all child elements of a parent and returns them in an array.
+
+#### Arguments
+parent: `HTMLElement` - The parent element
+
+##### Returns
+`Array`
+
+##### Example
+
+```html
+<div id="parentDiv">
+	<div id="childOne">Child One</div>
+	<div id="childTwo">Child Two</div>
+</div>
+```
+
+```javascript
+var 
+	pd = document.querySelector('#parentDiv'), 
+	nodes = Spektral.getChildNodes(pd);
+//Returns: [[object HTMLDivElement],[object HTMLDivElement]]
+```
 ---
 
 ## EVENT
