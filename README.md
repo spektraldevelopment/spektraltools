@@ -1657,5 +1657,38 @@ function onLoaded(e){
 	txtFile = e;
 }
 ```
+---
+
+##Window
+
+1. Spektral.setQueryString(obj, options);
+------
+
+#### Description
+Sets and/or appends a query string.
+
+#### Arguments
+obj: `Object` - The query keys and values
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	append: false //If set to true will keep the previous query string and update existing values if needed
+}
+```
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+Spektral.setQueryString({ foo: 'bar', spektral: 2 });
+//Sets: http://host/path?foo=bar&spektral=2
+
+Spektral.setQueryString({ testVal: 'test', spektral: 5 }, { append: true });
+//Sets: http://host/path?foo=bar&spektral=5&testVal=test
+```
 
 

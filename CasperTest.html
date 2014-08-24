@@ -116,11 +116,13 @@
             mousePosTest = [], mta = document.querySelector('#mouseTestArea'), viewportSizeTest, positionTest,
             dimensionTest, padMarginTest, docDimTest, timerTest = 0, stopTimerTest = true, timeoutTest = false,
             stopTimeoutTest = true, inlineStyleTest, getStyleTest = { padding: null, margin: null, display: null},
-            XHRTest, XHRTxtTest, XHRXMLTest, XHRJsonTest, XMLToJsonTest, XMLObject, XMLObjectIndex;
+            XHRTest, XHRTxtTest, XHRXMLTest, XHRJsonTest, XMLToJsonTest, XMLObject, XMLObjectIndex, queryString;
 
         function logToConsole(msg) {
             console.log(msg);
         }
+
+        Spektral.setQueryString({ foo: 'bar', spektral: 2, val3: 'test-value' });
     </script>
 </body>
 </html>

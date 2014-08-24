@@ -3,6 +3,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     casper.start('http://localhost/spektraltools/CasperTest.html', function() {
         this.viewport(800, 600);
         this.echo(this.getTitle(), 'GREEN_BAR');
+        this.echo(this.getCurrentUrl(), 'GREEN_BAR');
 
         var js = this.evaluate(function() {
             return document;
@@ -838,7 +839,41 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 ////        this.test.assertEqual(xmlObjIndex.foo[1].bar, 'Child Two', ' object is traversable.');
 //    });
 
+    casper.then(function(){
+        this.methodHeader('WINDOW - setQueryString');
+        this.evaluate(function(){
+            queryString = Spektral.setQueryString({ foo: 'bar', spektral: 2, val3: 'test-value' });
+        });
+        this.open(this.getHostURL() + casper.getVar('queryString'));
+    });
 
+    casper.then(function(){
+        this.test.assertEqual(this.getCurrentUrl(), 'http://localhost/spektraltools/CasperTest.html?foo=bar&spektral=2&val3=test-value', ' query string was set.');
+    });
+
+    casper.then(function(){
+        this.echo('WINDOW - setQueryString - append=false', 'INFO');
+        this.evaluate(function(){
+            queryString = Spektral.setQueryString({ testOne: 'testVal1', testTwo: 3 });
+        });
+        this.open(this.getHostURL() + casper.getVar('queryString'));
+    });
+
+    casper.then(function(){
+        this.test.assertEqual(this.getCurrentUrl(), 'http://localhost/spektraltools/CasperTest.html?testOne=testVal1&testTwo=3', ' query string was over written.');
+    });
+
+    casper.then(function(){
+        this.echo('WINDOW - setQueryString - append=true', 'INFO');
+        this.evaluate(function(){
+            queryString = Spektral.setQueryString({ foo: 'bar', testTwo: 5 }, { append: true });
+        });
+        this.open(this.getHostURL() + casper.getVar('queryString'));
+    });
+
+    casper.then(function(){
+        this.test.assertEqual(this.getCurrentUrl(), 'http://localhost/spektraltools/CasperTest.html?testOne=testVal1&testTwo=5&foo=bar', ' query string was appended.');
+    });
 
     casper.run(function() {
         this.echo(' ');

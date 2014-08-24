@@ -29,7 +29,7 @@ module.exports = function(grunt) {
                     '}(window));'
             },
             dist: {
-                src: ['src/modules/Global.js', 'src/modules/DOM.js', 'src/modules/Event.js', 'src/modules/Number.js', 'src/modules/String.js', 'src/modules/Style.js', 'src/modules/Utils.js', 'src/modules/XHR.js', 'src/modules/Debug.js'],
+                src: ['src/modules/Global.js', 'src/modules/DOM.js', 'src/modules/Event.js', 'src/modules/Number.js', 'src/modules/String.js', 'src/modules/Style.js', 'src/modules/Utils.js', 'src/modules/XHR.js', 'src/modules/Window.js', 'src/modules/Debug.js'],
                 dest: 'build/spektraltools.js'
             }
         },

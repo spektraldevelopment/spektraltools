@@ -81,3 +81,10 @@ casper.getType = function(obj){
     }
     return type.toLowerCase();
 };
+
+casper.getHostURL = function(){
+    return utils.decodeUrl(this.evaluate(function _evaluate() {
+        var docLoc = document.location;
+        return docLoc.protocol + "//" + docLoc.host + docLoc.pathname;
+    }));
+};
