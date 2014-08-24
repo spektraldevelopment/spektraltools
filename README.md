@@ -1691,4 +1691,21 @@ Spektral.setQueryString({ testVal: 'test', spektral: 5 }, { append: true });
 //Sets: http://host/path?foo=bar&spektral=5&testVal=test
 ```
 
+2. Spektral.getQueryString();
+------
+
+#### Description
+Gets the query string from the URL and returns them in an object
+
+##### Returns
+`Object`
+
+##### Example
+
+```javascript
+//Example: http://host/path?foo=bar&spektral=5&testVal=test
+var queryObj = Spektral.getQueryString();
+//Returns: {"foo":"bar","spektral":"5","testVal":"test"}
+```
+
 

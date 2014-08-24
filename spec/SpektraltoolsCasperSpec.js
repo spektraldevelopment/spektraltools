@@ -771,6 +771,12 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         });
     });
 
+    casper.waitFor(function check() {
+        return this.evaluate(function() {
+            return XHRTxtTest;
+        });
+    });
+
     casper.then(function(){
         this.test.assertEqual(this.getVar('XHRTxtTest'), 'Here is the text from test.txt', ' txt file was loaded.');
     });
@@ -873,6 +879,18 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
     casper.then(function(){
         this.test.assertEqual(this.getCurrentUrl(), 'http://localhost/spektraltools/CasperTest.html?testOne=testVal1&testTwo=5&foo=bar', ' query string was appended.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('WINDOW - getQueryString');
+        this.evaluate(function(){
+            queryObj = Spektral.getQueryString();
+        });
+
+        this.test.assertEqual(this.getType(this.getVar('queryObj')), 'object', ' query object is defined.');
+        this.test.assertEqual(this.getVar('queryObj').foo, 'bar', ' foo is defined');
+        this.test.assertEqual(this.getVar('queryObj').testOne, 'testVal1', ' testOne is defined');
+        this.test.assertEqual(this.getVar('queryObj').testTwo, '5', ' testTwo is defined');
     });
 
     casper.run(function() {
