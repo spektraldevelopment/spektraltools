@@ -1707,5 +1707,39 @@ Gets the query string from the URL and returns them in an object
 var queryObj = Spektral.getQueryString();
 //Returns: {"foo":"bar","spektral":"5","testVal":"test"}
 ```
+3. Spektral.setHash(hashtag);
+------
 
+#### Description
+Sets hashtag in URL
+
+#### Arguments
+hashtag: `String` - The hashtag to set
+
+##### Returns
+`Nothing`
+
+##### Example
+
+```javascript
+Spektral.setHash('foobar');
+//Sets: http://host/path?foo=bar&spektral=5&testVal=test#foobar
+```
+
+4. Spektral.getHash();
+------
+
+#### Description
+Gets the hashtag and returns it if set
+
+##### Returns
+`String`
+
+##### Example
+
+```javascript
+//Example: http://host/path?foo=bar&spektral=5&testVal=test#foobar
+var hash = Spektral.getHash();
+//Returns: '#foobar'
+```
 

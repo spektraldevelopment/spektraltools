@@ -68,3 +68,17 @@
         window.location.href = currentURL.protocol + "://" + currentURL.host + currentURL.path + queryString + currentURL.hash;
         return queryString;
     };
+
+    //WINDOW - getHash
+    Spektral.getHash = function() {
+        var hashtag = window.location.hash;
+        if(hashtag === "") {
+            Spektral.log("getHash. No hash found!", "warn");
+        }
+        return hashtag;
+    };
+
+    //WINDOW - setHash
+    Spektral.setHash = function(hashtag) {
+        window.location.hash = hashtag;
+    };

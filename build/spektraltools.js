@@ -1494,6 +1494,20 @@
         return queryString;
     };
 
+    //WINDOW - getHash
+    Spektral.getHash = function() {
+        var hashtag = window.location.hash;
+        if(hashtag === "") {
+            Spektral.log("getHash. No hash found!", "warn");
+        }
+        return hashtag;
+    };
+
+    //WINDOW - setHash
+    Spektral.setHash = function(hashtag) {
+        window.location.hash = hashtag;
+    };
+
     //DEBUG - LOG
     Spektral.log = function(msg, type, obj) {
         if (debug === true) {

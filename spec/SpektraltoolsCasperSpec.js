@@ -790,6 +790,12 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         });
     });
 
+    casper.waitFor(function check() {
+        return this.evaluate(function() {
+            return XHRJsonTest;
+        });
+    });
+
     casper.then(function(){
         var testObject = this.getVar('XHRJsonTest');
         this.test.assertEqual(this.getType(testObject), 'object', ' json object was returned.');
@@ -805,6 +811,12 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         });
     });
 
+    casper.waitFor(function check() {
+        return this.evaluate(function() {
+            return XHRXMLTest;
+        });
+    });
+
     casper.then(function(){
         var testObject = this.getVar('XHRXMLTest');
         this.test.assertEqual(this.getType(testObject), 'data', ' XML was returned.');
@@ -816,6 +828,12 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             Spektral.loadFile('http://' + host + '/spektraltools/xhrtest/test.xml', function(e) {
                 XMLToJsonTest = e;
             });
+        });
+    });
+
+    casper.waitFor(function check() {
+        return this.evaluate(function() {
+            return XMLToJsonTest;
         });
     });
 
@@ -891,6 +909,26 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getVar('queryObj').foo, 'bar', ' foo is defined');
         this.test.assertEqual(this.getVar('queryObj').testOne, 'testVal1', ' testOne is defined');
         this.test.assertEqual(this.getVar('queryObj').testTwo, '5', ' testTwo is defined');
+    });
+
+    casper.then(function(){
+        this.methodHeader('WINDOW - setHash');
+        this.evaluate(function(){
+            Spektral.setHash('foobar');
+        });
+    });
+
+    casper.then(function(){
+        this.test.assertEqual(this.getCurrentUrl(), 'http://localhost/spektraltools/CasperTest.html?testOne=testVal1&testTwo=5&foo=bar#foobar', ' hash was set.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('WINDOW - getHash');
+        this.evaluate(function(){
+            currentHash = Spektral.getHash();
+        });
+
+        this.test.assertEqual(this.getVar('currentHash'), '#foobar', ' hash was returned.');
     });
 
     casper.run(function() {
