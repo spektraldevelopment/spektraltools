@@ -1,9 +1,13 @@
 //MOUSE
-var mouse = require("mouse").create(casper);
+var
+    mouse = require("mouse").create(casper),
+    colorizer = require('colorizer').create('Colorizer');
+
+//Available color names are black, red, green, yellow, blue, magenta, cyan and white
 
 //EVENTS
 casper.on('remote.message', function(msg) {
-    this.echo('Remote message: ' + msg, 'WARN_BAR');
+    this.echoRemote(msg);
 });
 
 casper.on('remote.alert', function(msg) {
@@ -38,6 +42,25 @@ casper.methodHeader = function(msg){
 casper.echoHTML = function(el) {
     this.echo(this.getHTML(el, true));
 }
+
+casper.echoObject = function(obj){
+    var objString = 'Object: ' + this.getInfo(this.getVar(obj));
+    this.colourEcho(objString, 'white', 'black', false);
+};
+
+casper.echoRemote = function(msg) {
+    var remoteString = 'Remote: ' + msg;
+    this.colourEcho(remoteString, 'blue', 'cyan');
+};
+
+casper.colourEcho = function(obj, bgColour, fgColour, bold){
+    bold = bold || true;
+    this.echo(colorizer.format(obj, {
+        bg:   bgColour,
+        fg:   fgColour,
+        bold: bold
+    }));
+};
 
 casper.getVar = function(variable) {
     return this.evaluate(function(v){

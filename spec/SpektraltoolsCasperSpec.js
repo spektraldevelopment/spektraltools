@@ -927,8 +927,15 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.evaluate(function(){
             currentHash = Spektral.getHash();
         });
-
         this.test.assertEqual(this.getVar('currentHash'), '#foobar', ' hash was returned.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('WINDOW - getURLPath');
+        this.evaluate(function(){
+            urlObj = Spektral.getURLPath();
+        });
+        this.echoObject('urlObj');
     });
 
     casper.run(function() {
