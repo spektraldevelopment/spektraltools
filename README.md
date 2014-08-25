@@ -1743,3 +1743,19 @@ var hash = Spektral.getHash();
 //Returns: '#foobar'
 ```
 
+5. Spektral.getURLPath();
+------
+
+#### Description
+Gets the URL and breaks it down into an object
+
+##### Returns
+`Object`
+
+##### Example
+
+```javascript
+//Example: http://localhost/spektraltools/CasperTest.html?testOne=testVal1&testTwo=5&foo=bar#foobar
+//Returns: {"fileType":"html","fullURL":"http://localhost/spektraltools/CasperTest.html?testOne=testVal1&testTwo=5&foo=bar#foobar","hash":"#foobar","host":"localhost","path":"/spektraltools/CasperTest.html","pathArray":["spektraltools","CasperTest.html"],"protocol":"http:","queryString":"?testOne=testVal1&testTwo=5&foo=bar"}
+```
+
