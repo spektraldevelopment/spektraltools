@@ -1278,6 +1278,31 @@
         clearTimeout(timeout);
     };
 
+    //UTILS - GET SYSTEM INFO
+    Spektral.getSystemInfo = function() {
+        var
+            nav = window.navigator,
+            info = {}, possibleBrowsers,
+            ua = nav.userAgent, browser, browserMatch, i;
+        possibleBrowsers = ["MSIE", "Firefox", "Chrome", "Safari", "Opera"];
+        for(i = 0; i < possibleBrowsers.length; i += 1) {
+            browserMatch = Spektral.hasPattern(ua, possibleBrowsers[i]);
+            if(browserMatch === true) {
+                browser = possibleBrowsers[i];
+                if(browser === "MSIE") {
+                    browser = "IE";
+                }
+                break;
+            }
+        }
+        info["navigator"] = nav;
+        info["appName"] = nav.appName;
+        info["userAgent"] = ua;
+        info["browser"] = browser;
+        Spektral.log("getSystemInfo: nav: ", "dir", nav);
+        return info;
+    };
+
     //XHR - GET XHR
     Spektral.getXHR = function () {
         var result, versions, i;
@@ -1507,6 +1532,30 @@
     Spektral.setHash = function(hashtag) {
         window.location.hash = hashtag;
     };
+
+    //WINDOW - navigateToUrl
+    Spektral.navigateToURL = function (url, options) {
+        //Still have to test this, also I might allow for multiple window names:
+        //ex. _self, _parent etc.
+        var
+            newWindow = Spektral.getParameter(options, 'newWindow', false),
+            focusOnNew = Spektral.getParameter(options, 'focusOnNew', false);
+        if(newWindow === false) {
+            try {
+                window.location = url;
+            } catch (e) {
+                window.location.href = url;
+            }
+        } else {
+            if(focusOnNew === false) {
+                window.open(url, "_blank");
+            } else {
+                window.open(url, "_blank");
+                window.focus();
+            }
+        }
+    };
+
 
     //DEBUG - LOG
     Spektral.log = function(msg, type, obj) {

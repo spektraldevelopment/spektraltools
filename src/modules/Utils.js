@@ -648,3 +648,28 @@
     Spektral.stopTimeOut = function (timeout) {
         clearTimeout(timeout);
     };
+
+    //UTILS - GET SYSTEM INFO
+    Spektral.getSystemInfo = function() {
+        var
+            nav = window.navigator,
+            info = {}, possibleBrowsers,
+            ua = nav.userAgent, browser, browserMatch, i;
+        possibleBrowsers = ["MSIE", "Firefox", "Chrome", "Safari", "Opera"];
+        for(i = 0; i < possibleBrowsers.length; i += 1) {
+            browserMatch = Spektral.hasPattern(ua, possibleBrowsers[i]);
+            if(browserMatch === true) {
+                browser = possibleBrowsers[i];
+                if(browser === "MSIE") {
+                    browser = "IE";
+                }
+                break;
+            }
+        }
+        info["navigator"] = nav;
+        info["appName"] = nav.appName;
+        info["userAgent"] = ua;
+        info["browser"] = browser;
+        Spektral.log("getSystemInfo: nav: ", "dir", nav);
+        return info;
+    };

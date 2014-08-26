@@ -935,7 +935,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.evaluate(function(){
             urlObj = Spektral.getURLPath();
         });
-        this.echoObject('urlObj');
 
         var uObj = this.getVar('urlObj');
 
@@ -949,6 +948,25 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(uObj.pathArray, ["spektraltools","CasperTest.html"], ' pathArray was set.');
         this.test.assertEqual(uObj.protocol, 'hp:', ' protocol was set.');
         this.test.assertEqual(uObj.queryString, '?testOne=testVal1&testTwo=5&foo=bar', ' queryString was set.');
+    });
+
+    casper.then(function(){
+        this.methodHeader('WINDOW - navigateToURL');
+        this.evaluate(function(){
+            Spektral.navigateToURL('https://www.github.com');
+        });
+    });
+
+    casper.then(function(){
+        this.test.assertEqual(this.getCurrentUrl(), 'https://github.com/', ' new url is correct.');
+    });
+
+    casper.then(function(){
+        this.open('http://localhost/spektraltools/CasperTest.html');
+    });
+
+    casper.then(function(){
+        this.echo(this.getCurrentUrl());
     });
 
     casper.run(function() {
