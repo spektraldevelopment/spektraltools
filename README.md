@@ -257,6 +257,34 @@ var
 	nodes = Spektral.getChildNodes(pd);
 //Returns: [[object HTMLDivElement],[object HTMLDivElement]]
 ```
+
+12. Spektral.query(element);
+------
+
+#### Description
+Selects an element or a group of elements based on their id or class
+
+#### Arguments
+element: `String` - The id or class of the element 
+
+##### Returns
+`HTMLElement or Nodelist`
+
+##### Example
+
+```html
+<div id="parentDiv">
+	<div id="childOne" class="child">Child One</div>
+	<div id="childTwo" class="child">Child Two</div>
+</div>
+```
+
+```javascript
+var childById = Spektral.query('#childTwo');
+//Returns: [object HTMLDivElement]
+var children = Spektral.query('.child');
+//Returns: [object Nodelist]
+```
 ---
 
 ## EVENT

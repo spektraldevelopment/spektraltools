@@ -1,4 +1,22 @@
 
+    //DOM - QUERY
+    Spektral.query = function(element) {
+        var isClass = Spektral.detectCharacter(element, '.'), theElement;
+        if (isClass === true) {
+            theElement = document.querySelectorAll(element);
+
+            if(theElement.length === 1) {
+                theElement = theElement[0];
+            }
+        } else {
+            theElement = document.querySelector(element);
+        }
+        if (theElement === null) {
+            Spektral.log('query: element not found.', 'warn');
+        }
+        return theElement;
+    };
+
     //DOM - ADD ELEMENT
     Spektral.addElement = function(parent, type, attrs) {
         var

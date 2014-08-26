@@ -1,3 +1,5 @@
+var utils = require('utils');
+
 casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
     casper.start('http://localhost/spektraltools/CasperTest.html', function() {
@@ -8,7 +10,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         var js = this.evaluate(function() {
             return document;
         });
-        //this.echo(js.all[0].outerHTML);
     });
 
     casper.then(function(){
@@ -29,6 +30,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     });
 
     casper.then(function(){
+        this.echo('GLOBAL - query: single class query', 'INFO');
         this.evaluate(function(){
             queryClassTest = Spektral.query('.classTest');
         });
@@ -36,20 +38,20 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getVar('queryClassTest').className, 'classTest', 'element class name is correct.')
     });
 
-//Will come back to this, apparently evaluate() does not work for
-//    casper.then(function(){
-//        this.evaluate(function(){
-//            queryMultiTest = Spektral.query('.multiTest');
-//        });
-//
-//        this.test.assertEqual(this.getVar('queryMultiTest').length, 2, 'query returned two elements.');
-//
-//        this.test.assertEqual(this.getType(this.getVar('queryMultiTest')[0]), 'div', 'the first element is a div.');
-//        this.test.assertEqual(this.getVar('queryMultiTest')[0].className, 'multiTest', 'the first element class name is correct.');
-//
-//        //this.test.assertEqual(this.getType(this.getVar('queryMultiTest')[1]), 'div', 'the second element is a div.');
-//        //this.test.assertEqual(this.getVar('queryMultiTest')[1].className, 'multiTest', 'the first element class name is correct.');
-//    });
+    casper.then(function(){
+        this.echo('GLOBAL - query: multiple class query', 'INFO');
+        this.evaluate(function(){
+            queryMultiTest = Spektral.query('.multiTest')[0];
+        });
+
+        this.test.assertEqual(this.getVar('queryMultiTest').innerHTML, 'Query Multiple Class Div #1', ' first element was selected.');
+
+        this.evaluate(function(){
+            queryMultiTest = Spektral.query('.multiTest')[1];
+        });
+
+        this.test.assertEqual(this.getVar('queryMultiTest').innerHTML, 'Query Multiple Class Div #2', ' second element was selected.');
+    });
 
     casper.then(function(){
         this.evaluate(function(){
@@ -413,7 +415,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.evaluate(function(){
             var posTestDiv = document.querySelector('#getPosTest');
             positionTest = Spektral.getPosition(posTestDiv);
-            //logToConsole('Position: ' + JSON.stringify(positionTest));
         });
 
         var posObj = this.getVar('positionTest');
@@ -451,7 +452,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.evaluate(function(){
             var getDimTest = document.querySelector('#getDimTest');
             dimensionTest = Spektral.getDimensions(getDimTest);
-            //logToConsole('Dimensions: ' + JSON.stringify(dimensionTest));
         });
 
         var dObj = this.getVar('dimensionTest');
@@ -488,7 +488,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.evaluate(function(){
             var padMarginDiv = document.querySelector('#marginPaddingTest');
             padMarginTest = Spektral.getDimensions(padMarginDiv);
-            //logToConsole('Dimensions: ' + JSON.stringify(padMarginTest));
         });
         var pmTest = this.getVar('padMarginTest');
 
@@ -506,60 +505,60 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getVar('docDimTest').height, 675, ' returned height was correct.');
     });
 
-//    casper.then(function(){
-//        this.methodHeader('UTILS - createTimer');
-//        this.evaluate(function(){
-//            var newTimer = Spektral.createTimer(1, function(){
-//               timerTest += 1;
-//
-//               if (timerTest >= 5){
-//                   Spektral.stopTimer(newTimer);
-//               }
-//            });
-//        });
-//
-//        this.wait(5000, function(){
-//            this.test.assertEqual(this.getVar('timerTest'), 5, ' timer was created.');
-//        });
-//    });
-//
-//    casper.then(function(){
-//        this.methodHeader('UTILS - stopTimer');
-//        this.evaluate(function(){
-//            var timer = Spektral.createTimer(1, function(){
-//               stopTimerTest = false;
-//            });
-//            Spektral.stopTimer(timer);
-//        });
-//
-//        this.wait(2000, function(){
-//            this.test.assert(this.getVar('stopTimerTest'), ' time was stopped.');
-//        });
-//    });
-//
-//    casper.then(function(){
-//        this.methodHeader('UTILS - createTimeOut');
-//        this.evaluate(function(){
-//            Spektral.createTimeOut(1, function(){
-//                timeoutTest = true;
-//            });
-//        });
-//
-//        this.wait(2000, function(){
-//            this.test.assert(this.getVar('timeoutTest'), ' timeout was created.');
-//        });
-//    });
-//
-//    casper.then(function(){
-//        this.methodHeader('UTILS - stopTimeOut');
-//        this.evaluate(function(){
-//            var timeout = Spektral.createTimeOut(1, function(){
-//                stopTimeoutTest = false;
-//            });
-//            Spektral.stopTimeOut(timeout);
-//        });
-//        this.test.assert(this.getVar('stopTimeoutTest'), ' timeout was stopped.');
-//    });
+    casper.then(function(){
+        this.methodHeader('UTILS - createTimer');
+        this.evaluate(function(){
+            var newTimer = Spektral.createTimer(1, function(){
+               timerTest += 1;
+
+               if (timerTest >= 5){
+                   Spektral.stopTimer(newTimer);
+               }
+            });
+        });
+
+        this.wait(5000, function(){
+            this.test.assertEqual(this.getVar('timerTest'), 5, ' timer was created.');
+        });
+    });
+
+    casper.then(function(){
+        this.methodHeader('UTILS - stopTimer');
+        this.evaluate(function(){
+            var timer = Spektral.createTimer(1, function(){
+               stopTimerTest = false;
+            });
+            Spektral.stopTimer(timer);
+        });
+
+        this.wait(2000, function(){
+            this.test.assert(this.getVar('stopTimerTest'), ' time was stopped.');
+        });
+    });
+
+    casper.then(function(){
+        this.methodHeader('UTILS - createTimeOut');
+        this.evaluate(function(){
+            Spektral.createTimeOut(1, function(){
+                timeoutTest = true;
+            });
+        });
+
+        this.wait(2000, function(){
+            this.test.assert(this.getVar('timeoutTest'), ' timeout was created.');
+        });
+    });
+
+    casper.then(function(){
+        this.methodHeader('UTILS - stopTimeOut');
+        this.evaluate(function(){
+            var timeout = Spektral.createTimeOut(1, function(){
+                stopTimeoutTest = false;
+            });
+            Spektral.stopTimeOut(timeout);
+        });
+        this.test.assert(this.getVar('stopTimeoutTest'), ' timeout was stopped.');
+    });
 
     casper.then(function(){
         this.methodHeader('STYLE - setStyle');
