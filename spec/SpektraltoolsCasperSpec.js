@@ -1,15 +1,9 @@
-var utils = require('utils');
-
 casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
     casper.start('http://localhost/spektraltools/CasperTest.html', function() {
         this.viewport(800, 600);
         this.echo(this.getTitle(), 'GREEN_BAR');
         this.echo(this.getCurrentUrl(), 'GREEN_BAR');
-
-        var js = this.evaluate(function() {
-            return document;
-        });
     });
 
     casper.then(function(){
@@ -22,9 +16,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.evaluate(function(){
             queryIDTest = Spektral.query('#idTest');
         });
-
         this.methodHeader('GLOBAL - query');
-
         this.test.assertEqual(this.getType(this.getVar('queryIDTest')), 'div', 'query returned element by Id.');
         this.test.assertEqual(this.getVar('queryIDTest').id, 'idTest', 'element id is correct.');
     });
@@ -43,13 +35,10 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.evaluate(function(){
             queryMultiTest = Spektral.query('.multiTest')[0];
         });
-
         this.test.assertEqual(this.getVar('queryMultiTest').innerHTML, 'Query Multiple Class Div #1', ' first element was selected.');
-
         this.evaluate(function(){
             queryMultiTest = Spektral.query('.multiTest')[1];
         });
-
         this.test.assertEqual(this.getVar('queryMultiTest').innerHTML, 'Query Multiple Class Div #2', ' second element was selected.');
     });
 
@@ -64,9 +53,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
                 eventTest.testButtonClicked = true;
             }
         });
-
         this.click('#aelButton');
-
         this.methodHeader('EVENT - attachEventListener');
         this.test.assert(this.getVar('eventTest').testButtonClicked, 'test button was clicked');
         this.methodHeader('EVENT - getTarget');
@@ -91,7 +78,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     });
 
     casper.then(function(){
-
         this.evaluate(function(){
             var
                 tb = document.querySelector('#ceButton'),
@@ -107,7 +93,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
             Spektral.triggerEvent(tb, testEvent);
         });
-
         this.methodHeader('EVENT - createEvent');
         this.test.assert(this.getVar('customEventTest').eventExists, 'custom event was created and triggered.');
         this.test.assertEqual(this.getVar('customEventTest').fooIs, 'bar', 'foo equals bar in detail object.');
@@ -123,7 +108,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             }
             Spektral.triggerEvent(testDiv, 'click');
         });
-
         this.methodHeader('EVENT - triggerEvent');
         this.test.assert(this.getVar('triggerEventTest').eventTriggered, 'event was triggered.');
     });
@@ -140,7 +124,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
             testDiv.dispatchEvent('click');
         });
-
         this.methodHeader('EVENT - cancelEvent');
         this.test.assert(this.getVar('cancelEventTest').eventCanceled, 'event was cancelled.')
     });
@@ -162,7 +145,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
             testDiv.dispatchEvent(custEvent);
         });
-
         this.methodHeader('EVENT - cancelPropagation');
         this.test.assertEqual(this.getVar('cancelPropTest').callCount, 1, 'event was only called once.');
     });
@@ -355,15 +337,12 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     casper.then(function(){
         this.echo('Mouse: x:100 y:50', 'INFO');
         this.mouse.move(100, 50);
-        //this.echo('Mouse Test Area Bounds: ' + this.getInfo(this.getElementBounds('#mouseTestArea')));
     });
 
     casper.then(function(){
         this.wait(1000, function(){
-
             //Mouse Test Area: top: 25px, left: 10px
             var leftPos = 10, topPos = 25, xPos = 90, yPos = 25;
-            //this.echo('New Mouse Pos 0: ' + this.getInfo(this.getVar('mousePosTest')[0]));
 
             this.test.assertEqual(this.getVar('mousePosTest')[0].innerX, xPos, ' innerX was correct.');
             this.test.assertEqual(this.getVar('mousePosTest')[0].innerY, yPos, ' innerY was correct.');
@@ -379,15 +358,12 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
     casper.then(function(){
         this.echo('Mouse: x:150 y:100', 'INFO');
         this.mouse.move(150, 100);
-        //this.echo('Mouse Test Area Bounds: ' + this.getInfo(this.getElementBounds('#mouseTestArea')));
     });
 
     casper.then(function(){
         this.wait(1000, function(){
-
             //Mouse Test Area: top: 25px, left: 10px
             var leftPos = 10, topPos = 25, xPos = 140, yPos = 75;
-            //this.echo('New Mouse Pos 0: ' + this.getInfo(this.getVar('mousePosTest')[0]));
 
             this.test.assertEqual(this.getVar('mousePosTest')[1].innerX, xPos, ' innerX was correct.');
             this.test.assertEqual(this.getVar('mousePosTest')[1].innerY, yPos, ' innerY was correct.');
@@ -397,7 +373,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             this.test.assertEqual(this.getVar('mousePosTest')[1].pageY, yPos + topPos, ' pageY was correct.');
             this.test.assertEqual(this.getVar('mousePosTest')[1].viewportX, xPos + leftPos, ' viewportX was correct.');
             this.test.assertEqual(this.getVar('mousePosTest')[1].viewportY, yPos + topPos, ' viewportY was correct.');
-
         });
     });
 
@@ -419,32 +394,24 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
         var posObj = this.getVar('positionTest');
 
-        this.capture('captures/getPosTest.jpg');
-
         this.test.assertEqual(posObj.x , 125, ' x was correct.');
         this.test.assertEqual(posObj.y , 475, ' y was correct.');
-
         this.test.assertEqual(posObj.top , 475, ' top was correct.');
         this.test.assertEqual(posObj.right , 475, ' right was correct.');
         this.test.assertEqual(posObj.bottom , -75, ' bottom was correct.');
         this.test.assertEqual(posObj.left , 125, ' left was correct.');
-
         this.test.assertEqual(posObj.boundX , 125, ' boundX was correct.');
         this.test.assertEqual(posObj.boundY , 475, ' boundY was correct.');
-
         this.test.assertEqual(posObj.boundTop , 475, ' boundTop was correct.');
         this.test.assertEqual(posObj.boundRight , 325, ' boundRight was correct.');
         this.test.assertEqual(posObj.boundBottom , 675, ' boundBottom was correct.');
         this.test.assertEqual(posObj.boundLeft , 125, ' boundLeft was correct.');
-
         this.test.assertEqual(posObj.docX , 125, ' docX was correct.');
         this.test.assertEqual(posObj.docY , 475, ' docY was correct.');
-
         this.test.assertEqual(posObj.docTop , 475, ' docTop was correct.');
         this.test.assertEqual(posObj.docRight , 475, ' docRight was correct.');
         this.test.assertEqual(posObj.docBottom , -75, ' docBottom was correct.');
         this.test.assertEqual(posObj.docLeft , 125, ' docLeft was correct.');
-
     });
 
     casper.then(function(){
@@ -458,26 +425,20 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
         this.test.assertEqual(dObj.width, 125, ' the returned width was correct.');
         this.test.assertEqual(dObj.height, 90, ' the returned height was correct.');
-
         this.test.assertEqual(dObj.innerWidth, 155, ' the returned innerWidth was correct.');
         this.test.assertEqual(dObj.innerHeight, 110, ' the returned innerHeight was correct.');
-
         this.test.assertEqual(dObj.borderWidth, 159, ' the returned borderWidth was correct.');
         this.test.assertEqual(dObj.borderHeight, 114, ' the returned borderHeight was correct.');
-
         this.test.assertEqual(dObj.totalWidth, 194, ' the returned totalWidth was correct.');
         this.test.assertEqual(dObj.totalHeight, 129, ' the returned totalHeight was correct.');
-
         this.test.assertEqual(dObj.paddingTop, 5, ' the returned paddingTop was correct.');
         this.test.assertEqual(dObj.paddingRight, 10, ' the returned paddingRight was correct.');
         this.test.assertEqual(dObj.paddingBottom, 15, ' the returned paddingBottom was correct.');
         this.test.assertEqual(dObj.paddingLeft, 20, ' the returned paddingLeft was correct.');
-
         this.test.assertEqual(dObj.borderTop, 2, ' the returned borderTop was correct.');
         this.test.assertEqual(dObj.borderRight, 2, ' the returned borderRight was correct.');
         this.test.assertEqual(dObj.borderBottom, 2, ' the returned borderBottom was correct.');
         this.test.assertEqual(dObj.borderLeft, 2, ' the returned borderLeft was correct.');
-
         this.test.assertEqual(dObj.marginTop, 10, ' the returned marginTop was correct.');
         this.test.assertEqual(dObj.marginRight, 20, ' the returned marginRight was correct.');
         this.test.assertEqual(dObj.marginBottom, 5, ' the returned marginBottom was correct.');
@@ -502,7 +463,7 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         });
 
         this.test.assertEqual(this.getVar('docDimTest').width, 800, ' returned width was correct.');
-        this.test.assertEqual(this.getVar('docDimTest').height, 675, ' returned height was correct.');
+        this.test.assertEqual(this.getVar('docDimTest').height, 783, ' returned height was correct.');
     });
 
     casper.then(function(){
@@ -516,7 +477,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
                }
             });
         });
-
         this.wait(5000, function(){
             this.test.assertEqual(this.getVar('timerTest'), 5, ' timer was created.');
         });
@@ -530,7 +490,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             });
             Spektral.stopTimer(timer);
         });
-
         this.wait(2000, function(){
             this.test.assert(this.getVar('stopTimerTest'), ' time was stopped.');
         });
@@ -543,7 +502,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
                 timeoutTest = true;
             });
         });
-
         this.wait(2000, function(){
             this.test.assert(this.getVar('timeoutTest'), ' timeout was created.');
         });
@@ -569,11 +527,9 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
                 margin: '5px'    
             });
         });
-
         this.echo('setStyle.', 'INFO');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'padding'), '20px', ' padding was set correctly.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'margin'), '5px', ' margin was set correctly.');
-
         this.echo('setStyle - append.', 'INFO');
         this.evaluate(function(){
             Spektral.setStyle(setStyleDiv, {
@@ -581,18 +537,15 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
                 display: 'block'
             }, { append: true });
         });
-
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'padding'), '10px', ' padding was set correctly.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'margin'), '5px', ' margin was not affected.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'display'), 'block', ' display was set correctly.');
-
         this.echo('setStyle - no append.', 'INFO');
         this.evaluate(function(){
             Spektral.setStyle(setStyleDiv, {
                 display: 'inline'
             });
         });
-
         this.test.assertDoesntExist(this.getElementStyle('#setStyleDiv', 'padding'), ' padding was removed.');
         this.test.assertDoesntExist(this.getElementStyle('#setStyleDiv', 'margin'), ' margin was removed.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'display'), 'inline', ' display was set correctly.');
@@ -606,7 +559,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
                 margin: '7px'
             }, { append: true });
         });
-
         this.test.assertEqual(this.getElementStyle('#singleStyleDiv', 'padding'), '5px', ' padding was set correctly.');
         this.test.assertEqual(this.getElementStyle('#singleStyleDiv', 'margin'), '7px', ' margin was set correctly.');
     });
@@ -640,7 +592,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             var clearStyleDiv = document.querySelector('#clearStyleDiv');
             Spektral.clearInlineStyle(clearStyleDiv);
         });
-
         this.test.assertEqual(this.getElementAttr('#clearStyleDiv', 'style'), '', ' style attribute was cleared.');
     });
 
@@ -652,7 +603,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             getStyleTest['margin'] = Spektral.getStyleValue(getStyleDiv, 'margin');
             getStyleTest['display'] = Spektral.getStyleValue(getStyleDiv, 'display');
         });
-
         this.test.assertEqual(this.getVar('getStyleTest').padding, '5px', ' padding was returned correctly.');
         this.test.assertEqual(this.getVar('getStyleTest').margin, '2px', ' margin was returned correctly.');
         this.test.assertEqual(this.getVar('getStyleTest').display, 'block', ' display was returned correctly.');
@@ -665,7 +615,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             Spektral.useHandCursor(handCursorDiv);
         });
         this.test.assertEqual(this.getElementStyle('#handCursorDiv', 'cursor'), 'pointer', ' cursor was set to pointer.');
-
         this.methodHeader('STYLE - useDefaultCursor');
         this.evaluate(function(){
             Spektral.useDefaultCursor(handCursorDiv);
@@ -680,20 +629,17 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             Spektral.hideElement(hideShowDiv);
         });
         this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'visibility'), 'hidden', ' element was hidden using visibility.');
-
         this.methodHeader('STYLE - showElement - visibility');
         this.evaluate(function(){
             Spektral.showElement(hideShowDiv);
         });
         this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'display'), 'block', ' element display property set to block.');
         this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'visibility'), 'visible', ' element visibility property set to visible.');
-
         this.methodHeader('STYLE - hideElement - display');
         this.evaluate(function(){
             Spektral.hideElement(hideShowDiv, { useDisplay: true });
         });
         this.test.assertEqual(this.getElementStyle('#hideShowDiv', 'display'), 'none', ' element display property was set to none.');
-
         this.methodHeader('STYLE - showElement - display');
         this.evaluate(function(){
             Spektral.showElement(hideShowDiv, { displayType: 'inline' });
@@ -707,20 +653,15 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             var toggleVisDiv = document.querySelector('#toggleVisDiv');
             Spektral.toggleVisibility(toggleVisDiv);
         });
-
         this.test.assertEqual(this.getElementStyle('#toggleVisDiv', 'visibility'), 'hidden', ' the div is hidden.');
-
         this.evaluate(function(){
             Spektral.toggleVisibility(toggleVisDiv);
         });
-
         this.test.assertEqual(this.getElementStyle('#toggleVisDiv', 'visibility'), 'visible', ' the div is visible.');
-
         this.evaluate(function(){
             var toggleVisDiv = document.querySelector('#toggleVisDiv');
             Spektral.toggleVisibility(toggleVisDiv);
         });
-
         this.test.assertEqual(this.getElementStyle('#toggleVisDiv', 'visibility'), 'hidden', ' the div is hidden.');
     });
 
@@ -730,27 +671,40 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
             var toggleDisplayDiv = document.querySelector('#toggleDisplayDiv');
             Spektral.toggleDisplay(toggleDisplayDiv);
         });
-
         this.test.assertEqual(this.getElementStyle('#toggleDisplayDiv', 'display'), 'none', ' display is set to none.');
-
         this.evaluate(function(){
             Spektral.toggleDisplay(toggleDisplayDiv);
         });
-
         this.test.assertEqual(this.getElementStyle('#toggleDisplayDiv', 'display'), 'block', ' display is set to block.');
-
         this.evaluate(function(){
             Spektral.toggleDisplay(toggleDisplayDiv);
         });
-
         this.test.assertEqual(this.getElementStyle('#toggleDisplayDiv', 'display'), 'none', ' display is set to none.');
-
         this.evaluate(function(){
             Spektral.toggleDisplay(toggleDisplayDiv, { displayType: 'inline' });
         });
-
         this.test.assertEqual(this.getElementStyle('#toggleDisplayDiv', 'display'), 'inline', ' display is set to inline.');
     });
+
+    casper.then(function(){
+        this.methodHeader('STYLE - matchHeight');
+        this.evaluate(function(){
+            var
+                ref = document.querySelector('#refMatchHeight'),
+                target = document.querySelector('#targetMatchHeight');
+
+            Spektral.matchHeight(ref, target);
+        });
+        this.test.assertEqual(this.getElementStyle('#targetMatchHeight', 'height'), '125px', ' target height matches reference height.')
+    });
+
+
+
+    casper.then(function(){
+        this.exit();
+    });
+
+
 
     casper.then(function(){
         this.methodHeader('XHR - getXHR');
@@ -858,8 +812,8 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 //        xmlObjIndex = this.getVar('XMLObjectIndex');
 //
 //        this.echo(this.getInfo(xmlObjIndex));
-////        this.test.assertEqual(this.getType(xmlObjIndex), 'object', ' JSON object was returned.');
-////        this.test.assertEqual(xmlObjIndex.foo[1].bar, 'Child Two', ' object is traversable.');
+//        this.test.assertEqual(this.getType(xmlObjIndex), 'object', ' JSON object was returned.');
+//        this.test.assertEqual(xmlObjIndex.foo[1].bar, 'Child Two', ' object is traversable.');
 //    });
 
     casper.then(function(){
@@ -903,7 +857,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.evaluate(function(){
             queryObj = Spektral.getQueryString();
         });
-
         this.test.assertEqual(this.getType(this.getVar('queryObj')), 'object', ' query object is defined.');
         this.test.assertEqual(this.getVar('queryObj').foo, 'bar', ' foo is defined');
         this.test.assertEqual(this.getVar('queryObj').testOne, 'testVal1', ' testOne is defined');
@@ -938,7 +891,6 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         var uObj = this.getVar('urlObj');
 
         this.test.assertEqual(this.getType(uObj), 'object', ' object was returned.');
-
         this.test.assertEqual(uObj.fileType, 'html', ' fileType was set.');
         this.test.assertEqual(uObj.fullURL, 'http://localhost/spektraltools/CasperTest.html?testOne=testVal1&testTwo=5&foo=bar#foobar', ' full URL was set.');
         this.test.assertEqual(uObj.hash, '#foobar', ' hash was set.');

@@ -88,6 +88,8 @@
             <!--<div id="childOne">Child One</div>-->
             <!--<div id="childTwo">Child Two</div>-->
         <!--</div>-->
+        <div id="refMatchHeight" style="height:125px; width:65px; padding:10px; margin:5px; border:2px solid #cecece;">Match Height Reference Element</div>
+        <div id="targetMatchHeight" class="matchheight">Match Height Target Element</div>
     </section>
     <script src="build/spektraltools.js"></script>
     <script>
@@ -117,7 +119,7 @@
             dimensionTest, padMarginTest, docDimTest, timerTest = 0, stopTimerTest = true, timeoutTest = false,
             stopTimeoutTest = true, inlineStyleTest, getStyleTest = { padding: null, margin: null, display: null},
             XHRTest, XHRTxtTest, XHRXMLTest, XHRJsonTest, XMLToJsonTest, XMLObject, XMLObjectIndex, queryString,
-            queryObj, currentHash, urlObj;
+            queryObj, currentHash, urlObj, matchedHeight;
 
         function logToConsole(msg) {
             console.log(msg);

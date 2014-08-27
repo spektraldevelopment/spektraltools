@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-08-26
+* Build Created: 2014-08-27
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -626,6 +626,22 @@
             //Spektral.log("toggleDisplay: Hiding, showing: " + displayString);
         }
     };
+
+    //STYLE - MATCH HEIGHT
+    Spektral.matchHeight = function(reference, target, options) {
+        var
+            type = Spektral.getParameter(options, 'type', 'normal'),
+            refDim = Spektral.getDimensions(reference), refHeight;
+        if(type === "normal") {
+            refHeight = refDim.height;
+        } else if (type === "inner") {
+            refHeight = refDim.innerHeight;
+        } else if (type === "total") {
+            refHeight = refDim.totalHeight;
+        }
+        Spektral.setStyle(target, { height: refHeight + "px" });
+    };
+
 
 
     //UTILS - GET TYPE
