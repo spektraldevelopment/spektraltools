@@ -698,13 +698,27 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getElementStyle('#targetMatchHeight', 'height'), '125px', ' target height matches reference height.')
     });
 
-
-
     casper.then(function(){
-        this.exit();
+        this.evaluate(function(){
+            var
+                ref = document.querySelector('#refMatchHeight'),
+                target = document.querySelector('#targetMatchHeight');
+
+            Spektral.matchHeight(ref, target, { type: 'inner' });
+        });
+        this.test.assertEqual(this.getElementStyle('#targetMatchHeight', 'height'), '145px', ' target height matches reference inner height.')
     });
 
+    casper.then(function(){
+        this.evaluate(function(){
+            var
+                ref = document.querySelector('#refMatchHeight'),
+                target = document.querySelector('#targetMatchHeight');
 
+            Spektral.matchHeight(ref, target, { type: 'total' });
+        });
+        this.test.assertEqual(this.getElementStyle('#targetMatchHeight', 'height'), '159px', ' target height matches reference total height.')
+    });
 
     casper.then(function(){
         this.methodHeader('XHR - getXHR');
