@@ -1,6 +1,6 @@
 casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
 
-    casper.start('http://localhost/spektraltools/CasperTest.html', function() {
+    casper.start('CasperTest.html', function() {
         this.viewport(800, 600);
         this.echo(this.getTitle(), 'GREEN_BAR');
         this.echo(this.getCurrentUrl(), 'GREEN_BAR');
@@ -527,9 +527,11 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
                 margin: '5px'    
             });
         });
+
         this.echo('setStyle.', 'INFO');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'padding'), '20px', ' padding was set correctly.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'margin'), '5px', ' margin was set correctly.');
+
         this.echo('setStyle - append.', 'INFO');
         this.evaluate(function(){
             Spektral.setStyle(setStyleDiv, {
@@ -540,14 +542,16 @@ casper.test.begin('SPEKTRALTOOLS test', 0, function suite(test) {
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'padding'), '10px', ' padding was set correctly.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'margin'), '5px', ' margin was not affected.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'display'), 'block', ' display was set correctly.');
+
         this.echo('setStyle - no append.', 'INFO');
         this.evaluate(function(){
             Spektral.setStyle(setStyleDiv, {
                 display: 'inline'
             });
         });
-        this.test.assertDoesntExist(this.getElementStyle('#setStyleDiv', 'padding'), ' padding was removed.');
-        this.test.assertDoesntExist(this.getElementStyle('#setStyleDiv', 'margin'), ' margin was removed.');
+
+        this.test.assertFalsy(this.hasStyleProp('#setStyleDiv', 'padding'), ' padding was removed.');
+        this.test.assertFalsy(this.hasStyleProp('#setStyleDiv', 'margin'), ' margin was removed.');
         this.test.assertEqual(this.getElementStyle('#setStyleDiv', 'display'), 'inline', ' display was set correctly.');
     });
 

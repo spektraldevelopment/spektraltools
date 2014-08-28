@@ -74,7 +74,7 @@ casper.getElement = function(id) {
   }, id);
 };
 
-casper.getElementStyle = function(id, prop){
+casper.getElementStyle = function(id, prop) {
     return this.evaluate(function(i, p){
         return document.querySelector(i).style[p];
     }, id, prop);
@@ -85,6 +85,21 @@ casper.getElementAttr = function(id, attr) {
       var e = document.querySelector(i);
       return e.getAttribute(a);
   }, id, attr);
+};
+
+casper.hasStyleProp = function(id, prop) {
+    return this.evaluate(function(i, p){
+        var 
+            hasStyle = false,
+            el = document.querySelector(i),
+            style = document.defaultView.getComputedStyle(el, null).getPropertyValue(p);
+
+        if(style !== '' && style !== null) {
+            hasStyle = true;
+        }
+        
+        return hasStyle;
+    }, id, prop);
 };
 
 casper.getInfo = function(obj) {
