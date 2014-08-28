@@ -60,7 +60,12 @@ module.exports = function(grunt) {
             buildJasmine: {
                 files: ["src/**", "spec/**"],
                 tasks: ["concat", "uglify", "jasmine", "notify:watch"]
+            },
+            buildOnly: {
+                files: ["src/**", "spec/**"],
+                tasks: ["concat", "uglify", "notify:watch"]
             }
+
         },
         jasmine: {
             pivotal: {
@@ -107,6 +112,7 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);
+    grunt.registerTask('watch-build', ['watch:buildOnly']);
     grunt.registerTask('watch-casper', ['watch:buildCasper']);
     grunt.registerTask('watch-jasmine', ['watch:buildJasmine']);
     grunt.registerTask('build-casper', ['concat', 'uglify', 'casper']);

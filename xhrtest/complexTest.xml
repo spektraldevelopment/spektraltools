@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<discography>
+	<!-- <artist foo="bar"><![CDATA[Modest Mouse]]></artist> -->
+	<artist>
+		<child>Child One</child>
+		<child>Child Two</child>
+		<kids foo="bar">
+			<grandkid>Grand Kid One</grandkid>
+			<grandkid>Grand Kid Two</grandkid>
+		</kids>
+	</artist>
+	<album>
+		<title><![CDATA[Good News For People Who Love Bad News]]></title>
+		<year>2004</year>
+		<tracks total="16">
+			<track duration="0:10">Horn Intro</track>
+			<track duration="4:33">The World At Large</track>
+			<track duration="3:28">Float On</track>
+			<track duration="3:44">Ocean Breathes Salty</track>
+			<track duration="0:13">Dig Your Grave</track>
+			<track duration="3:50">Bury Me With It</track>
+			<track duration="2:57">Dance Hall</track>
+			<track duration="4:15">Bukowski</track>
+			<track duration="2:19">This Devil's Workday</track>
+			<track duration="4:10">The View</track>
+			<track duration="2:35">Satin In A Coffin</track>
+			<track duration="0:59">Interlude (Milo)</track>
+			<track duration="5:25">Blame It On The Tetons</track>
+			<track duration="2:43">Black Cadillacs</track>
+			<track duration="3:02">One Chance</track>
+			<track duration="4:17">The Good Times Are Killing Me</track>
+		</tracks>
+	</album>
+	<album>
+		<title><![CDATA[We Were Dead Before The Ship Even Sank]]></title>
+		<year>2007</year>
+		<tracks total="14">
+			<track duration="3:31">March Into The Sea</track>
+			<track duration="4:06">Dashboard</track>
+			<track duration="4:35">Fire It Up</track>
+			<track duration="2:58">Florida</track>
+			<track duration="5:34">Parting Of The Sensory</track>
+			<track duration="4:25">Missed The Boat</track>
+			<track duration="3:40">We've Got Everything</track>
+			<track duration="4:29">Fly Trapped In A Jar</track>
+			<track duration="3:56">Education</track>
+			<track duration="4:44">Little Motel</track>
+			<track duration="4:26">Steam Engenius</track>
+			<track duration="8:27">Spitting Venom</track>
+			<track duration="3:42">People As Places As People</track>
+			<track duration="4:00">Invisible</track>
+		</tracks>
+	</album>
+</discography>
