@@ -1,14 +1,6 @@
 <?xml version="1.0"?>
 <discography>
-	<!-- <artist foo="bar"><![CDATA[Modest Mouse]]></artist> -->
-	<artist>
-		<child>Child One</child>
-		<child>Child Two</child>
-		<kids foo="bar">
-			<grandkid>Grand Kid One</grandkid>
-			<grandkid>Grand Kid Two</grandkid>
-		</kids>
-	</artist>
+	<artist foo="bar"><![CDATA[Modest Mouse]]></artist>
 	<album>
 		<title><![CDATA[Good News For People Who Love Bad News]]></title>
 		<year>2004</year>

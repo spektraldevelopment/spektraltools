@@ -11,3 +11,14 @@
         }
         return roundedNum;
     };
+
+    //NUMBER - GET RANDOM NUM
+    Spektral.getRandomNum = function(min, max, options) {
+        var randNum, rounded = Spektral.getParameter(options, 'rounded', true);
+        if (rounded === false) {
+            randNum = Math.random() * (max - min) + min;
+        } else {
+            randNum = Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        return randNum;
+    };

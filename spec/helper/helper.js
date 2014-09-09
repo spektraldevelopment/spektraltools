@@ -115,6 +115,10 @@ function getType (obj) {
     return type;
 }
 
+function isInt(n) {
+    return n % 1 === 0;
+}
+
 ////////////////////
 ////LOG OBJECT
 ////////////////////

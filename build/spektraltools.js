@@ -1,7 +1,7 @@
 /**
 * spektraltools - v0.0.1
 *
-* Build Created: 2014-08-28
+* Build Created: 2014-09-09
 * Copyright (c) 2013 - 2014 spektraldevelopment.com, David Boyle.
 *
 * Distributed under the terms of the MIT license.
@@ -272,6 +272,17 @@
             roundedNum = Math.floor(num);
         }
         return roundedNum;
+    };
+
+    //NUMBER - GET RANDOM NUM
+    Spektral.getRandomNum = function(min, max, options) {
+        var randNum, rounded = Spektral.getParameter(options, 'rounded', true);
+        if (rounded === false) {
+            randNum = Math.random() * (max - min) + min;
+        } else {
+            randNum = Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        return randNum;
     };
 
     //STRING - HAS PATTERN
@@ -1393,76 +1404,50 @@
     };
 
     //XHR - XML TO JSON
-    Spektral.xmlToJSON = function (xml, options) {
-        var
-            node = Spektral.getParameter(options, 'node', xml.firstChild.nodeName),
-            index = Spektral.getParameter(options, 'index', 0),
-            parentNode = xml.getElementsByTagName(node)[index],
-            child, type, xmlObject = {}, rootArray = [], rootObj;
-        for (child = parentNode.firstChild; child !== null; child = child.nextSibling) {
-            type = Spektral.getType(child);
-            //console.log('TYPE IS: ' + type);
-            if (type !== '#text') {
-                if (child.childNodes.length === 1) {
-                    //If node is a immediate child of xml.firstChild
-
-                    //NOTE: make sure this can handle multiple attributes
-
-                    rootObj = {};
-                    rootArray.push(Spektral.createNodeObject(child));
-                    rootObj[child.tagName] = rootArray;
-                    xmlObject['root'] = rootObj;
+    Spektral.xmlToJSON = function(xml){
+        var 
+            root = xml.getElementsByTagName(xml.firstChild.nodeName)[0],
+            type, i, j, group, jsonObject = {}, nodeArray = [];
+        for (i = 0; i < root.childNodes.length; i += 1) {
+            if (Spektral.isElement(root.childNodes[i]) === true) {
+                group = xml.getElementsByTagName(root.childNodes[i].nodeName);
+                if (group.length === 1) {
+                    //Only one instance of element
+                    jsonObject[group[0].nodeName] = Spektral.createNodeObject(group[0]);
                 } else {
-                    xmlObject[child.tagName] = Spektral.createArray(child.childNodes);
+                    //Multiple instances of element
+                    nodeArray.push(Spektral.createNodeObject(group[0]));
+                    jsonObject[group[0].nodeName] = nodeArray;
                 }
-            }
+            } 
         }
-        return xmlObject;
+        return jsonObject;
     };
 
     Spektral.createNodeObject = function(node) {
-        var nodeObj = {}, attributes, attrLength, i;
-        nodeObj['inner'] = Spektral.getInnerText(node.childNodes[0]);
-        attributes = node.attributes;
-        attrLength = attributes.length;
-        if (attrLength >= 1) {
-            for (i = 0; i < attributes.length; i += 1) {
-                nodeObj[attributes.item(i).name] = attributes.item(i).value;
+        var nodeObj = {}, hasChildren, i, j, group, nodeArray = [];
+        if (node.attributes.length > 0) {
+            for (j = 0; j < node.attributes.length; j += 1) {
+                nodeObj[node.attributes[j].name] = node.attributes[j].value;
+            }
+        }    
+        if (node.childNodes.length === 1) {
+            nodeObj['content'] = Spektral.getInnerText(node);
+        } else {
+
+            for (i = 0; i < node.childNodes.length; i += 1) {
+                if (Spektral.isElement(node.childNodes[i]) === true) {
+                    group = node.getElementsByTagName(node.childNodes[i].nodeName);
+                    if (group.length === 1) {
+                        nodeObj[group[0].nodeName] = Spektral.createNodeObject(group[0]);
+                    } else {
+                        nodeArray.push(Spektral.createNodeObject(node.childNodes[i]));
+                        nodeObj[group[0].nodeName] = nodeArray;
+                    }
+                }
             }
         }
         return nodeObj;
-    };
-
-    //XHR - CREATE ARRAY
-    Spektral.createArray = function (list) {
-        var
-            child, type, listArray = [],
-            listObject, attributes, attrLength,
-            hasChildren, length, i, j;
-
-        for (i = 0; i < list.length; i++) {
-            child = list[i];
-            type = Spektral.getType(child);
-            if (type !== "#text") {
-                hasChildren = child.hasChildNodes();
-                length = child.childNodes.length;
-                //Element
-                listObject = {};
-                attributes = child.attributes;
-                attrLength = attributes.length;
-                if (attrLength >= 1) {
-                    for (j = 0; j < attributes.length; j += 1) {
-                        listObject[attributes.item(j).name] = attributes.item(j).value;
-                    }
-                }
-                listObject[child.tagName] = Spektral.getInnerText(child);
-                if (hasChildren && length > 1) {
-                    listObject[child.tagName] = Spektral.createArray(child.childNodes);
-                }
-                listArray.push(listObject);
-            }
-        }
-        return listArray;
     };
 
     //WINDOW - getURLPath

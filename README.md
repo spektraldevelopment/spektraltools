@@ -533,6 +533,36 @@ Spektral.roundNum(3.4, { roundType: 'up' });
 Spektral.roundNum(8.8, { roundType: 'down' });
 //Returns 8
 ```
+
+2. Spektral.getRandomNum(min, max, options);
+------
+
+#### Description
+Returns a random number between a specified range.
+
+#### Arguments
+min: `Number` - The minimum end of the range
+max: `Number` - The maximum end of the range
+options: `Object` - All optional parameters are passed through this object
+
+#### Available Options
+```JavaScript
+{
+	rounded: true //Setting to false will return a float instead of an integer
+}
+```
+
+##### Returns
+`Number`
+
+##### Example
+
+```javascript
+Spektral.getRandomNum(2, 7);
+//Returns: 4
+Spektral.getRandomNum(4, 8, { rounded: false });
+//Returns: 5.487
+```
 ---
 
 ## STRING

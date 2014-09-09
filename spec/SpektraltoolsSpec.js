@@ -247,6 +247,20 @@ describe('SpektralTools: ', function() {
         });
     });
 
+    describe('NUMBER - getRandomNum', function(){
+        it('returns a number.', function(){
+            expect(getType(Spektral.getRandomNum(0, 7))).toEqual('number');
+        });
+
+        it('returns an rounded number.', function(){
+            expect(isInt(Spektral.getRandomNum(4, 9))).toBeTruthy();
+        });
+
+        it('returns an un-rounded number.', function(){
+            expect(isInt(Spektral.getRandomNum(4, 9, { rounded: false }))).toBeFalsy();
+        });
+    });
+
     describe('STRING - hasPattern', function(){
         var
             testString = 'This foobar string has foobar in it two times.',
